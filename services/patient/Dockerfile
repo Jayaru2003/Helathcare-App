@@ -27,6 +27,7 @@ WORKDIR /app
 COPY --from=builder --chown=healthbridge:nodejs /app/services/patient/dist ./dist
 COPY --from=builder --chown=healthbridge:nodejs /app/services/patient/package.json ./
 COPY --from=builder --chown=healthbridge:nodejs /app/services/patient/prisma ./prisma
+COPY --from=builder --chown=healthbridge:nodejs /app/node_modules/.prisma/patient-client ./node_modules/@prisma/client
 
 RUN npm install --production --ignore-scripts 2>/dev/null; true
 

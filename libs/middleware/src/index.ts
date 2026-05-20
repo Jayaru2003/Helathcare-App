@@ -140,7 +140,7 @@ export const validateRequest = <T>(
       const parsed = schema.parse(data);
 
       // Replace the target with the parsed (coerced + validated) value
-      (req as Record<string, unknown>)[target] = parsed;
+      (req as unknown as Record<string, unknown>)[target] = parsed;
       next();
     } catch (err) {
       if (err instanceof ZodError) {

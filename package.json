@@ -9,7 +9,10 @@
   ],
   "scripts": {
     "dev": "npm run dev --workspaces --if-present",
-    "build": "npm run build --workspaces --if-present",
+    "build:libs": "npm run build -w @healthbridge/logger -w @healthbridge/errors -w @healthbridge/dto -w @healthbridge/kafka -w @healthbridge/middleware",
+    "db:generate": "npm run db:generate -w @healthbridge/patient -w @healthbridge/appointment",
+    "build:services": "npm run build -w @healthbridge/auth -w @healthbridge/patient -w @healthbridge/appointment -w @healthbridge/prescription -w @healthbridge/billing -w @healthbridge/notification -w @healthbridge/analytics -w @healthbridge/api-gateway",
+    "build": "npm run build:libs && npm run db:generate && npm run build:services",
     "test": "npm run test --workspaces --if-present",
     "lint": "eslint . --ext .ts",
     "format": "prettier --write \"**/*.ts\"",

@@ -106,7 +106,7 @@ export class AppointmentService {
     while (current < dayEnd.getTime()) {
       const slotStart = new Date(current);
       const slotEnd = new Date(current + 30 * 60_000);
-      const isTaken = existing.some((apt) => {
+      const isTaken = existing.some((apt: { scheduledAt: Date; durationMinutes: number }) => {
         const aptEnd = new Date(apt.scheduledAt.getTime() + apt.durationMinutes * 60_000);
         return apt.scheduledAt < slotEnd && aptEnd > slotStart;
       });

@@ -19,6 +19,7 @@ WORKDIR /app
 COPY --from=builder --chown=healthbridge:nodejs /app/services/appointment/dist ./dist
 COPY --from=builder --chown=healthbridge:nodejs /app/services/appointment/package.json ./
 COPY --from=builder --chown=healthbridge:nodejs /app/services/appointment/prisma ./prisma
+COPY --from=builder --chown=healthbridge:nodejs /app/node_modules/.prisma/appointment-client ./node_modules/@prisma/client
 RUN npm install --production --ignore-scripts 2>/dev/null; true
 USER healthbridge
 EXPOSE 3003

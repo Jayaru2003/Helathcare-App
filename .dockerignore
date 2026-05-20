@@ -1,0 +1,42 @@
+# Dependencies
+node_modules
+**/node_modules
+
+# Build output
+dist
+**/dist
+
+# Environment files
+.env
+**/.env
+*.env.local
+
+# Git
+.git
+.gitignore
+
+# Test files
+coverage
+**/*.test.ts
+**/*.spec.ts
+**/__tests__
+
+# IDE
+.vscode
+.idea
+
+# Logs
+*.log
+logs
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Terraform state
+**/.terraform
+**/terraform.tfstate
+
+# CI / docs
+.github
+**/*.md
