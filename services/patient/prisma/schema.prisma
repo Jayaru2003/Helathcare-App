@@ -1,0 +1,58 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Patient {
+  id                    String    @id @default(uuid())
+  userId                String    @unique
+  firstName             String
+  lastName              String
+  dateOfBirth           DateTime
+  gender                String
+  bloodType             String?
+  nationalId            String?   @unique
+  phoneNumber           String
+  email                 String    @unique
+  addressStreet         String?
+  addressCity           String?
+  addressState          String?
+  addressPostalCode     String?
+  addressCountry        String?
+  emergencyContactName  String?
+  emergencyContactPhone String?
+  emergencyContactRel   String?
+  allergies             Json      @default("[]")
+  currentMedications    String[]
+  medicalHistory        String[]
+  insuranceProvider     String?
+  insurancePolicyNumber String?
+  isActive              Boolean   @default(true)
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  medicalRecords MedicalRecord[]
+
+  @@map("patients")
+}
+
+model MedicalRecord {
+  id          String   @id @default(uuid())
+  patientId   String
+  recordType  String
+  title       String
+  description String?
+  fileUrl     String?
+  recordedBy  String
+  recordedAt  DateTime
+  tags        String[]
+  createdAt   DateTime @default(now())
+
+  patient Patient @relation(fields: [patientId], references: [id], onDelete: Cascade)
+
+  @@map("medical_records")
+}

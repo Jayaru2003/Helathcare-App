@@ -1,0 +1,25 @@
+{
+  "name": "@healthbridge/errors",
+  "version": "1.0.0",
+  "description": "HealthBridge shared error classes and Express error handler middleware",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "dev": "tsc --watch",
+    "test": "jest",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@healthbridge/logger": "*"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.11.0",
+    "express": "^4.18.2",
+    "typescript": "^5.3.3"
+  },
+  "peerDependencies": {
+    "express": "^4.18.2"
+  }
+}

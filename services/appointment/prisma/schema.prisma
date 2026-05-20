@@ -1,0 +1,37 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Appointment {
+  id                 String   @id @default(uuid())
+  patientId          String
+  doctorId           String
+  scheduledAt        DateTime
+  durationMinutes    Int      @default(30)
+  type               String   @default("in_person")
+  status             String   @default("pending")
+  reason             String
+  notes              String?
+  symptoms           String[]
+  videoCallUrl       String?
+  cancellationReason String?
+  cancelledBy        String?
+  cancelledAt        DateTime?
+  completedAt        DateTime?
+  followUpRequired   Boolean  @default(false)
+  followUpDate       DateTime?
+  fee                Decimal  @default(0)
+  currency           String   @default("USD")
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  @@index([patientId])
+  @@index([doctorId])
+  @@index([scheduledAt])
+  @@map("appointments")
+}

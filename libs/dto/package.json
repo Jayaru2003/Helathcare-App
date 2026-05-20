@@ -1,0 +1,17 @@
+{
+  "name": "@healthbridge/dto",
+  "version": "1.0.0",
+  "description": "HealthBridge shared TypeScript interfaces and DTOs",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "dev": "tsc --watch",
+    "test": "jest",
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "typescript": "^5.3.3"
+  }
+}

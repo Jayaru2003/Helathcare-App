@@ -1,0 +1,253 @@
+version: '3.9'
+
+networks:
+  healthbridge-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  mongo_data:
+  redis_data:
+  zookeeper_data:
+  kafka_data:
+
+services:
+  # ─── Infrastructure ───────────────────────────────────────────────────────────
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: healthbridge-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-healthbridge}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-healthbridge_secret}
+      POSTGRES_DB: ${POSTGRES_DB:-healthbridge}
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - healthbridge-network
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER:-healthbridge}']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  mongodb:
+    image: mongo:7.0
+    container_name: healthbridge-mongo
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER:-healthbridge}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD:-healthbridge_secret}
+      MONGO_INITDB_DATABASE: ${MONGO_DB:-healthbridge}
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - healthbridge-network
+    healthcheck:
+      test: ['CMD', 'mongosh', '--eval', "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: healthbridge-redis
+    restart: unless-stopped
+    command: redis-server --requirepass ${REDIS_PASSWORD:-healthbridge_secret}
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis_data:/data
+    networks:
+      - healthbridge-network
+    healthcheck:
+      test: ['CMD', 'redis-cli', '-a', '${REDIS_PASSWORD:-healthbridge_secret}', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  zookeeper:
+    image: bitnami/zookeeper:3.9
+    container_name: healthbridge-zookeeper
+    restart: unless-stopped
+    environment:
+      ALLOW_ANONYMOUS_LOGIN: 'yes'
+      ZOO_MY_ID: 1
+    ports:
+      - '2181:2181'
+    volumes:
+      - zookeeper_data:/bitnami/zookeeper
+    networks:
+      - healthbridge-network
+    healthcheck:
+      test: ['CMD-SHELL', 'echo ruok | nc localhost 2181 | grep imok']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  kafka:
+    image: bitnami/kafka:3.6
+    container_name: healthbridge-kafka
+    restart: unless-stopped
+    depends_on:
+      zookeeper:
+        condition: service_healthy
+    environment:
+      KAFKA_CFG_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_CFG_LISTENERS: PLAINTEXT://:9092
+      KAFKA_CFG_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE: 'true'
+      KAFKA_CFG_NUM_PARTITIONS: 3
+      KAFKA_CFG_DEFAULT_REPLICATION_FACTOR: 1
+      ALLOW_PLAINTEXT_LISTENER: 'yes'
+    ports:
+      - '9092:9092'
+    volumes:
+      - kafka_data:/bitnami/kafka
+    networks:
+      - healthbridge-network
+    healthcheck:
+      test: ['CMD-SHELL', 'kafka-topics.sh --bootstrap-server localhost:9092 --list']
+      interval: 15s
+      timeout: 10s
+      retries: 5
+
+  # ─── Services ──────────────────────────────────────────────────────────────────
+
+  api-gateway:
+    build:
+      context: .
+      dockerfile: services/api-gateway/Dockerfile
+    container_name: healthbridge-api-gateway
+    restart: unless-stopped
+    ports:
+      - '3000:3000'
+    env_file:
+      - services/api-gateway/.env.example
+    networks:
+      - healthbridge-network
+    depends_on:
+      - auth
+      - patient
+      - appointment
+
+  auth:
+    build:
+      context: .
+      dockerfile: services/auth/Dockerfile
+    container_name: healthbridge-auth
+    restart: unless-stopped
+    ports:
+      - '3001:3001'
+    env_file:
+      - services/auth/.env.example
+    networks:
+      - healthbridge-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  patient:
+    build:
+      context: .
+      dockerfile: services/patient/Dockerfile
+    container_name: healthbridge-patient
+    restart: unless-stopped
+    ports:
+      - '3002:3002'
+    env_file:
+      - services/patient/.env.example
+    networks:
+      - healthbridge-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  appointment:
+    build:
+      context: .
+      dockerfile: services/appointment/Dockerfile
+    container_name: healthbridge-appointment
+    restart: unless-stopped
+    ports:
+      - '3003:3003'
+    env_file:
+      - services/appointment/.env.example
+    networks:
+      - healthbridge-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+
+  prescription:
+    build:
+      context: .
+      dockerfile: services/prescription/Dockerfile
+    container_name: healthbridge-prescription
+    restart: unless-stopped
+    ports:
+      - '3004:3004'
+    env_file:
+      - services/prescription/.env.example
+    networks:
+      - healthbridge-network
+    depends_on:
+      mongodb:
+        condition: service_healthy
+
+  billing:
+    build:
+      context: .
+      dockerfile: services/billing/Dockerfile
+    container_name: healthbridge-billing
+    restart: unless-stopped
+    ports:
+      - '3005:3005'
+    env_file:
+      - services/billing/.env.example
+    networks:
+      - healthbridge-network
+    depends_on:
+      kafka:
+        condition: service_healthy
+
+  notification:
+    build:
+      context: .
+      dockerfile: services/notification/Dockerfile
+    container_name: healthbridge-notification
+    restart: unless-stopped
+    ports:
+      - '3006:3006'
+    env_file:
+      - services/notification/.env.example
+    networks:
+      - healthbridge-network
+    depends_on:
+      kafka:
+        condition: service_healthy
+
+  analytics:
+    build:
+      context: .
+      dockerfile: services/analytics/Dockerfile
+    container_name: healthbridge-analytics
+    restart: unless-stopped
+    ports:
+      - '3007:3007'
+    env_file:
+      - services/analytics/.env.example
+    networks:
+      - healthbridge-network
+    depends_on:
+      kafka:
+        condition: service_healthy

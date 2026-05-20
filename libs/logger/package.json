@@ -1,0 +1,21 @@
+{
+  "name": "@healthbridge/logger",
+  "version": "1.0.0",
+  "description": "HealthBridge shared Winston logger with CloudWatch transport",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "dev": "tsc --watch",
+    "test": "jest",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "winston": "^3.11.0",
+    "winston-cloudwatch": "^6.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "typescript": "^5.3.3"
+  }
+}
