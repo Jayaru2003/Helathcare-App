@@ -14,16 +14,25 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
+      fail-fast: false
       matrix:
-        service:
-          - api-gateway
-          - auth
-          - patient
-          - appointment
-          - prescription
-          - billing
-          - notification
-          - analytics
+        include:
+          - service: api-gateway
+            port: 3000
+          - service: auth
+            port: 3001
+          - service: patient
+            port: 3002
+          - service: appointment
+            port: 3003
+          - service: prescription
+            port: 3004
+          - service: billing
+            port: 3005
+          - service: notification
+            port: 3006
+          - service: analytics
+            port: 3007
 
     steps:
       - name: Checkout code
@@ -40,17 +49,29 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
-      - name: Build, tag and push image
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          IMAGE_TAG: ${{ github.sha }}
+      - name: Set image tags
+        id: tags
         run: |
-          cd services/${{ matrix.service }}
+          echo "IMAGE=${{ steps.login-ecr.outputs.registry }}/healthbridge-${{ matrix.service }}" >> $GITHUB_OUTPUT
+          echo "SHA_TAG=${GITHUB_SHA::8}" >> $GITHUB_OUTPUT
 
-          docker build -t $ECR_REGISTRY/healthbridge-${{ matrix.service }}:latest \
-                       -t $ECR_REGISTRY/healthbridge-${{ matrix.service }}:v1.0.0 \
-                       -t $ECR_REGISTRY/healthbridge-${{ matrix.service }}:$IMAGE_TAG .
+      - name: Build Docker image
+        run: |
+          docker build \
+            -f services/${{ matrix.service }}/Dockerfile \
+            -t ${{ steps.tags.outputs.IMAGE }}:latest \
+            -t ${{ steps.tags.outputs.IMAGE }}:v1.0.0 \
+            -t ${{ steps.tags.outputs.IMAGE }}:${{ steps.tags.outputs.SHA_TAG }} \
+            .
 
-          docker push $ECR_REGISTRY/healthbridge-${{ matrix.service }} --all-tags
+      - name: Push all tags to ECR
+        run: |
+          docker push ${{ steps.tags.outputs.IMAGE }}:latest
+          docker push ${{ steps.tags.outputs.IMAGE }}:v1.0.0
+          docker push ${{ steps.tags.outputs.IMAGE }}:${{ steps.tags.outputs.SHA_TAG }}
 
-          echo "Pushed healthbridge-${{ matrix.service }}"
+      - name: Print image URI
+        run: |
+          echo "✅ Pushed: ${{ steps.tags.outputs.IMAGE }}:latest"
+          echo "✅ Pushed: ${{ steps.tags.outputs.IMAGE }}:v1.0.0"
+          echo "✅ Pushed: ${{ steps.tags.outputs.IMAGE }}:${{ steps.tags.outputs.SHA_TAG }}"
