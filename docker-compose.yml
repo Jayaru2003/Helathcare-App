@@ -195,12 +195,9 @@ services:
     ports:
       - '3004:3004'
     env_file:
-      - services/prescription/.env.example
+      - services/prescription/.env
     networks:
       - healthbridge-network
-    depends_on:
-      mongodb:
-        condition: service_healthy
 
   billing:
     build:

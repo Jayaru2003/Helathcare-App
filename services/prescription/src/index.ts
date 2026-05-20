@@ -38,10 +38,15 @@ app.use((err: Error & { statusCode?: number }, _req: Request, res: Response, _ne
 async function bootstrap() {
   const mongoUri = process.env.MONGODB_URI ?? 'mongodb://localhost:27017/healthbridge';
   try {
-    await mongoose.connect(mongoUri);
+    await mongoose.connect(mongoUri, {
+      serverSelectionTimeoutMS: 10_000,
+    });
     console.info('[Prescription Service] MongoDB connected');
   } catch (err) {
     console.error('[Prescription Service] MongoDB connection failed:', err);
+    if (process.env.NODE_ENV === 'production') {
+      process.exit(1);
+    }
   }
 
   app.listen(PORT, () => {
