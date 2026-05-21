@@ -1,6 +1,6 @@
 generator client {
   provider = "prisma-client-js"
-  output   = "../../../node_modules/.prisma/patient-client"
+  output   = "../node_modules/.prisma/client"
 }
 
 datasource db {
@@ -57,3 +57,4 @@ model MedicalRecord {
 
   @@map("medical_records")
 }
+
