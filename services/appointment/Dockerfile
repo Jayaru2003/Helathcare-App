@@ -11,7 +11,6 @@ RUN npm run build -w libs/dto
 RUN npm run build -w libs/kafka
 RUN npm run build -w libs/middleware
 RUN npm run build -w services/appointment
-RUN cp -r node_modules/.prisma/appointment-client node_modules/.prisma/client
 
 FROM node:20-alpine AS production
 WORKDIR /app
