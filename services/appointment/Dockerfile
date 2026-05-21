@@ -4,18 +4,18 @@ COPY package.json package-lock.json tsconfig.json ./
 COPY libs/ ./libs/
 COPY services/appointment/ ./services/appointment/
 RUN npm ci
-RUN cd services/appointment && npx prisma generate
+RUN npm run db:generate -w @healthbridge/appointment
 RUN npm run build -w libs/logger
 RUN npm run build -w libs/errors
 RUN npm run build -w libs/dto
 RUN npm run build -w libs/kafka
 RUN npm run build -w libs/middleware
 RUN npm run build -w services/appointment
+RUN cp -r node_modules/.prisma/appointment-client node_modules/.prisma/client
 
 FROM node:20-alpine AS production
 WORKDIR /app
 COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=builder /app/libs ./libs
 COPY --from=builder /app/services/appointment/dist ./dist
 COPY --from=builder /app/services/appointment/package.json ./package.json
