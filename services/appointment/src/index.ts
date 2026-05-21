@@ -2,11 +2,13 @@ import express, { Application, Request, Response, NextFunction } from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
 import morgan from 'morgan';
+import { PrismaClient } from '@prisma/client';
 import router from './routes/index';
 import { AppointmentKafkaService } from './services/appointment-kafka.service';
 
 const app: Application = express();
 const PORT = parseInt(process.env.PORT ?? '3003', 10);
+const prisma = new PrismaClient();
 
 app.use(helmet());
 app.use(cors({ origin: process.env.CORS_ORIGIN ?? '*', credentials: true }));
@@ -33,13 +35,24 @@ app.use((err: Error & { statusCode?: number }, _req: Request, res: Response, _ne
   });
 });
 
-app.listen(PORT, async () => {
-  console.info(`[Appointment Service] Listening on port ${PORT}`);
-  // Connect Kafka producer in background
-  AppointmentKafkaService.connect().catch((err) =>
-    console.error('[Appointment Service] Kafka connect failed:', err)
-  );
+async function connectDatabase() {
+  await prisma.$connect();
+}
+
+// Start server FIRST
+const server = app.listen(PORT, () => {
+  console.log(`Appointment service running on port ${PORT}`);
 });
+
+// Connect DB AFTER server is up
+connectDatabase().catch(err => {
+  console.error('DB connection failed:', err);
+  // Don't exit — let health check still pass
+});
+
+AppointmentKafkaService.connect().catch((err) =>
+  console.error('[Appointment Service] Kafka connect failed:', err)
+);
 
 export default app;
 

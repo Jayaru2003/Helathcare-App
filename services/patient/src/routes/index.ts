@@ -5,6 +5,15 @@ import { createPatientSchema, updatePatientSchema } from '../services/patient.se
 
 const router = Router();
 
+router.get('/health', (_req, res) => {
+	res.status(200).json({
+		status: 'ok',
+		service: 'patient',
+		version: '1.0.0',
+		timestamp: new Date().toISOString()
+	});
+});
+
 router.use(verifyJWT);
 
 router.get('/', PatientController.list);
