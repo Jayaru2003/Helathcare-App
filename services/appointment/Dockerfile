@@ -1,28 +1,40 @@
+# Stage 1: Builder
 FROM node:20-alpine AS builder
+
 WORKDIR /app
-COPY package.json package-lock.json* ./
-COPY tsconfig.json ./
+
+# Copy root workspace files
+COPY package.json package-lock.json tsconfig.json ./
+
+# Copy all libs and services
 COPY libs/ ./libs/
 COPY services/appointment/ ./services/appointment/
-RUN npm ci --workspaces --if-present
-RUN npm run build -w @healthbridge/logger
-RUN npm run build -w @healthbridge/errors
-RUN npm run build -w @healthbridge/middleware
-RUN npm run build -w @healthbridge/dto
-RUN npm run build -w @healthbridge/kafka
-RUN cd services/appointment && npx prisma generate
-RUN npm run build -w @healthbridge/appointment
 
+# Install ALL dependencies including workspaces
+RUN npm ci
+
+# Build libs first then service
+RUN npm run build -w libs/logger
+RUN npm run build -w libs/errors
+RUN npm run build -w libs/dto
+RUN npm run build -w libs/kafka
+RUN npm run build -w libs/middleware
+RUN npm run build -w services/appointment
+
+# Stage 2: Production
 FROM node:20-alpine AS production
-RUN addgroup -g 1001 -S nodejs && adduser -S healthbridge -u 1001
+
 WORKDIR /app
-COPY --from=builder --chown=healthbridge:nodejs /app/services/appointment/dist ./dist
-COPY --from=builder --chown=healthbridge:nodejs /app/services/appointment/package.json ./
-COPY --from=builder --chown=healthbridge:nodejs /app/services/appointment/prisma ./prisma
-COPY --from=builder --chown=healthbridge:nodejs /app/node_modules/.prisma/appointment-client ./node_modules/@prisma/client
-RUN npm install --production --ignore-scripts 2>/dev/null; true
-USER healthbridge
+
+# Copy built files and node_modules from builder
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/libs ./libs
+COPY --from=builder /app/services/appointment/dist ./dist
+COPY --from=builder /app/services/appointment/package.json ./package.json
+
 EXPOSE 3003
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD wget -qO- http://localhost:3003/health || exit 1
+
+HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
+    CMD wget -q -O- http://localhost:3003/health || exit 1
+
 CMD ["node", "dist/index.js"]
