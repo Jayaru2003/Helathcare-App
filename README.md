@@ -155,6 +155,8 @@ npm run format
 
 The infra/terraform folder includes modules for VPC and ECS. Run Terraform from infra/terraform:
 
+ECR region: southeast-2.
+
 ```bash
 cd infra/terraform
 terraform init
