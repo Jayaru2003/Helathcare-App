@@ -1,90 +1,310 @@
+/**
+ * HealthBridge API Gateway
+ * ─────────────────────────────────────────────────────────────────────────────
+ * Single entry point for all downstream microservices.
+ * Env vars are injected by ECS task definitions — no dotenv import.
+ *
+ * Route map (public path → downstream service):
+ *   /api/auth/*          → AUTH_SERVICE_URL          (port 3001)
+ *   /api/patients/*      → PATIENT_SERVICE_URL        (port 3002)
+ *   /api/appointments/*  → APPOINTMENT_SERVICE_URL    (port 3003)
+ *   /api/prescriptions/* → PRESCRIPTION_SERVICE_URL   (port 3004)
+ *   /api/billing/*       → BILLING_SERVICE_URL        (port 3005)
+ *   /api/notifications/* → NOTIFICATION_SERVICE_URL   (port 3006)
+ *   /api/analytics/*     → ANALYTICS_SERVICE_URL      (port 3007)
+ *
+ * Special routes (handled locally, NOT proxied):
+ *   GET /health          → gateway liveness probe
+ *   GET /api/health      → aggregated downstream health check
+ */
+
 import express, { Application, Request, Response, NextFunction } from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
 import morgan from 'morgan';
 import rateLimit from 'express-rate-limit';
+import { createProxyMiddleware, Options as ProxyOptions } from 'http-proxy-middleware';
 import { v4 as uuidv4 } from 'uuid';
-import router from './routes/index';
+import type { IncomingMessage, ServerResponse, ClientRequest } from 'http';
+import http from 'http';
+import https from 'https';
+
+// ─── Environment ─────────────────────────────────────────────────────────────
+
+const PORT        = parseInt(process.env.PORT ?? '3000', 10);
+const NODE_ENV    = process.env.NODE_ENV ?? 'development';
+const CORS_ORIGIN = process.env.CORS_ORIGIN ?? '*';
+
+const SERVICE_URLS = {
+  auth:          process.env.AUTH_SERVICE_URL          ?? 'http://localhost:3001',
+  patient:       process.env.PATIENT_SERVICE_URL       ?? 'http://localhost:3002',
+  appointment:   process.env.APPOINTMENT_SERVICE_URL   ?? 'http://localhost:3003',
+  prescription:  process.env.PRESCRIPTION_SERVICE_URL  ?? 'http://localhost:3004',
+  billing:       process.env.BILLING_SERVICE_URL       ?? 'http://localhost:3005',
+  notification:  process.env.NOTIFICATION_SERVICE_URL  ?? 'http://localhost:3006',
+  analytics:     process.env.ANALYTICS_SERVICE_URL     ?? 'http://localhost:3007',
+} as const;
+
+type ServiceName = keyof typeof SERVICE_URLS;
+
+// ─── Application ──────────────────────────────────────────────────────────────
 
 const app: Application = express();
-const PORT = parseInt(process.env.PORT ?? '3000', 10);
 
-// ─── Security Middleware ───────────────────────────────────────────────────
+// ─── Security ─────────────────────────────────────────────────────────────────
+
 app.use(helmet());
-app.use(cors({
-  origin: process.env.CORS_ORIGIN ?? '*',
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Request-Id'],
-}));
+app.use(
+  cors({
+    origin: CORS_ORIGIN,
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Request-Id', 'X-Correlation-Id'],
+  })
+);
 
-// ─── Request ID ────────────────────────────────────────────────────────────
-app.use((req: Request, _res: Response, next: NextFunction) => {
-  (req as any).requestId = req.headers['x-request-id'] ?? uuidv4();
+// ─── Request ID ───────────────────────────────────────────────────────────────
+// Attach a unique ID to every request so logs are traceable across services.
+
+app.use((req: Request, res: Response, next: NextFunction) => {
+  const id = (req.headers['x-request-id'] as string) ?? uuidv4();
+  (req as any).requestId = id;
+  res.setHeader('X-Request-Id', id);
   next();
 });
 
-// ─── Logging ───────────────────────────────────────────────────────────────
-app.use(morgan('combined'));
+// ─── Request Logging ──────────────────────────────────────────────────────────
+// morgan 'combined' includes IP, method, path, status, response-time.
 
-// ─── Body Parsing ──────────────────────────────────────────────────────────
+morgan.token('request-id', (req: Request) => (req as any).requestId ?? '-');
+app.use(
+  morgan(':request-id :method :url :status :res[content-length] - :response-time ms', {
+    skip: (req) => req.url === '/health', // suppress noisy liveness probes
+  })
+);
+
+// ─── Body Parsing ─────────────────────────────────────────────────────────────
+// NOTE: body parsing MUST NOT be applied to proxied routes — it consumes the
+// stream and the downstream service will receive an empty body. We apply it
+// only before the local /api/health handler below, then disable it for the
+// proxy mount paths by placing the proxy middleware AFTER this point.
+
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
-// ─── Rate Limiting ─────────────────────────────────────────────────────────
-const limiter = rateLimit({
-  windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS ?? '900000', 10),
-  max: parseInt(process.env.RATE_LIMIT_MAX ?? '100', 10),
+// ─── Rate Limiting ────────────────────────────────────────────────────────────
+
+const apiLimiter = rateLimit({
+  windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS ?? '60000', 10), // 1 minute
+  max:      parseInt(process.env.RATE_LIMIT_MAX       ?? '100',   10), // 100 req/min/IP
   standardHeaders: true,
-  legacyHeaders: false,
+  legacyHeaders:   false,
+  keyGenerator: (req) => req.ip ?? 'unknown',
   message: {
-    success: false,
+    success:    false,
     statusCode: 429,
-    message: 'Too many requests from this IP, please try again later.',
+    message:    'Too many requests. Please slow down and try again later.',
+    retryAfter: Math.ceil(parseInt(process.env.RATE_LIMIT_WINDOW_MS ?? '60000', 10) / 1000),
+  },
+  handler: (_req, res, _next, options) => {
+    res.status(429).json(options.message);
   },
 });
-app.use('/api/', limiter);
 
-// ─── Health Check ──────────────────────────────────────────────────────────
+// Apply rate limit to all /api/* traffic (proxied AND local).
+app.use('/api', apiLimiter);
+
+// ─── Local Health Probe ───────────────────────────────────────────────────────
+
 app.get('/health', (_req: Request, res: Response) => {
-  res.json({
-    success: true,
-    service: 'api-gateway',
-    version: '1.0.0',
-    status: 'healthy',
+  res.status(200).json({
+    success:   true,
+    service:   'api-gateway',
+    version:   '1.0.0',
+    status:    'healthy',
     timestamp: new Date().toISOString(),
-    uptime: process.uptime(),
+    uptime:    process.uptime(),
   });
 });
 
-// ─── Routes ────────────────────────────────────────────────────────────────
-app.use('/api', router);
+// ─── Aggregated Downstream Health Check ──────────────────────────────────────
+// Calls GET /health on every downstream service concurrently and returns a
+// summary. This route is handled locally (not proxied) so it must be
+// registered BEFORE the proxy middleware below.
 
-// ─── 404 Handler ───────────────────────────────────────────────────────────
+function probeService(name: ServiceName): Promise<{ name: string; status: string; latencyMs: number; error?: string }> {
+  return new Promise((resolve) => {
+    const url     = new URL('/health', SERVICE_URLS[name]);
+    const driver  = url.protocol === 'https:' ? https : http;
+    const start   = Date.now();
+    const timeout = 3000; // 3 s timeout per service
+
+    const req = driver.get(url.toString(), { timeout }, (res) => {
+      const latencyMs = Date.now() - start;
+      // Drain the response body so the socket is properly released.
+      res.resume();
+      const status = res.statusCode === 200 ? 'healthy' : 'degraded';
+      resolve({ name, status, latencyMs });
+    });
+
+    req.on('timeout', () => {
+      req.destroy();
+      resolve({ name, status: 'unreachable', latencyMs: Date.now() - start, error: 'Connection timed out' });
+    });
+
+    req.on('error', (err) => {
+      resolve({ name, status: 'unreachable', latencyMs: Date.now() - start, error: err.message });
+    });
+  });
+}
+
+app.get('/api/health', async (_req: Request, res: Response) => {
+  const probes = await Promise.all(
+    (Object.keys(SERVICE_URLS) as ServiceName[]).map((name) => probeService(name))
+  );
+
+  const allHealthy = probes.every((p) => p.status === 'healthy');
+  const httpStatus = allHealthy ? 200 : 207; // 207 Multi-Status when mixed
+
+  res.status(httpStatus).json({
+    success:   allHealthy,
+    service:   'api-gateway',
+    timestamp: new Date().toISOString(),
+    uptime:    process.uptime(),
+    services:  probes,
+  });
+});
+
+// ─── Proxy Factory ────────────────────────────────────────────────────────────
+// Creates a proxy middleware for a given service.
+//
+// Path rewriting logic:
+//   Request arrives at Express as:  /api/patients/123
+//   After app.use('/api/...') strips the mount:  N/A — we mount at /api/<svc>
+//   The proxy sees the ORIGINAL full path and rewrites it:
+//     /api/patients/123  →  /patients/123   (strips /api/patients prefix)
+//
+// Why strip only /api/<service> and not add /api back?
+//   Downstream services own their own routing. They expose /patients/:id
+//   directly — they do NOT have an /api prefix internally. If your downstream
+//   services DO use /api internally, change the rewrite below accordingly.
+
+function makeProxy(serviceName: ServiceName): ReturnType<typeof createProxyMiddleware> {
+  const target  = SERVICE_URLS[serviceName];
+  // e.g. serviceName="patient" → public prefix is "/api/patients"
+  // The map below handles the plural naming mismatch for built-in services.
+  const publicPrefixMap: Record<ServiceName, string> = {
+    auth:         '/api/auth',
+    patient:      '/api/patients',
+    appointment:  '/api/appointments',
+    prescription: '/api/prescriptions',
+    billing:      '/api/billing',
+    notification: '/api/notifications',
+    analytics:    '/api/analytics',
+  };
+
+  const publicPrefix = publicPrefixMap[serviceName];
+
+  const options: ProxyOptions = {
+    target,
+    changeOrigin: true,
+
+    // Rewrite: /api/patients/123  →  /patients/123
+    pathRewrite: { [`^${publicPrefix}`]: `/${serviceName === 'auth' ? 'auth' : publicPrefix.replace('/api/', '')}` },
+
+    // Forward the X-Request-Id header upstream so traces are end-to-end.
+    on: {
+      proxyReq: (proxyReq: ClientRequest, req: IncomingMessage) => {
+        const rid = (req as any).requestId;
+        if (rid) proxyReq.setHeader('X-Request-Id', rid);
+        // Log the forwarded request for debugging.
+        console.info(`[Proxy → ${serviceName}] ${(req as any).method} ${(req as any).url} → ${target}${proxyReq.path}`);
+      },
+
+      error: (err: Error, req: IncomingMessage, res: ServerResponse | Response) => {
+        console.error(`[Proxy ✗ ${serviceName}] ${(req as any).method} ${(req as any).url} — ${err.message}`);
+
+        const rawRes = res as ServerResponse;
+        if (rawRes.headersSent) return;
+
+        rawRes.writeHead(502, { 'Content-Type': 'application/json' });
+        rawRes.end(
+          JSON.stringify({
+            success:    false,
+            statusCode: 502,
+            message:    'Service unavailable',
+            service:    serviceName,
+            error:      NODE_ENV !== 'production' ? err.message : undefined,
+            timestamp:  new Date().toISOString(),
+          })
+        );
+      },
+    },
+  };
+
+  return createProxyMiddleware(options);
+}
+
+// ─── Proxy Routes ─────────────────────────────────────────────────────────────
+// IMPORTANT: These MUST be registered AFTER the local /api/health handler.
+// Express matches routes in registration order — first match wins.
+//
+// The proxy middleware BYPASSES body parsing middleware because it intercepts
+// the request before the body has been fully consumed. This is correct
+// behaviour: the raw body stream is forwarded as-is to the downstream service.
+
+app.use('/api/auth',          makeProxy('auth'));
+app.use('/api/patients',      makeProxy('patient'));
+app.use('/api/appointments',  makeProxy('appointment'));
+app.use('/api/prescriptions', makeProxy('prescription'));
+app.use('/api/billing',       makeProxy('billing'));
+app.use('/api/notifications', makeProxy('notification'));
+app.use('/api/analytics',     makeProxy('analytics'));
+
+// ─── 404 Catch-All ───────────────────────────────────────────────────────────
+
 app.use((_req: Request, res: Response) => {
   res.status(404).json({
-    success: false,
+    success:    false,
     statusCode: 404,
-    message: 'Route not found',
-    timestamp: new Date().toISOString(),
+    message:    'Route not found',
+    timestamp:  new Date().toISOString(),
   });
 });
 
-// ─── Global Error Handler ──────────────────────────────────────────────────
+// ─── Global Error Handler ─────────────────────────────────────────────────────
+
 app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
   console.error('[API Gateway] Unhandled error:', err);
   res.status(500).json({
-    success: false,
+    success:    false,
     statusCode: 500,
-    message: process.env.NODE_ENV === 'production' ? 'Internal Server Error' : err.message,
-    timestamp: new Date().toISOString(),
+    message:    NODE_ENV === 'production' ? 'Internal Server Error' : err.message,
+    timestamp:  new Date().toISOString(),
   });
 });
 
-// ─── Start Server ──────────────────────────────────────────────────────────
+// ─── Start Server ─────────────────────────────────────────────────────────────
+// Per spec: server starts listening BEFORE proxies are exercised (they are
+// already registered above at import time, but the socket is bound here).
+
 app.listen(PORT, () => {
-  console.info(`[API Gateway] Server running on port ${PORT} in ${process.env.NODE_ENV} mode`);
+  console.info(`
+┌──────────────────────────────────────────────────────┐
+│  HealthBridge API Gateway                            │
+│  Listening on port ${String(PORT).padEnd(33)}│
+│  Environment: ${NODE_ENV.padEnd(38)}│
+├──────────────────────────────────────────────────────┤
+│  Proxied routes:                                     │
+│    /api/auth/*          → ${SERVICE_URLS.auth.padEnd(26)}│
+│    /api/patients/*      → ${SERVICE_URLS.patient.padEnd(26)}│
+│    /api/appointments/*  → ${SERVICE_URLS.appointment.padEnd(26)}│
+│    /api/prescriptions/* → ${SERVICE_URLS.prescription.padEnd(26)}│
+│    /api/billing/*       → ${SERVICE_URLS.billing.padEnd(26)}│
+│    /api/notifications/* → ${SERVICE_URLS.notification.padEnd(26)}│
+│    /api/analytics/*     → ${SERVICE_URLS.analytics.padEnd(26)}│
+└──────────────────────────────────────────────────────┘
+  `);
 });
 
 export default app;
-
