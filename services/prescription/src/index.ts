@@ -34,25 +34,23 @@ app.use((err: Error & { statusCode?: number }, _req: Request, res: Response, _ne
   });
 });
 
-async function bootstrap() {
-  const mongoUri = process.env.MONGODB_URI ?? 'mongodb://localhost:27017/healthbridge';
-  try {
-    await mongoose.connect(mongoUri, {
-      serverSelectionTimeoutMS: 10_000,
-    });
-    console.info('[Prescription Service] MongoDB connected');
-  } catch (err) {
-    console.error('[Prescription Service] MongoDB connection failed:', err);
-    if (process.env.NODE_ENV === 'production') {
-      process.exit(1);
-    }
-  }
+// Start server FIRST so that ECS/Docker health checks pass and container starts successfully
+const server = app.listen(PORT, () => {
+  console.info(`[Prescription Service] Listening on port ${PORT}`);
+});
 
-  app.listen(PORT, () => {
-    console.info(`[Prescription Service] Listening on port ${PORT}`);
-  });
-}
+// Connect to MongoDB asynchronously AFTER the server starts
+const mongoUri = process.env.MONGODB_URI ?? 'mongodb://localhost:27017/healthbridge';
+mongoose.connect(mongoUri, {
+  serverSelectionTimeoutMS: 10_000,
+})
+.then(() => {
+  console.info('[Prescription Service] MongoDB connected');
+})
+.catch(err => {
+  console.error('[Prescription Service] MongoDB connection failed:', err);
+  // Do not process.exit(1) to allow the container to remain alive and retry or report unhealthiness gracefully
+});
 
-bootstrap();
 export default app;
 
