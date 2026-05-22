@@ -25,7 +25,7 @@ import morgan from 'morgan';
 import rateLimit from 'express-rate-limit';
 import { createProxyMiddleware, Options as ProxyOptions } from 'http-proxy-middleware';
 import { v4 as uuidv4 } from 'uuid';
-import type { IncomingMessage, ServerResponse, ClientRequest } from 'http';
+import type { IncomingMessage, ServerResponse } from 'http';
 import http from 'http';
 import https from 'https';
 
@@ -205,6 +205,8 @@ function makeProxy(serviceName: ServiceName): ReturnType<typeof createProxyMiddl
 
   const publicPrefix = publicPrefixMap[serviceName];
 
+  // ── http-proxy-middleware v2 uses flat top-level callbacks, NOT the nested
+  //    `on: { proxyReq, error }` syntax introduced in v3. ──────────────────
   const options: ProxyOptions = {
     target,
     changeOrigin: true,
@@ -212,33 +214,30 @@ function makeProxy(serviceName: ServiceName): ReturnType<typeof createProxyMiddl
     // Rewrite: /api/patients/123  →  /patients/123
     pathRewrite: { [`^${publicPrefix}`]: `/${serviceName === 'auth' ? 'auth' : publicPrefix.replace('/api/', '')}` },
 
-    // Forward the X-Request-Id header upstream so traces are end-to-end.
-    on: {
-      proxyReq: (proxyReq: ClientRequest, req: IncomingMessage) => {
-        const rid = (req as any).requestId;
-        if (rid) proxyReq.setHeader('X-Request-Id', rid);
-        // Log the forwarded request for debugging.
-        console.info(`[Proxy → ${serviceName}] ${(req as any).method} ${(req as any).url} → ${target}${proxyReq.path}`);
-      },
+    // Forward X-Request-Id upstream for end-to-end tracing (v2 flat API).
+    onProxyReq: (proxyReq, req: IncomingMessage) => {
+      const rid = (req as any).requestId;
+      if (rid) proxyReq.setHeader('X-Request-Id', rid);
+      console.info(`[Proxy → ${serviceName}] ${(req as any).method} ${(req as any).url} → ${target}${proxyReq.path}`);
+    },
 
-      error: (err: Error, req: IncomingMessage, res: ServerResponse | Response) => {
-        console.error(`[Proxy ✗ ${serviceName}] ${(req as any).method} ${(req as any).url} — ${err.message}`);
+    // Return a structured 502 instead of crashing when the upstream is down (v2 flat API).
+    onError: (err: Error, req: IncomingMessage, res: ServerResponse) => {
+      console.error(`[Proxy ✗ ${serviceName}] ${(req as any).method} ${(req as any).url} — ${err.message}`);
 
-        const rawRes = res as ServerResponse;
-        if (rawRes.headersSent) return;
+      if (res.headersSent) return;
 
-        rawRes.writeHead(502, { 'Content-Type': 'application/json' });
-        rawRes.end(
-          JSON.stringify({
-            success:    false,
-            statusCode: 502,
-            message:    'Service unavailable',
-            service:    serviceName,
-            error:      NODE_ENV !== 'production' ? err.message : undefined,
-            timestamp:  new Date().toISOString(),
-          })
-        );
-      },
+      res.writeHead(502, { 'Content-Type': 'application/json' });
+      res.end(
+        JSON.stringify({
+          success:    false,
+          statusCode: 502,
+          message:    'Service unavailable',
+          service:    serviceName,
+          error:      NODE_ENV !== 'production' ? err.message : undefined,
+          timestamp:  new Date().toISOString(),
+        })
+      );
     },
   };
 
