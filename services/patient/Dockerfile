@@ -3,6 +3,8 @@
 # -----------------------------
 FROM node:20-alpine AS builder
 
+RUN apk add --no-cache libc6-compat openssl
+
 WORKDIR /app
 
 # Install dependencies first (better caching)
@@ -33,6 +35,8 @@ RUN npm run build -w services/patient
 # Production Stage
 # -----------------------------
 FROM node:20-alpine AS production
+
+RUN apk add --no-cache libc6-compat openssl
 
 WORKDIR /app
 

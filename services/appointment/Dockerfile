@@ -1,4 +1,5 @@
 FROM node:20-alpine AS builder
+RUN apk add --no-cache libc6-compat openssl
 WORKDIR /app
 COPY package.json package-lock.json tsconfig.json ./
 COPY libs/ ./libs/
@@ -13,6 +14,7 @@ RUN npm run build -w libs/middleware
 RUN npm run build -w services/appointment
 
 FROM node:20-alpine AS production
+RUN apk add --no-cache libc6-compat openssl
 WORKDIR /app
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/libs ./libs
