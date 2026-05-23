@@ -81,7 +81,7 @@ jobs:
 
       - name: Force ECS redeployment and Debug Status
         run: |
-          echo "🔄 Scanning ECS clusters for services matching healthbridge-${{ matrix.service }}..."
+          echo "🔄 Scanning ECS clusters for services matching healthbridge-${{ matrix.servi ce }}..."
           CLUSTERS=$(aws ecs list-clusters --query "clusterArns" --output text)
           for CLUSTER in $CLUSTERS; do
             echo "Checking cluster: $CLUSTER"
