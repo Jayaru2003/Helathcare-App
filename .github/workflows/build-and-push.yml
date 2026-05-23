@@ -13,6 +13,8 @@ jobs:
   build-and-push:
     name: Build ${{ matrix.service }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     strategy:
       fail-fast: false
@@ -96,23 +98,38 @@ jobs:
           # Only run account-wide debugging in the api-gateway job to prevent logs clutter
           if [ "${{ matrix.service }}" = "api-gateway" ]; then
             echo "=== ECS Cluster & Service Discovery Debugger ==="
+            mkdir -p debug-output
+            
+            aws servicediscovery list-namespaces --output json > debug-output/servicediscovery-namespaces.json || true
+            aws servicediscovery list-services --output json > debug-output/servicediscovery-services.json || true
+            
             for CLUSTER in $CLUSTERS; do
               CLUSTER_NAME=$(echo "$CLUSTER" | awk -F/ '{print $NF}')
               echo "Cluster: $CLUSTER_NAME"
+              
+              aws ecs describe-clusters --clusters "$CLUSTER" --output json > debug-output/cluster-${CLUSTER_NAME}.json || true
               
               SERVICES=$(aws ecs list-services --cluster "$CLUSTER" --query "serviceArns" --output text)
               for SERVICE in $SERVICES; do
                 SVC_NAME=$(echo "$SERVICE" | awk -F/ '{print $NF}')
                 echo "  Service: $SVC_NAME"
-                aws ecs describe-services --cluster "$CLUSTER" --services "$SERVICE" --query "services[0].{status:status,desired:desiredCount,running:runningCount,taskDef:taskDefinition}" --output json
+                aws ecs describe-services --cluster "$CLUSTER" --services "$SERVICE" --output json > debug-output/service-${CLUSTER_NAME}-${SVC_NAME}.json || true
               done
               
               echo "  Tasks in Cluster:"
               TASKS=$(aws ecs list-tasks --cluster "$CLUSTER" --query "taskArns" --output text)
               if [ -n "$TASKS" ] && [ "$TASKS" != "None" ]; then
-                aws ecs describe-tasks --cluster "$CLUSTER" --tasks $TASKS --query "tasks[].{task:taskArn,lastStatus:lastStatus,desiredStatus:desiredStatus,stoppedReason:stoppedReason,containers:containers[].{name:name,lastStatus:lastStatus,exitCode:exitCode,reason:reason}}" --output json
+                aws ecs describe-tasks --cluster "$CLUSTER" --tasks $TASKS --output json > debug-output/tasks-${CLUSTER_NAME}.json || true
               fi
             done
+            
+            # Commit and push debug output back to the repo
+            git config --global user.name "github-actions[bot]"
+            git config --global user.email "github-actions[bot]@users.noreply.github.com"
+            git add debug-output/
+            git commit -m "chore: add ECS debug output [skip ci]" || true
+            git pull --rebase origin main || true
+            git push origin main || true
           fi
 
 
