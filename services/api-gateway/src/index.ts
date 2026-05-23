@@ -175,6 +175,20 @@ app.get('/api/health', async (_req: Request, res: Response) => {
   });
 });
 
+app.get('/api/debug-env', (_req: Request, res: Response) => {
+  const serviceEnvs: Record<string, string | undefined> = {};
+  for (const key of Object.keys(process.env)) {
+    if (key.includes('SERVICE_URL') || key.includes('PORT') || key.includes('HOST')) {
+      serviceEnvs[key] = process.env[key];
+    }
+  }
+  res.json({
+    success: true,
+    envs: serviceEnvs,
+    SERVICE_URLS
+  });
+});
+
 // ─── Proxy Factory ────────────────────────────────────────────────────────────
 // Creates a proxy middleware for a given service.
 //
