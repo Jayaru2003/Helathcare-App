@@ -4,14 +4,14 @@
  * Single entry point for all downstream microservices.
  * Env vars are injected by ECS task definitions — no dotenv import.
  *
- * Route map (public path → downstream service):
- *   /api/auth/*          → AUTH_SERVICE_URL          (port 3001)
- *   /api/patients/*      → PATIENT_SERVICE_URL        (port 3002)
- *   /api/appointments/*  → APPOINTMENT_SERVICE_URL    (port 3003)
- *   /api/prescriptions/* → PRESCRIPTION_SERVICE_URL   (port 3004)
- *   /api/billing/*       → BILLING_SERVICE_URL        (port 3005)
- *   /api/notifications/* → NOTIFICATION_SERVICE_URL   (port 3006)
- *   /api/analytics/*     → ANALYTICS_SERVICE_URL      (port 3007)
+ * Route map (public path → downstream service → internal path):
+ *   /api/auth/*          → AUTH_SERVICE_URL          (port 3001)  → /api/v1/auth/*
+ *   /api/patients/*      → PATIENT_SERVICE_URL        (port 3002)  → /api/v1/patients/*
+ *   /api/appointments/*  → APPOINTMENT_SERVICE_URL    (port 3003)  → /api/v1/appointments/*
+ *   /api/prescriptions/* → PRESCRIPTION_SERVICE_URL   (port 3004)  → /api/v1/prescriptions/*
+ *   /api/billing/*       → BILLING_SERVICE_URL        (port 3005)  → /api/v1/billing/*
+ *   /api/notifications/* → NOTIFICATION_SERVICE_URL   (port 3006)  → /api/v1/notifications/*
+ *   /api/analytics/*     → ANALYTICS_SERVICE_URL      (port 3007)  → /api/v1/analytics/*
  *
  * Special routes (handled locally, NOT proxied):
  *   GET /health          → gateway liveness probe
@@ -180,19 +180,17 @@ app.get('/api/health', async (_req: Request, res: Response) => {
 //
 // Path rewriting logic:
 //   Request arrives at Express as:  /api/patients/123
-//   After app.use('/api/...') strips the mount:  N/A — we mount at /api/<svc>
 //   The proxy sees the ORIGINAL full path and rewrites it:
-//     /api/patients/123  →  /patients/123   (strips /api/patients prefix)
+//     /api/patients/123  →  /api/v1/patients/123
 //
-// Why strip only /api/<service> and not add /api back?
-//   Downstream services own their own routing. They expose /patients/:id
-//   directly — they do NOT have an /api prefix internally. If your downstream
-//   services DO use /api internally, change the rewrite below accordingly.
+// All downstream services mount their routers at /api/v1/<resource> internally,
+// so we rewrite the public /api/<resource> prefix to /api/v1/<resource>.
 
 function makeProxy(serviceName: ServiceName): ReturnType<typeof createProxyMiddleware> {
   const target  = SERVICE_URLS[serviceName];
-  // e.g. serviceName="patient" → public prefix is "/api/patients"
-  // The map below handles the plural naming mismatch for built-in services.
+
+  // Public path prefix (what the client sends to the gateway)
+  // e.g. patient → "/api/patients"
   const publicPrefixMap: Record<ServiceName, string> = {
     auth:         '/api/auth',
     patient:      '/api/patients',
@@ -203,7 +201,20 @@ function makeProxy(serviceName: ServiceName): ReturnType<typeof createProxyMiddl
     analytics:    '/api/analytics',
   };
 
-  const publicPrefix = publicPrefixMap[serviceName];
+  // Internal path prefix (what the downstream service actually listens on)
+  // All services use /api/v1/<resource> internally.
+  const internalPrefixMap: Record<ServiceName, string> = {
+    auth:         '/api/v1/auth',
+    patient:      '/api/v1/patients',
+    appointment:  '/api/v1/appointments',
+    prescription: '/api/v1/prescriptions',
+    billing:      '/api/v1/billing',
+    notification: '/api/v1/notifications',
+    analytics:    '/api/v1/analytics',
+  };
+
+  const publicPrefix   = publicPrefixMap[serviceName];
+  const internalPrefix = internalPrefixMap[serviceName];
 
   // ── http-proxy-middleware v2 uses flat top-level callbacks, NOT the nested
   //    `on: { proxyReq, error }` syntax introduced in v3. ──────────────────
@@ -211,8 +222,8 @@ function makeProxy(serviceName: ServiceName): ReturnType<typeof createProxyMiddl
     target,
     changeOrigin: true,
 
-    // Rewrite: /api/patients/123  →  /patients/123
-    pathRewrite: { [`^${publicPrefix}`]: `/${serviceName === 'auth' ? 'auth' : publicPrefix.replace('/api/', '')}` },
+    // Rewrite: /api/patients/123  →  /api/v1/patients/123
+    pathRewrite: { [`^${publicPrefix}`]: internalPrefix },
 
     // Forward X-Request-Id upstream for end-to-end tracing (v2 flat API).
     onProxyReq: (proxyReq, req: IncomingMessage) => {
