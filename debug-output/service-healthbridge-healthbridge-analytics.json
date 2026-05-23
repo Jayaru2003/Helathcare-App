@@ -26,15 +26,15 @@
             },
             "deployments": [
                 {
-                    "id": "ecs-svc/6470080469487816065",
+                    "id": "ecs-svc/8314901917834878636",
                     "status": "PRIMARY",
                     "taskDefinition": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-analytics:1",
                     "desiredCount": 1,
                     "pendingCount": 1,
                     "runningCount": 0,
                     "failedTasks": 0,
-                    "createdAt": "2026-05-23T17:27:33.853000+00:00",
-                    "updatedAt": "2026-05-23T17:27:44.486000+00:00",
+                    "createdAt": "2026-05-23T17:32:21.279000+00:00",
+                    "updatedAt": "2026-05-23T17:32:32.014000+00:00",
                     "launchType": "FARGATE",
                     "platformVersion": "1.4.0",
                     "platformFamily": "Linux",
@@ -51,18 +51,18 @@
                         }
                     },
                     "rolloutState": "IN_PROGRESS",
-                    "rolloutStateReason": "ECS deployment ecs-svc/6470080469487816065 in progress."
+                    "rolloutStateReason": "ECS deployment ecs-svc/8314901917834878636 in progress."
                 },
                 {
-                    "id": "ecs-svc/5371521479464942377",
+                    "id": "ecs-svc/6470080469487816065",
                     "status": "ACTIVE",
                     "taskDefinition": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-analytics:1",
                     "desiredCount": 1,
                     "pendingCount": 0,
                     "runningCount": 1,
                     "failedTasks": 0,
-                    "createdAt": "2026-05-23T17:24:43.540000+00:00",
-                    "updatedAt": "2026-05-23T17:27:44.493000+00:00",
+                    "createdAt": "2026-05-23T17:27:33.853000+00:00",
+                    "updatedAt": "2026-05-23T17:32:32.022000+00:00",
                     "launchType": "FARGATE",
                     "platformVersion": "1.4.0",
                     "platformFamily": "Linux",
@@ -78,12 +78,32 @@
                             "assignPublicIp": "ENABLED"
                         }
                     },
-                    "rolloutState": "IN_PROGRESS",
-                    "rolloutStateReason": "ECS deployment ecs-svc/5371521479464942377 in progress."
+                    "rolloutState": "COMPLETED",
+                    "rolloutStateReason": "ECS deployment ecs-svc/6470080469487816065 completed."
                 }
             ],
             "roleArn": "arn:aws:iam::617998378442:role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS",
             "events": [
+                {
+                    "id": "7249843d-eee1-4e65-9bd7-da99ffacbfd1",
+                    "createdAt": "2026-05-23T17:32:32.542000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task eeea8daef4e54020a2f9c94651a58689)."
+                },
+                {
+                    "id": "ec2a2153-08e1-4029-b13d-c96a3eb64526",
+                    "createdAt": "2026-05-23T17:30:35.226000+00:00",
+                    "message": "(service healthbridge-analytics) has reached a steady state."
+                },
+                {
+                    "id": "08b51e5b-eacc-4c76-907d-3ad17741020f",
+                    "createdAt": "2026-05-23T17:30:35.225000+00:00",
+                    "message": "(service healthbridge-analytics) (deployment ecs-svc/6470080469487816065) deployment completed."
+                },
+                {
+                    "id": "5e2824a3-34a7-404e-94b8-e9c60ef16436",
+                    "createdAt": "2026-05-23T17:28:49.353000+00:00",
+                    "message": "(service healthbridge-analytics) has stopped 1 running tasks: (task 6d04bcd07a5f41fe89cc85663a5c2c6d)."
+                },
                 {
                     "id": "1a3badd7-0b29-42f5-bfd6-ab48af97214b",
                     "createdAt": "2026-05-23T17:27:44.910000+00:00",
@@ -546,16 +566,16 @@
                 }
             ],
             "createdAt": "2026-05-21T04:14:22.064000+00:00",
-            "currentServiceDeployment": "arn:aws:ecs:ap-southeast-2:617998378442:service-deployment/healthbridge/healthbridge-analytics/XQg_DPuGLzfMTCFnCCLC_",
+            "currentServiceDeployment": "arn:aws:ecs:ap-southeast-2:617998378442:service-deployment/healthbridge/healthbridge-analytics/6SGHxk__eLMU2dHel3ho4",
             "currentServiceRevisions": [
                 {
-                    "arn": "arn:aws:ecs:ap-southeast-2:617998378442:service-revision/healthbridge/healthbridge-analytics/6470080469487816065",
+                    "arn": "arn:aws:ecs:ap-southeast-2:617998378442:service-revision/healthbridge/healthbridge-analytics/8314901917834878636",
                     "requestedTaskCount": 1,
                     "runningTaskCount": 0,
                     "pendingTaskCount": 1
                 },
                 {
-                    "arn": "arn:aws:ecs:ap-southeast-2:617998378442:service-revision/healthbridge/healthbridge-analytics/5371521479464942377",
+                    "arn": "arn:aws:ecs:ap-southeast-2:617998378442:service-revision/healthbridge/healthbridge-analytics/6470080469487816065",
                     "requestedTaskCount": 1,
                     "runningTaskCount": 1,
                     "pendingTaskCount": 0
