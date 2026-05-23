@@ -296,7 +296,7 @@ jobs:
               aws ecs update-service \
                 --cluster "$CLUSTER" \
                 --service "$ECS_SVC" \
-                --service-registries "[{\"registryArn\":\"${CM_SERVICE_ARN}\",\"containerName\":\"${SVC}\",\"containerPort\":${PORT}}]" \
+                --service-registries "[{\"registryArn\":\"${CM_SERVICE_ARN}\"}]" \
                 --no-cli-pager
               echo "  ✅ Registry attached to $ECS_SVC"
             else
