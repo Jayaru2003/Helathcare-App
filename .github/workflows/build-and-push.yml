@@ -77,7 +77,7 @@ jobs:
           echo "✅ Pushed: ${{ steps.tags.outputs.IMAGE }}:v1.0.0"
           echo "✅ Pushed: ${{ steps.tags.outputs.IMAGE }}:${{ steps.tags.outputs.SHA_TAG }}"
 
-      - name: Force ECS redeployment
+      - name: Force ECS redeployment and Debug Status
         run: |
           echo "🔄 Scanning ECS clusters for services matching healthbridge-${{ matrix.service }}..."
           CLUSTERS=$(aws ecs list-clusters --query "clusterArns" --output text)
@@ -92,4 +92,27 @@ jobs:
               fi
             done
           done
+
+          # Only run account-wide debugging in the api-gateway job to prevent logs clutter
+          if [ "${{ matrix.service }}" = "api-gateway" ]; then
+            echo "=== ECS Cluster & Service Discovery Debugger ==="
+            for CLUSTER in $CLUSTERS; do
+              CLUSTER_NAME=$(echo "$CLUSTER" | awk -F/ '{print $NF}')
+              echo "Cluster: $CLUSTER_NAME"
+              
+              SERVICES=$(aws ecs list-services --cluster "$CLUSTER" --query "serviceArns" --output text)
+              for SERVICE in $SERVICES; do
+                SVC_NAME=$(echo "$SERVICE" | awk -F/ '{print $NF}')
+                echo "  Service: $SVC_NAME"
+                aws ecs describe-services --cluster "$CLUSTER" --services "$SERVICE" --query "services[0].{status:status,desired:desiredCount,running:runningCount,taskDef:taskDefinition}" --output json
+              done
+              
+              echo "  Tasks in Cluster:"
+              TASKS=$(aws ecs list-tasks --cluster "$CLUSTER" --query "taskArns" --output text)
+              if [ -n "$TASKS" ] && [ "$TASKS" != "None" ]; then
+                aws ecs describe-tasks --cluster "$CLUSTER" --tasks $TASKS --query "tasks[].{task:taskArn,lastStatus:lastStatus,desiredStatus:desiredStatus,stoppedReason:stoppedReason,containers:containers[].{name:name,lastStatus:lastStatus,exitCode:exitCode,reason:reason}}" --output json
+              fi
+            done
+          fi
+
 
