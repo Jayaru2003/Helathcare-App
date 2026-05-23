@@ -1,0 +1,582 @@
+{
+    "services": [
+        {
+            "serviceArn": "arn:aws:ecs:ap-southeast-2:617998378442:service/healthbridge/healthbridge-analytics",
+            "serviceName": "healthbridge-analytics",
+            "clusterArn": "arn:aws:ecs:ap-southeast-2:617998378442:cluster/healthbridge",
+            "loadBalancers": [],
+            "serviceRegistries": [],
+            "status": "ACTIVE",
+            "desiredCount": 1,
+            "runningCount": 1,
+            "pendingCount": 1,
+            "launchType": "FARGATE",
+            "platformVersion": "LATEST",
+            "platformFamily": "Linux",
+            "taskDefinition": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-analytics:1",
+            "deploymentConfiguration": {
+                "deploymentCircuitBreaker": {
+                    "enable": false,
+                    "rollback": false
+                },
+                "maximumPercent": 200,
+                "minimumHealthyPercent": 100,
+                "strategy": "ROLLING",
+                "bakeTimeInMinutes": 0
+            },
+            "deployments": [
+                {
+                    "id": "ecs-svc/5371521479464942377",
+                    "status": "PRIMARY",
+                    "taskDefinition": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-analytics:1",
+                    "desiredCount": 1,
+                    "pendingCount": 1,
+                    "runningCount": 0,
+                    "failedTasks": 0,
+                    "createdAt": "2026-05-23T17:24:43.540000+00:00",
+                    "updatedAt": "2026-05-23T17:24:54.728000+00:00",
+                    "launchType": "FARGATE",
+                    "platformVersion": "1.4.0",
+                    "platformFamily": "Linux",
+                    "networkConfiguration": {
+                        "awsvpcConfiguration": {
+                            "subnets": [
+                                "subnet-0c16a12e0cd387b21",
+                                "subnet-0d0de008f955e1c47"
+                            ],
+                            "securityGroups": [
+                                "sg-0448096f5d35b1317"
+                            ],
+                            "assignPublicIp": "ENABLED"
+                        }
+                    },
+                    "rolloutState": "IN_PROGRESS",
+                    "rolloutStateReason": "ECS deployment ecs-svc/5371521479464942377 in progress."
+                },
+                {
+                    "id": "ecs-svc/5582456353232981028",
+                    "status": "ACTIVE",
+                    "taskDefinition": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-analytics:1",
+                    "desiredCount": 1,
+                    "pendingCount": 0,
+                    "runningCount": 1,
+                    "failedTasks": 0,
+                    "createdAt": "2026-05-23T17:19:40.182000+00:00",
+                    "updatedAt": "2026-05-23T17:24:54.736000+00:00",
+                    "launchType": "FARGATE",
+                    "platformVersion": "1.4.0",
+                    "platformFamily": "Linux",
+                    "networkConfiguration": {
+                        "awsvpcConfiguration": {
+                            "subnets": [
+                                "subnet-0c16a12e0cd387b21",
+                                "subnet-0d0de008f955e1c47"
+                            ],
+                            "securityGroups": [
+                                "sg-0448096f5d35b1317"
+                            ],
+                            "assignPublicIp": "ENABLED"
+                        }
+                    },
+                    "rolloutState": "COMPLETED",
+                    "rolloutStateReason": "ECS deployment ecs-svc/5582456353232981028 completed."
+                }
+            ],
+            "roleArn": "arn:aws:iam::617998378442:role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS",
+            "events": [
+                {
+                    "id": "97e68cee-e469-48bb-8fa2-8447e01a2f9b",
+                    "createdAt": "2026-05-23T17:24:55.350000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task 6d04bcd07a5f41fe89cc85663a5c2c6d)."
+                },
+                {
+                    "id": "c6ec8802-3b46-4e05-9820-1342dcd82b45",
+                    "createdAt": "2026-05-23T17:23:04.827000+00:00",
+                    "message": "(service healthbridge-analytics) has reached a steady state."
+                },
+                {
+                    "id": "e8f70459-03ca-4819-bd55-314c0ed6cd6f",
+                    "createdAt": "2026-05-23T17:23:04.826000+00:00",
+                    "message": "(service healthbridge-analytics) (deployment ecs-svc/5582456353232981028) deployment completed."
+                },
+                {
+                    "id": "890013c3-9b67-4abd-ac4f-69f02ba3ca97",
+                    "createdAt": "2026-05-23T17:21:12.122000+00:00",
+                    "message": "(service healthbridge-analytics) has stopped 1 running tasks: (task 64030d5de81343e0bc9568ca41694b0b)."
+                },
+                {
+                    "id": "d43585ee-6e04-4210-b4d8-4709045a8e20",
+                    "createdAt": "2026-05-23T17:19:58.011000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task 4ff1246fdc60421db9fb3d63f6c0994f)."
+                },
+                {
+                    "id": "db775de2-c678-41af-bddb-50825d728d05",
+                    "createdAt": "2026-05-23T17:18:32.817000+00:00",
+                    "message": "(service healthbridge-analytics) has stopped 1 running tasks: (task 9b871f55bd6142ffa1f0b46a80b2c92e)."
+                },
+                {
+                    "id": "8ccd895f-37dd-4c6e-be04-fa5cf60aa932",
+                    "createdAt": "2026-05-23T17:17:18.119000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task 64030d5de81343e0bc9568ca41694b0b)."
+                },
+                {
+                    "id": "c0f5b50d-06d1-4999-8fe0-8c73a505b318",
+                    "createdAt": "2026-05-23T17:14:15.350000+00:00",
+                    "message": "(service healthbridge-analytics) has reached a steady state."
+                },
+                {
+                    "id": "37f1add5-4aac-4c25-a965-4cc982893d9a",
+                    "createdAt": "2026-05-23T17:14:15.349000+00:00",
+                    "message": "(service healthbridge-analytics) (deployment ecs-svc/8192235780563602425) deployment completed."
+                },
+                {
+                    "id": "d7f34013-d9a6-4b4b-8288-404229025aff",
+                    "createdAt": "2026-05-23T17:12:19.475000+00:00",
+                    "message": "(service healthbridge-analytics) has stopped 1 running tasks: (task b18026231e954e8285e702def2a31b16)."
+                },
+                {
+                    "id": "a3b2aaea-10be-4cd1-9f27-9bb0bf252c07",
+                    "createdAt": "2026-05-23T17:11:16.205000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task 9b871f55bd6142ffa1f0b46a80b2c92e)."
+                },
+                {
+                    "id": "f0d8c390-2787-4f6d-afbe-82585d977654",
+                    "createdAt": "2026-05-23T11:22:22.571000+00:00",
+                    "message": "(service healthbridge-analytics) has reached a steady state."
+                },
+                {
+                    "id": "95cab702-a084-4034-a8a6-26a81c5a82c5",
+                    "createdAt": "2026-05-23T05:21:52.641000+00:00",
+                    "message": "(service healthbridge-analytics) has reached a steady state."
+                },
+                {
+                    "id": "e0999c8f-c69b-467c-902d-4da497896ddd",
+                    "createdAt": "2026-05-22T23:21:33.960000+00:00",
+                    "message": "(service healthbridge-analytics) has reached a steady state."
+                },
+                {
+                    "id": "b6248d76-1986-4330-8ae3-7a7effc6012d",
+                    "createdAt": "2026-05-22T17:21:18.604000+00:00",
+                    "message": "(service healthbridge-analytics) has reached a steady state."
+                },
+                {
+                    "id": "b91dfcc4-c110-4c04-877f-e2a84eea8732",
+                    "createdAt": "2026-05-22T11:21:17.738000+00:00",
+                    "message": "(service healthbridge-analytics) has reached a steady state."
+                },
+                {
+                    "id": "fa2144b8-8a1c-400b-9770-e905b08bd7c7",
+                    "createdAt": "2026-05-22T05:21:12.940000+00:00",
+                    "message": "(service healthbridge-analytics) has reached a steady state."
+                },
+                {
+                    "id": "5a56ad90-f1f5-48bf-9d62-4ac63138d1f8",
+                    "createdAt": "2026-05-21T23:20:45.441000+00:00",
+                    "message": "(service healthbridge-analytics) has reached a steady state."
+                },
+                {
+                    "id": "acfd04e7-a108-4e8f-a0dd-d0999a239154",
+                    "createdAt": "2026-05-21T17:20:40.240000+00:00",
+                    "message": "(service healthbridge-analytics) has reached a steady state."
+                },
+                {
+                    "id": "873e745f-ed63-45cc-90de-e49011c8b7f8",
+                    "createdAt": "2026-05-21T11:20:26.634000+00:00",
+                    "message": "(service healthbridge-analytics) has reached a steady state."
+                },
+                {
+                    "id": "fb56bc9f-be31-40b7-94cb-2c51324f8eb5",
+                    "createdAt": "2026-05-21T05:20:06.075000+00:00",
+                    "message": "(service healthbridge-analytics) has reached a steady state."
+                },
+                {
+                    "id": "35e60689-ff93-4acd-9541-fdccf7f70d1d",
+                    "createdAt": "2026-05-21T05:20:06.074000+00:00",
+                    "message": "(service healthbridge-analytics) (deployment ecs-svc/2823024235465861289) deployment completed."
+                },
+                {
+                    "id": "ffaf5db9-1ea4-41db-8174-39d209a1e378",
+                    "createdAt": "2026-05-21T05:18:20.807000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task b18026231e954e8285e702def2a31b16)."
+                },
+                {
+                    "id": "6747dd91-f0c0-4390-9e3c-8756c7d99a8d",
+                    "createdAt": "2026-05-21T05:18:10.764000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task 1d4c6689f841437db644371e348d484b)."
+                },
+                {
+                    "id": "bdaf1ad5-09e5-4914-bd91-ec69cba27c0e",
+                    "createdAt": "2026-05-21T05:17:23.473000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task 515bcc10c4e64d13ac21b9feb6a002d8)."
+                },
+                {
+                    "id": "ac0276dc-25e8-4f13-acaf-2b8acdcc433c",
+                    "createdAt": "2026-05-21T05:16:32.932000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task 9bb8d937559747718287f44df961bdfa)."
+                },
+                {
+                    "id": "782e522f-50cf-4a14-98dc-6a175b1fc0ad",
+                    "createdAt": "2026-05-21T05:15:43.412000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task 8f9d2b7ce1e844a6adda0a763864c635)."
+                },
+                {
+                    "id": "1e6255b7-1ecd-461d-9fe9-74df13c72760",
+                    "createdAt": "2026-05-21T05:14:46.205000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task 78027a31e10d411e8b43c10f8ea07197)."
+                },
+                {
+                    "id": "6f7becac-06b7-4757-b12b-9da297862620",
+                    "createdAt": "2026-05-21T05:10:35.826000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task bba9f56fab8c4be39792a23ec594e4f6)."
+                },
+                {
+                    "id": "81735ba9-cd46-4a76-95d5-c3866c2bee67",
+                    "createdAt": "2026-05-21T05:09:43.208000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task ed2714317d524888ac5ef48bd97d6d20)."
+                },
+                {
+                    "id": "0f458530-c760-44a7-b2d4-de75cf79e3b8",
+                    "createdAt": "2026-05-21T05:08:53.945000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task ee0a145ebfed487b9ebe606ed483168b)."
+                },
+                {
+                    "id": "712989f7-ac09-4f9b-a690-9dfb2feefd04",
+                    "createdAt": "2026-05-21T05:08:02.980000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task ce98abe581164a44af4a369120ecf080)."
+                },
+                {
+                    "id": "27fe8858-b0d5-4ebe-8e3b-2e7043f14c42",
+                    "createdAt": "2026-05-21T05:07:00.639000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task fa3c3ff53bd14b1988191fe82523048b)."
+                },
+                {
+                    "id": "2cca48c3-e79d-485a-bc4c-19b9497d590c",
+                    "createdAt": "2026-05-21T05:06:12.105000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task fe0b4009a6044269aecb2b6f5438d538)."
+                },
+                {
+                    "id": "512940bc-0dde-4a95-b64c-f4c5566c9ac2",
+                    "createdAt": "2026-05-21T05:05:20.522000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task bde066ba0ac541ccae7f219bb9e25ab9)."
+                },
+                {
+                    "id": "03f55aec-83a1-4310-95aa-21fd5d04377f",
+                    "createdAt": "2026-05-21T05:04:18.597000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task 038ab467d8c543d6a1de889bfb5df1f2)."
+                },
+                {
+                    "id": "bc9e81a6-c793-4c6c-a522-50ba46d9f4f7",
+                    "createdAt": "2026-05-21T05:03:16.720000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task f2abd4f5659f480793a33187311782be)."
+                },
+                {
+                    "id": "daf49562-3188-418a-bb74-c763a8a22e90",
+                    "createdAt": "2026-05-21T05:02:25.603000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task a28755a9d13242c2a47574ffb998da58)."
+                },
+                {
+                    "id": "42b85463-f710-4cf0-90ed-745f2105b5a6",
+                    "createdAt": "2026-05-21T05:01:34.790000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task 8a25c7228c9a40d88b14ae2d86e8f673)."
+                },
+                {
+                    "id": "2bd23731-6758-4f18-9f3c-18765deec67a",
+                    "createdAt": "2026-05-21T05:00:45.443000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task 69e4ac8d742a4dd084c70bf388b4b4f1)."
+                },
+                {
+                    "id": "dca04c09-794f-46df-b393-fd2c1cd3bc85",
+                    "createdAt": "2026-05-21T04:59:54.582000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task df98c32d1630434e9ae1015418a264cb)."
+                },
+                {
+                    "id": "b51cb926-5d1f-488d-a9e7-d800c237125f",
+                    "createdAt": "2026-05-21T04:58:55.450000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task 24dae6c618cb423eb155e67f3ab9b2ba)."
+                },
+                {
+                    "id": "3ac86810-c53b-4be7-8c92-afe06fbebfd2",
+                    "createdAt": "2026-05-21T04:58:02.542000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task 5e03bf9df5a9435c925b0d78f3a94b62)."
+                },
+                {
+                    "id": "f919b85e-836f-4d72-8091-d2ed7013e408",
+                    "createdAt": "2026-05-21T04:57:13.602000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task e8b120aff9cc4d99a452ea0eb90cb37f)."
+                },
+                {
+                    "id": "17bc3fb6-9365-49ae-a024-223b92b85874",
+                    "createdAt": "2026-05-21T04:56:20.879000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task 2a75a5e25d634419a2961138387c0f30)."
+                },
+                {
+                    "id": "f2d3df7a-df49-4a80-92ad-3826eb37d1f2",
+                    "createdAt": "2026-05-21T04:55:39.208000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task b6a56eef5f894293b6842d596348ea96)."
+                },
+                {
+                    "id": "1ee3abfd-9392-49d9-88e0-47a5d555a8ae",
+                    "createdAt": "2026-05-21T04:55:27.376000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task ec89bd47d24c4655b1290f6ea9c5b016)."
+                },
+                {
+                    "id": "7a386b56-01de-46e8-886c-c268ce4591d2",
+                    "createdAt": "2026-05-21T04:54:58.929000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task ed44aed27606493ead5d09e82210382a)."
+                },
+                {
+                    "id": "90f5e331-ca32-443d-be7d-db61ff349e12",
+                    "createdAt": "2026-05-21T04:54:06.578000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task 10af9d7d9d834edbb0f1509e8444c876)."
+                },
+                {
+                    "id": "ea6961a5-0a12-4dc4-a0c9-767b10ca0ed9",
+                    "createdAt": "2026-05-21T04:53:17.927000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task 511ce64face34ba6932a0b5eeb614c95)."
+                },
+                {
+                    "id": "9137a264-ae8b-47c0-a68f-482cf750e5cb",
+                    "createdAt": "2026-05-21T04:52:26.194000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task 02c00d4440e8410881996c5a281144ff)."
+                },
+                {
+                    "id": "4b46fbb8-d4a8-4676-91ed-e6a5347206aa",
+                    "createdAt": "2026-05-21T04:51:34.528000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task 44fb031ed96c4c67aaa523edd340700f)."
+                },
+                {
+                    "id": "fb8e8f48-6ba4-47d1-a3a7-37cd8898ac8b",
+                    "createdAt": "2026-05-21T04:50:44.424000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task 0f5a1883096b4d46b7c8cfad11d95c58)."
+                },
+                {
+                    "id": "4c8ce9cf-e456-462f-adb1-3dc700a947b1",
+                    "createdAt": "2026-05-21T04:49:44.212000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task 4af9331608b046fc8418de90868042ed)."
+                },
+                {
+                    "id": "c048be39-51dc-40da-9159-5e80662f06ac",
+                    "createdAt": "2026-05-21T04:48:54.048000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task c71241ebc62a4e4492b23e0af5a7feba)."
+                },
+                {
+                    "id": "3b713659-cc13-4572-b823-d5109770149a",
+                    "createdAt": "2026-05-21T04:48:04.994000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task 9c0152cb8e504969ac0574d9ebd3b56f)."
+                },
+                {
+                    "id": "c94302fa-b4b7-48ef-b896-b5818992f417",
+                    "createdAt": "2026-05-21T04:47:12.533000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task 730dcebcda8b48e0ade017864157fc0e)."
+                },
+                {
+                    "id": "d7283ad9-7949-4407-8a52-e8f5368f8409",
+                    "createdAt": "2026-05-21T04:46:14.461000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task 119dc2889f1b42309bef84d8c7c8aef0)."
+                },
+                {
+                    "id": "ed8c1c30-ffe4-4d4f-90e7-9cebd6ebc86e",
+                    "createdAt": "2026-05-21T04:45:24.034000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task b2ccb11ca3dc4d27a98c4cf35d80a8b6)."
+                },
+                {
+                    "id": "8d146ec1-0a7f-4994-b9fd-1678f8012d8d",
+                    "createdAt": "2026-05-21T04:44:33.953000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task 7362baef8e904ea7950cdd0ebdd3f79b)."
+                },
+                {
+                    "id": "6b46f8ce-32e9-4831-9836-2c8033f97dbd",
+                    "createdAt": "2026-05-21T04:43:43.154000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task dc3eea2d12954c4a9a73d9074ea81e0d)."
+                },
+                {
+                    "id": "6b546246-16e3-4cbf-a8ac-c68cb12d82bd",
+                    "createdAt": "2026-05-21T04:42:51.172000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task 773e350bc4d248d0baa3f994df775941)."
+                },
+                {
+                    "id": "a9b60d05-c550-4300-9e19-e8f71620c92c",
+                    "createdAt": "2026-05-21T04:42:00.965000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task 8b5985d7380a48199f0a3b3fee353817)."
+                },
+                {
+                    "id": "36dd39f9-e5d5-449d-8e47-66020bb250e7",
+                    "createdAt": "2026-05-21T04:41:00.702000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task e3aa11bd2e0949938aba0fc1277fd660)."
+                },
+                {
+                    "id": "cf35fabc-e70a-42d3-a041-87ecac8900be",
+                    "createdAt": "2026-05-21T04:40:00.899000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task 905129b8fe474679b45a70ecb8cd9495)."
+                },
+                {
+                    "id": "66fb5136-8ff6-481f-97b1-2734aa4da4a3",
+                    "createdAt": "2026-05-21T04:38:59.776000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task ce120b50412249b49c3c72f0c02dcd90)."
+                },
+                {
+                    "id": "9ac5fbe0-b910-4af3-88d0-fc569e589dd5",
+                    "createdAt": "2026-05-21T04:38:05.165000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task cdd3d772d8294d84a13ed5889ee6816f)."
+                },
+                {
+                    "id": "837467a4-1130-40c6-b628-94ea017513e4",
+                    "createdAt": "2026-05-21T04:37:02.987000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task 1d50eff9d72247c5be2f34c5e07f3941)."
+                },
+                {
+                    "id": "5bad5877-7270-49e2-89df-5ec5e463b591",
+                    "createdAt": "2026-05-21T04:36:11.244000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task f346ad76f3f74c09b143a4dbb6f5a248)."
+                },
+                {
+                    "id": "f499ac8c-35c0-4b2b-9c83-96ad554b1036",
+                    "createdAt": "2026-05-21T04:35:20.936000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task ce029821ac894c9a92b354808997e315)."
+                },
+                {
+                    "id": "3e085fec-db76-44d5-944b-ecec7995bbf2",
+                    "createdAt": "2026-05-21T04:34:27.649000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task f87b0d58d9204eebb3286107968eb57f)."
+                },
+                {
+                    "id": "556dc91e-3a66-49b3-896e-2646a3414703",
+                    "createdAt": "2026-05-21T04:33:37.398000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task 2715cc6ea76e45cb93b01c1402b197d2)."
+                },
+                {
+                    "id": "473f5696-430a-4dd2-9418-e3fa03704a0a",
+                    "createdAt": "2026-05-21T04:32:37.457000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task 496643492f4741878e1d6d61bb4530ee)."
+                },
+                {
+                    "id": "e58549ed-68b0-4864-955f-0296822052f1",
+                    "createdAt": "2026-05-21T04:31:46.742000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task 7b264f68a3664dcea818155d89106afb)."
+                },
+                {
+                    "id": "13ff43b2-2f9b-4cb8-b624-f2afdda4875a",
+                    "createdAt": "2026-05-21T04:30:45.936000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task 60df66ed95254a238c2faa220fc068e5)."
+                },
+                {
+                    "id": "6aca0e4c-a0c1-47e0-a934-daaa0e64b3da",
+                    "createdAt": "2026-05-21T04:28:51.933000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task c2f8f3151bde443790ecd8d8cd4416b5)."
+                },
+                {
+                    "id": "3ca13953-1969-486e-80aa-f421c3336927",
+                    "createdAt": "2026-05-21T04:28:18.880000+00:00",
+                    "message": "(service healthbridge-analytics) was unable to place a task. Reason: CannotPullContainerError: pull image manifest has been retried 7 time(s): failed to resolve ref 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-analytics:latest: 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-analytics:latest: not found."
+                },
+                {
+                    "id": "bbdc44f9-1f70-450f-a5c6-6a36165553a1",
+                    "createdAt": "2026-05-21T04:26:45.181000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task e3f4f1afff2b458a82c06c1e3e6c907d)."
+                },
+                {
+                    "id": "52725d0d-06df-4621-bd31-e4c9c80fe9c0",
+                    "createdAt": "2026-05-21T04:26:12.905000+00:00",
+                    "message": "(service healthbridge-analytics) was unable to place a task. Reason: CannotPullContainerError: pull image manifest has been retried 7 time(s): failed to resolve ref 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-analytics:latest: 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-analytics:latest: not found."
+                },
+                {
+                    "id": "7e088c7e-24ea-4e0d-9d67-4c8199239791",
+                    "createdAt": "2026-05-21T04:24:51.454000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task f0eec795195e42319704b8a6ccc15376)."
+                },
+                {
+                    "id": "7e99e5fe-cc21-417c-bbc2-7283265e2425",
+                    "createdAt": "2026-05-21T04:24:22.065000+00:00",
+                    "message": "(service healthbridge-analytics) was unable to place a task. Reason: CannotPullContainerError: pull image manifest has been retried 7 time(s): failed to resolve ref 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-analytics:latest: 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-analytics:latest: not found."
+                },
+                {
+                    "id": "a7c22a1f-df03-4bb4-b2a0-e739ef45e015",
+                    "createdAt": "2026-05-21T04:22:49.572000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task b91dfc6b43814c0da9c0c99f04e0a46e)."
+                },
+                {
+                    "id": "2382b773-a23e-4630-92cb-096ce7e1a0a9",
+                    "createdAt": "2026-05-21T04:22:17.808000+00:00",
+                    "message": "(service healthbridge-analytics) was unable to place a task. Reason: CannotPullContainerError: pull image manifest has been retried 7 time(s): failed to resolve ref 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-analytics:latest: 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-analytics:latest: not found."
+                },
+                {
+                    "id": "185b6c4d-ea13-4568-a813-e340e4deb05e",
+                    "createdAt": "2026-05-21T04:20:45.251000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task bc6586c0b8954db5b24f19e5e719b3cd)."
+                },
+                {
+                    "id": "d6a103a3-6ad9-48f4-9031-fbbfb6da6970",
+                    "createdAt": "2026-05-21T04:20:14.314000+00:00",
+                    "message": "(service healthbridge-analytics) was unable to place a task. Reason: CannotPullContainerError: pull image manifest has been retried 7 time(s): failed to resolve ref 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-analytics:latest: 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-analytics:latest: not found."
+                },
+                {
+                    "id": "b3beb9e0-b36d-4bf4-8942-8cbc851e4798",
+                    "createdAt": "2026-05-21T04:18:45.875000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task 2c372f441b094a5c90a1cb80da7dc05a)."
+                },
+                {
+                    "id": "d460d2b3-0162-492f-be33-f8ca19b12632",
+                    "createdAt": "2026-05-21T04:18:13.449000+00:00",
+                    "message": "(service healthbridge-analytics) was unable to place a task. Reason: CannotPullContainerError: pull image manifest has been retried 7 time(s): failed to resolve ref 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-analytics:latest: 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-analytics:latest: not found."
+                },
+                {
+                    "id": "3f82a330-455b-466f-b65f-f22e3172d3f5",
+                    "createdAt": "2026-05-21T04:16:46.340000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task 17a8c70bd27f4f82ac8c5bc334aa7178)."
+                },
+                {
+                    "id": "323a7dd2-9429-4fb4-91a1-2f35c0018298",
+                    "createdAt": "2026-05-21T04:16:15.107000+00:00",
+                    "message": "(service healthbridge-analytics) was unable to place a task. Reason: CannotPullContainerError: pull image manifest has been retried 7 time(s): failed to resolve ref 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-analytics:latest: 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-analytics:latest: not found."
+                },
+                {
+                    "id": "7cf2ba13-e175-4130-95cc-537402d352f3",
+                    "createdAt": "2026-05-21T04:14:40.631000+00:00",
+                    "message": "(service healthbridge-analytics) has started 1 tasks: (task 80f4dc1f80ee4fb596024139c7b62760)."
+                }
+            ],
+            "createdAt": "2026-05-21T04:14:22.064000+00:00",
+            "currentServiceDeployment": "arn:aws:ecs:ap-southeast-2:617998378442:service-deployment/healthbridge/healthbridge-analytics/4YAmexwu1dN6H8yikW_P9",
+            "currentServiceRevisions": [
+                {
+                    "arn": "arn:aws:ecs:ap-southeast-2:617998378442:service-revision/healthbridge/healthbridge-analytics/5371521479464942377",
+                    "requestedTaskCount": 1,
+                    "runningTaskCount": 0,
+                    "pendingTaskCount": 1
+                },
+                {
+                    "arn": "arn:aws:ecs:ap-southeast-2:617998378442:service-revision/healthbridge/healthbridge-analytics/5582456353232981028",
+                    "requestedTaskCount": 1,
+                    "runningTaskCount": 1,
+                    "pendingTaskCount": 0
+                }
+            ],
+            "placementConstraints": [],
+            "placementStrategy": [],
+            "networkConfiguration": {
+                "awsvpcConfiguration": {
+                    "subnets": [
+                        "subnet-0c16a12e0cd387b21",
+                        "subnet-0d0de008f955e1c47"
+                    ],
+                    "securityGroups": [
+                        "sg-0448096f5d35b1317"
+                    ],
+                    "assignPublicIp": "ENABLED"
+                }
+            },
+            "healthCheckGracePeriodSeconds": 0,
+            "schedulingStrategy": "REPLICA",
+            "deploymentController": {
+                "type": "ECS"
+            },
+            "createdBy": "arn:aws:iam::617998378442:user/admin-user",
+            "enableECSManagedTags": false,
+            "propagateTags": "NONE",
+            "enableExecuteCommand": false,
+            "availabilityZoneRebalancing": "ENABLED",
+            "resourceManagementType": "CUSTOMER"
+        }
+    ],
+    "failures": []
+}

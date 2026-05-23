@@ -1,0 +1,597 @@
+{
+    "services": [
+        {
+            "serviceArn": "arn:aws:ecs:ap-southeast-2:617998378442:service/healthbridge/healthbridge-prescription",
+            "serviceName": "healthbridge-prescription",
+            "clusterArn": "arn:aws:ecs:ap-southeast-2:617998378442:cluster/healthbridge",
+            "loadBalancers": [],
+            "serviceRegistries": [],
+            "status": "ACTIVE",
+            "desiredCount": 1,
+            "runningCount": 1,
+            "pendingCount": 0,
+            "launchType": "FARGATE",
+            "platformVersion": "LATEST",
+            "platformFamily": "Linux",
+            "taskDefinition": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-prescription:1",
+            "deploymentConfiguration": {
+                "deploymentCircuitBreaker": {
+                    "enable": false,
+                    "rollback": false
+                },
+                "maximumPercent": 200,
+                "minimumHealthyPercent": 100,
+                "strategy": "ROLLING",
+                "bakeTimeInMinutes": 0
+            },
+            "deployments": [
+                {
+                    "id": "ecs-svc/4898542392440064142",
+                    "status": "PRIMARY",
+                    "taskDefinition": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-prescription:1",
+                    "desiredCount": 1,
+                    "pendingCount": 0,
+                    "runningCount": 1,
+                    "failedTasks": 0,
+                    "createdAt": "2026-05-23T17:19:33.493000+00:00",
+                    "updatedAt": "2026-05-23T17:22:57.127000+00:00",
+                    "launchType": "FARGATE",
+                    "platformVersion": "1.4.0",
+                    "platformFamily": "Linux",
+                    "networkConfiguration": {
+                        "awsvpcConfiguration": {
+                            "subnets": [
+                                "subnet-0c16a12e0cd387b21",
+                                "subnet-0d0de008f955e1c47"
+                            ],
+                            "securityGroups": [
+                                "sg-0448096f5d35b1317"
+                            ],
+                            "assignPublicIp": "ENABLED"
+                        }
+                    },
+                    "rolloutState": "COMPLETED",
+                    "rolloutStateReason": "ECS deployment ecs-svc/4898542392440064142 completed."
+                }
+            ],
+            "roleArn": "arn:aws:iam::617998378442:role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS",
+            "events": [
+                {
+                    "id": "135bbcfd-7da6-4174-9010-d982d5296f8a",
+                    "createdAt": "2026-05-23T17:22:57.136000+00:00",
+                    "message": "(service healthbridge-prescription) has reached a steady state."
+                },
+                {
+                    "id": "54faf869-dccb-4df6-bf82-e285baeb8a08",
+                    "createdAt": "2026-05-23T17:22:57.135000+00:00",
+                    "message": "(service healthbridge-prescription) (deployment ecs-svc/4898542392440064142) deployment completed."
+                },
+                {
+                    "id": "41be1ff6-8707-4782-9c30-409b85162296",
+                    "createdAt": "2026-05-23T17:20:59.656000+00:00",
+                    "message": "(service healthbridge-prescription) has stopped 1 running tasks: (task 4b32530bfca849ce920f939a84e6ffce)."
+                },
+                {
+                    "id": "e4143561-5dc7-4efc-b0cb-6e1745366515",
+                    "createdAt": "2026-05-23T17:19:46.955000+00:00",
+                    "message": "(service healthbridge-prescription) has started 1 tasks: (task 927fd2a9134d40619c39e48a214eba96)."
+                },
+                {
+                    "id": "b3150742-b0a5-4609-a2ce-51348ef1a756",
+                    "createdAt": "2026-05-23T17:18:30.146000+00:00",
+                    "message": "(service healthbridge-prescription) has stopped 1 running tasks: (task 5d3de5091b77437b9a40e5f72c1dd316)."
+                },
+                {
+                    "id": "47ea1c7a-8f33-4d51-9833-b972958801ed",
+                    "createdAt": "2026-05-23T17:17:26.893000+00:00",
+                    "message": "(service healthbridge-prescription) has started 1 tasks: (task 4b32530bfca849ce920f939a84e6ffce)."
+                },
+                {
+                    "id": "d2d2e016-746f-45ab-8252-2d658d59ea61",
+                    "createdAt": "2026-05-23T17:14:25.309000+00:00",
+                    "message": "(service healthbridge-prescription) has reached a steady state."
+                },
+                {
+                    "id": "c582bcda-e8a3-4dc7-83aa-82d96a24c93f",
+                    "createdAt": "2026-05-23T17:14:25.308000+00:00",
+                    "message": "(service healthbridge-prescription) (deployment ecs-svc/7083829896879706553) deployment completed."
+                },
+                {
+                    "id": "a512baf7-ef2f-45fb-ae23-55eb77500a87",
+                    "createdAt": "2026-05-23T17:12:28.833000+00:00",
+                    "message": "(service healthbridge-prescription) has stopped 1 running tasks: (task 5ebc6d3db31c4b0e856ab78c3d1addb8)."
+                },
+                {
+                    "id": "448193fe-210b-4494-97aa-1cb09d55923e",
+                    "createdAt": "2026-05-23T17:11:25.754000+00:00",
+                    "message": "(service healthbridge-prescription) has started 1 tasks: (task 5d3de5091b77437b9a40e5f72c1dd316)."
+                },
+                {
+                    "id": "27bb36c7-171d-4ad5-9c8b-ec506b2bbb2e",
+                    "createdAt": "2026-05-23T12:53:01.372000+00:00",
+                    "message": "(service healthbridge-prescription) has reached a steady state."
+                },
+                {
+                    "id": "3b8109be-9f11-45be-ac2e-7329fd957049",
+                    "createdAt": "2026-05-23T06:52:54.560000+00:00",
+                    "message": "(service healthbridge-prescription) has reached a steady state."
+                },
+                {
+                    "id": "251cc6b9-29bf-4125-93cf-8181409e930b",
+                    "createdAt": "2026-05-23T00:52:26.815000+00:00",
+                    "message": "(service healthbridge-prescription) has reached a steady state."
+                },
+                {
+                    "id": "207387f3-dbb6-4a3e-8246-e012c5885320",
+                    "createdAt": "2026-05-22T18:52:23.073000+00:00",
+                    "message": "(service healthbridge-prescription) has reached a steady state."
+                },
+                {
+                    "id": "a09f63ba-60b6-4ebc-bf8a-2024e0b40ed3",
+                    "createdAt": "2026-05-22T12:52:02.937000+00:00",
+                    "message": "(service healthbridge-prescription) has reached a steady state."
+                },
+                {
+                    "id": "69105566-0c9b-475f-a872-4e262ef7d874",
+                    "createdAt": "2026-05-22T12:52:02.936000+00:00",
+                    "message": "(service healthbridge-prescription) (deployment ecs-svc/0541960394636668580) deployment completed."
+                },
+                {
+                    "id": "79338b8d-e3b1-4ec2-9e8c-eb5c9622c2b7",
+                    "createdAt": "2026-05-22T12:50:19.746000+00:00",
+                    "message": "(service healthbridge-prescription) stopped 1 pending tasks."
+                },
+                {
+                    "id": "dcae15af-5331-4bbc-b6cd-b7c0dbca2db8",
+                    "createdAt": "2026-05-22T12:49:38.614000+00:00",
+                    "message": "(service healthbridge-prescription) has started 1 tasks: (task 5ebc6d3db31c4b0e856ab78c3d1addb8)."
+                },
+                {
+                    "id": "ecdfda19-8c17-4074-8877-4d1243780298",
+                    "createdAt": "2026-05-22T12:49:36.088000+00:00",
+                    "message": "(service healthbridge-prescription) has started 1 tasks: (task e08e27c49e03463aaa899c0a682db06b)."
+                },
+                {
+                    "id": "aad91263-bccc-4c20-9709-7b810113e5e0",
+                    "createdAt": "2026-05-22T12:49:06.371000+00:00",
+                    "message": "(service healthbridge-prescription) was unable to place a task. Reason: CannotPullContainerError: pull image manifest has been retried 7 time(s): failed to resolve ref 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: not found."
+                },
+                {
+                    "id": "43262dc5-ec74-45d5-ad36-1b94799954d6",
+                    "createdAt": "2026-05-22T12:45:33.182000+00:00",
+                    "message": "(service healthbridge-prescription) has started 1 tasks: (task 751e72ed3e3243fb9386b9d3c52ec612)."
+                },
+                {
+                    "id": "e4e20336-e811-43db-b277-183b9d9586bf",
+                    "createdAt": "2026-05-22T12:31:35.888000+00:00",
+                    "message": "(service healthbridge-prescription) is unable to consistently start tasks successfully. For more information, see the Troubleshooting section of the Amazon ECS Developer Guide."
+                },
+                {
+                    "id": "2017710e-690c-43f1-b600-9f7c11d5fa18",
+                    "createdAt": "2026-05-22T12:31:35.887000+00:00",
+                    "message": "(service healthbridge-prescription) was unable to place a task. Reason: CannotPullContainerError: pull image manifest has been retried 7 time(s): failed to resolve ref 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: not found."
+                },
+                {
+                    "id": "a155155c-e5a8-44f8-a5cf-292b0ac45642",
+                    "createdAt": "2026-05-22T12:30:06.083000+00:00",
+                    "message": "(service healthbridge-prescription) has started 1 tasks: (task 3e9f28c451b4463ca3eeb200df2755c8)."
+                },
+                {
+                    "id": "16888b1c-0c58-4f05-ab8e-80b6fc280b32",
+                    "createdAt": "2026-05-22T12:17:04.164000+00:00",
+                    "message": "(service healthbridge-prescription) is unable to consistently start tasks successfully. For more information, see the Troubleshooting section of the Amazon ECS Developer Guide."
+                },
+                {
+                    "id": "6a411975-c3dc-424a-b02a-7a46581d663c",
+                    "createdAt": "2026-05-22T12:17:04.163000+00:00",
+                    "message": "(service healthbridge-prescription) was unable to place a task. Reason: CannotPullContainerError: pull image manifest has been retried 7 time(s): failed to resolve ref 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: not found."
+                },
+                {
+                    "id": "c0b5c485-75cb-4f32-a206-89ba94f7fd80",
+                    "createdAt": "2026-05-22T12:15:33.202000+00:00",
+                    "message": "(service healthbridge-prescription) has started 1 tasks: (task 8a1a32839cca4188a4a5fba1ef20acbc)."
+                },
+                {
+                    "id": "0513801e-fdc6-4e63-a0b7-293b1679fcd9",
+                    "createdAt": "2026-05-22T12:01:59.825000+00:00",
+                    "message": "(service healthbridge-prescription) is unable to consistently start tasks successfully. For more information, see the Troubleshooting section of the Amazon ECS Developer Guide."
+                },
+                {
+                    "id": "e6540e4f-5932-4ac5-a1a2-62e6c71ef226",
+                    "createdAt": "2026-05-22T12:01:59.824000+00:00",
+                    "message": "(service healthbridge-prescription) was unable to place a task. Reason: CannotPullContainerError: pull image manifest has been retried 7 time(s): failed to resolve ref 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: not found."
+                },
+                {
+                    "id": "0ee8761b-a24d-4530-9b23-b199d06c1d51",
+                    "createdAt": "2026-05-22T12:00:29.324000+00:00",
+                    "message": "(service healthbridge-prescription) has started 1 tasks: (task a818ccfd9fcc42f59cbae6d46df237d0)."
+                },
+                {
+                    "id": "e97ed4e6-fda3-4ea1-a95a-e4f5514ad374",
+                    "createdAt": "2026-05-22T11:47:17.600000+00:00",
+                    "message": "(service healthbridge-prescription) is unable to consistently start tasks successfully. For more information, see the Troubleshooting section of the Amazon ECS Developer Guide."
+                },
+                {
+                    "id": "01516517-8878-40fc-8205-1b69f8cf8bce",
+                    "createdAt": "2026-05-22T11:47:17.599000+00:00",
+                    "message": "(service healthbridge-prescription) was unable to place a task. Reason: CannotPullContainerError: pull image manifest has been retried 7 time(s): failed to resolve ref 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: not found."
+                },
+                {
+                    "id": "9045b096-3d25-46fa-b172-5a22c185cc4a",
+                    "createdAt": "2026-05-22T11:45:46.906000+00:00",
+                    "message": "(service healthbridge-prescription) has started 1 tasks: (task 255e54a1c5ee4ee99db510947e5f6fde)."
+                },
+                {
+                    "id": "69e20dc8-6a88-4ddf-854a-d937f38b1f12",
+                    "createdAt": "2026-05-22T11:32:31.013000+00:00",
+                    "message": "(service healthbridge-prescription) is unable to consistently start tasks successfully. For more information, see the Troubleshooting section of the Amazon ECS Developer Guide."
+                },
+                {
+                    "id": "3763b345-a6c9-4639-832c-81af7ad1a3db",
+                    "createdAt": "2026-05-22T11:32:31.012000+00:00",
+                    "message": "(service healthbridge-prescription) was unable to place a task. Reason: CannotPullContainerError: pull image manifest has been retried 7 time(s): failed to resolve ref 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: not found."
+                },
+                {
+                    "id": "6ae547b2-1f92-44f1-85bc-46b3799ea63d",
+                    "createdAt": "2026-05-22T11:30:59.584000+00:00",
+                    "message": "(service healthbridge-prescription) has started 1 tasks: (task 4f79d52240194f37af46786c8dd98a09)."
+                },
+                {
+                    "id": "5aa80892-136b-4c08-9d8f-810c420e3a41",
+                    "createdAt": "2026-05-22T11:17:06.636000+00:00",
+                    "message": "(service healthbridge-prescription) is unable to consistently start tasks successfully. For more information, see the Troubleshooting section of the Amazon ECS Developer Guide."
+                },
+                {
+                    "id": "4f5a371b-7640-4d6a-9aba-49227138cf19",
+                    "createdAt": "2026-05-22T11:17:06.635000+00:00",
+                    "message": "(service healthbridge-prescription) was unable to place a task. Reason: CannotPullContainerError: pull image manifest has been retried 7 time(s): failed to resolve ref 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: not found."
+                },
+                {
+                    "id": "1f2b2d7b-7f79-499f-b567-2a81e7facecf",
+                    "createdAt": "2026-05-22T11:15:35.931000+00:00",
+                    "message": "(service healthbridge-prescription) has started 1 tasks: (task 70aadbfe402242c48c98056658fbea47)."
+                },
+                {
+                    "id": "fc03fb1c-1852-465f-948a-e915433f075a",
+                    "createdAt": "2026-05-22T11:01:41.037000+00:00",
+                    "message": "(service healthbridge-prescription) is unable to consistently start tasks successfully. For more information, see the Troubleshooting section of the Amazon ECS Developer Guide."
+                },
+                {
+                    "id": "da1ff469-d5c6-4e9e-b38f-c205f1b37c8d",
+                    "createdAt": "2026-05-22T11:01:41.036000+00:00",
+                    "message": "(service healthbridge-prescription) was unable to place a task. Reason: CannotPullContainerError: pull image manifest has been retried 7 time(s): failed to resolve ref 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: not found."
+                },
+                {
+                    "id": "f9440ec6-8432-4a95-9534-b69db7dc09b9",
+                    "createdAt": "2026-05-22T11:00:10.368000+00:00",
+                    "message": "(service healthbridge-prescription) has started 1 tasks: (task de5e17622e784816993ab141a9ce9dab)."
+                },
+                {
+                    "id": "a2f2099f-fcea-4feb-a88d-0d61ec9d5be6",
+                    "createdAt": "2026-05-22T10:45:59.565000+00:00",
+                    "message": "(service healthbridge-prescription) is unable to consistently start tasks successfully. For more information, see the Troubleshooting section of the Amazon ECS Developer Guide."
+                },
+                {
+                    "id": "2c854951-4759-403a-8f29-b33368852557",
+                    "createdAt": "2026-05-22T10:45:59.564000+00:00",
+                    "message": "(service healthbridge-prescription) was unable to place a task. Reason: CannotPullContainerError: pull image manifest has been retried 7 time(s): failed to resolve ref 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: not found."
+                },
+                {
+                    "id": "60cab866-1ff8-42d6-8d93-a49d5d88df19",
+                    "createdAt": "2026-05-22T10:44:29.578000+00:00",
+                    "message": "(service healthbridge-prescription) has started 1 tasks: (task f8950e93780c463c939ff327090f382c)."
+                },
+                {
+                    "id": "30dd163e-f0cf-4473-8f8f-8d0db1698968",
+                    "createdAt": "2026-05-22T10:30:45.398000+00:00",
+                    "message": "(service healthbridge-prescription) is unable to consistently start tasks successfully. For more information, see the Troubleshooting section of the Amazon ECS Developer Guide."
+                },
+                {
+                    "id": "293cdc53-a744-4a42-a522-9de927df8086",
+                    "createdAt": "2026-05-22T10:30:45.397000+00:00",
+                    "message": "(service healthbridge-prescription) was unable to place a task. Reason: CannotPullContainerError: pull image manifest has been retried 7 time(s): failed to resolve ref 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: not found."
+                },
+                {
+                    "id": "94d9a2ed-0d67-4a57-a9f1-481bd5c6ed4a",
+                    "createdAt": "2026-05-22T10:29:16.362000+00:00",
+                    "message": "(service healthbridge-prescription) has started 1 tasks: (task 45c9366c761341fab0ccf81942af3dab)."
+                },
+                {
+                    "id": "a3b6ff7d-fa2c-4d24-8aaa-bf649ac11215",
+                    "createdAt": "2026-05-22T10:16:23.850000+00:00",
+                    "message": "(service healthbridge-prescription) is unable to consistently start tasks successfully. For more information, see the Troubleshooting section of the Amazon ECS Developer Guide."
+                },
+                {
+                    "id": "905f6dec-f581-456f-9e36-241aad9775b2",
+                    "createdAt": "2026-05-22T10:16:23.849000+00:00",
+                    "message": "(service healthbridge-prescription) was unable to place a task. Reason: CannotPullContainerError: pull image manifest has been retried 7 time(s): failed to resolve ref 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: not found."
+                },
+                {
+                    "id": "ee02f767-5427-4f47-9d71-d94ec2b98ca5",
+                    "createdAt": "2026-05-22T10:14:51.140000+00:00",
+                    "message": "(service healthbridge-prescription) has started 1 tasks: (task f5cef61a4ffc47e880bc074aa893b72f)."
+                },
+                {
+                    "id": "20256f9e-1434-4362-8f6a-fe7eacae0e0b",
+                    "createdAt": "2026-05-22T10:01:01.183000+00:00",
+                    "message": "(service healthbridge-prescription) is unable to consistently start tasks successfully. For more information, see the Troubleshooting section of the Amazon ECS Developer Guide."
+                },
+                {
+                    "id": "11a384c8-d829-4ed4-93fc-5dfc9ab75f3b",
+                    "createdAt": "2026-05-22T10:01:01.182000+00:00",
+                    "message": "(service healthbridge-prescription) was unable to place a task. Reason: CannotPullContainerError: pull image manifest has been retried 7 time(s): failed to resolve ref 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: not found."
+                },
+                {
+                    "id": "0cc70958-085f-48db-99cb-30c48ce3bc70",
+                    "createdAt": "2026-05-22T09:59:31.918000+00:00",
+                    "message": "(service healthbridge-prescription) has started 1 tasks: (task ef45ff6e358644bfa24ef724b91ccce2)."
+                },
+                {
+                    "id": "0d4ca291-0811-4da3-a6a6-abec0316d2d5",
+                    "createdAt": "2026-05-22T09:46:31.385000+00:00",
+                    "message": "(service healthbridge-prescription) is unable to consistently start tasks successfully. For more information, see the Troubleshooting section of the Amazon ECS Developer Guide."
+                },
+                {
+                    "id": "1667ec26-aacb-4ff1-b4fe-c11897af9a85",
+                    "createdAt": "2026-05-22T09:46:31.384000+00:00",
+                    "message": "(service healthbridge-prescription) was unable to place a task. Reason: CannotPullContainerError: pull image manifest has been retried 7 time(s): failed to resolve ref 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: not found."
+                },
+                {
+                    "id": "2755d31a-9c98-4ff0-bf9b-fff459542860",
+                    "createdAt": "2026-05-22T09:44:59.726000+00:00",
+                    "message": "(service healthbridge-prescription) has started 1 tasks: (task 65049beaeccb41c292026fcc44e78c41)."
+                },
+                {
+                    "id": "c918c631-8c1f-4b71-8dd6-d1707fdd56fc",
+                    "createdAt": "2026-05-22T09:30:58.726000+00:00",
+                    "message": "(service healthbridge-prescription) is unable to consistently start tasks successfully. For more information, see the Troubleshooting section of the Amazon ECS Developer Guide."
+                },
+                {
+                    "id": "246f7da5-422f-4f87-8546-5f494c322c25",
+                    "createdAt": "2026-05-22T09:30:58.725000+00:00",
+                    "message": "(service healthbridge-prescription) was unable to place a task. Reason: CannotPullContainerError: pull image manifest has been retried 7 time(s): failed to resolve ref 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: not found."
+                },
+                {
+                    "id": "37c7d2d5-0576-441b-838e-9e17883644eb",
+                    "createdAt": "2026-05-22T09:29:28.027000+00:00",
+                    "message": "(service healthbridge-prescription) has started 1 tasks: (task a6193bba24cf40c38818d604b5e0f190)."
+                },
+                {
+                    "id": "9ba53f81-97da-4050-98e4-42ca7568a0df",
+                    "createdAt": "2026-05-22T09:19:40.264000+00:00",
+                    "message": "(service healthbridge-prescription) is unable to consistently start tasks successfully. For more information, see the Troubleshooting section of the Amazon ECS Developer Guide."
+                },
+                {
+                    "id": "4bb21b1a-9651-4a32-be4e-86587230d006",
+                    "createdAt": "2026-05-22T09:19:40.263000+00:00",
+                    "message": "(service healthbridge-prescription) was unable to place a task. Reason: CannotPullContainerError: pull image manifest has been retried 7 time(s): failed to resolve ref 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: not found."
+                },
+                {
+                    "id": "88efd3e0-fa97-4e73-bc2e-9e7aad2eb6f2",
+                    "createdAt": "2026-05-22T09:18:16.497000+00:00",
+                    "message": "(service healthbridge-prescription) has started 1 tasks: (task 6b554422226d4325aa21bd0b76eded8d)."
+                },
+                {
+                    "id": "2b2b18d6-f91f-49a1-8ca0-7be74229c46e",
+                    "createdAt": "2026-05-22T09:08:34.796000+00:00",
+                    "message": "(service healthbridge-prescription) is unable to consistently start tasks successfully. For more information, see the Troubleshooting section of the Amazon ECS Developer Guide."
+                },
+                {
+                    "id": "9f47fe1a-3e86-4837-b3e7-0647fa9d06c6",
+                    "createdAt": "2026-05-22T09:08:34.795000+00:00",
+                    "message": "(service healthbridge-prescription) was unable to place a task. Reason: CannotPullContainerError: pull image manifest has been retried 7 time(s): failed to resolve ref 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: not found."
+                },
+                {
+                    "id": "7447c967-bedc-4954-81a2-f289e2322dcd",
+                    "createdAt": "2026-05-22T09:07:14.956000+00:00",
+                    "message": "(service healthbridge-prescription) has started 1 tasks: (task a45940426104402fb2de8afe9e2f1791)."
+                },
+                {
+                    "id": "1cd4f9b3-33a1-4928-9b3e-71e8919df5b7",
+                    "createdAt": "2026-05-22T08:57:06.454000+00:00",
+                    "message": "(service healthbridge-prescription) is unable to consistently start tasks successfully. For more information, see the Troubleshooting section of the Amazon ECS Developer Guide."
+                },
+                {
+                    "id": "aa953c58-dad0-4c2a-89a6-86c27109578e",
+                    "createdAt": "2026-05-22T08:57:06.453000+00:00",
+                    "message": "(service healthbridge-prescription) was unable to place a task. Reason: CannotPullContainerError: pull image manifest has been retried 7 time(s): failed to resolve ref 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: not found."
+                },
+                {
+                    "id": "41d06b09-b330-46ff-8a30-72358e738613",
+                    "createdAt": "2026-05-22T08:55:34.485000+00:00",
+                    "message": "(service healthbridge-prescription) has started 1 tasks: (task 87db78adec7d493f92ca299f19205655)."
+                },
+                {
+                    "id": "46e51e1c-e261-43d4-8ae5-a6dd0f982da8",
+                    "createdAt": "2026-05-22T08:45:29.496000+00:00",
+                    "message": "(service healthbridge-prescription) is unable to consistently start tasks successfully. For more information, see the Troubleshooting section of the Amazon ECS Developer Guide."
+                },
+                {
+                    "id": "cd798bf8-e1f3-479d-9878-95918eee6f8a",
+                    "createdAt": "2026-05-22T08:45:29.495000+00:00",
+                    "message": "(service healthbridge-prescription) was unable to place a task. Reason: CannotPullContainerError: pull image manifest has been retried 7 time(s): failed to resolve ref 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: not found."
+                },
+                {
+                    "id": "7446c7e5-1d6d-4e16-9d23-ad0432c99333",
+                    "createdAt": "2026-05-22T08:44:07.021000+00:00",
+                    "message": "(service healthbridge-prescription) has started 1 tasks: (task 93c0f1eea93b4aaabeef60ec2437d73a)."
+                },
+                {
+                    "id": "6a29c5f1-8942-4d9d-8255-1e48b7b408ce",
+                    "createdAt": "2026-05-22T08:33:50.704000+00:00",
+                    "message": "(service healthbridge-prescription) is unable to consistently start tasks successfully. For more information, see the Troubleshooting section of the Amazon ECS Developer Guide."
+                },
+                {
+                    "id": "bade9a76-7c6b-4fbd-8ec7-93e8aa15ccf7",
+                    "createdAt": "2026-05-22T08:33:50.703000+00:00",
+                    "message": "(service healthbridge-prescription) was unable to place a task. Reason: CannotPullContainerError: pull image manifest has been retried 7 time(s): failed to resolve ref 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: not found."
+                },
+                {
+                    "id": "20db3a97-2a5a-4d79-b71d-f32f45250cc0",
+                    "createdAt": "2026-05-22T08:32:25.024000+00:00",
+                    "message": "(service healthbridge-prescription) has started 1 tasks: (task b3e9a25cc3fe4b688289db6be379dd5c)."
+                },
+                {
+                    "id": "82567920-47bf-4616-a1a4-d11c982b6a44",
+                    "createdAt": "2026-05-22T08:22:11.133000+00:00",
+                    "message": "(service healthbridge-prescription) is unable to consistently start tasks successfully. For more information, see the Troubleshooting section of the Amazon ECS Developer Guide."
+                },
+                {
+                    "id": "f5f855e5-45dc-4648-b019-55c36257b695",
+                    "createdAt": "2026-05-22T08:22:11.132000+00:00",
+                    "message": "(service healthbridge-prescription) was unable to place a task. Reason: CannotPullContainerError: pull image manifest has been retried 7 time(s): failed to resolve ref 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: not found."
+                },
+                {
+                    "id": "6c00b67c-0aa4-4a67-8b61-88bcd83fd583",
+                    "createdAt": "2026-05-22T08:20:38.470000+00:00",
+                    "message": "(service healthbridge-prescription) has started 1 tasks: (task e6d5816d18fe4be28ddf72eab8edf185)."
+                },
+                {
+                    "id": "a6efc466-10f0-4f37-8a93-e7dbd97bebb2",
+                    "createdAt": "2026-05-22T08:10:34.726000+00:00",
+                    "message": "(service healthbridge-prescription) is unable to consistently start tasks successfully. For more information, see the Troubleshooting section of the Amazon ECS Developer Guide."
+                },
+                {
+                    "id": "beed4a5b-9e07-4dc0-a45f-eff4aec6c3d8",
+                    "createdAt": "2026-05-22T08:10:34.725000+00:00",
+                    "message": "(service healthbridge-prescription) was unable to place a task. Reason: CannotPullContainerError: pull image manifest has been retried 7 time(s): failed to resolve ref 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: not found."
+                },
+                {
+                    "id": "3b0896e5-d858-40f2-aa06-bb95eb54736a",
+                    "createdAt": "2026-05-22T08:09:02.455000+00:00",
+                    "message": "(service healthbridge-prescription) has started 1 tasks: (task bb6f6d0983044a6287867dc3200da69d)."
+                },
+                {
+                    "id": "2f0f971d-2b37-42d1-a170-4c50782337a3",
+                    "createdAt": "2026-05-22T07:59:07.400000+00:00",
+                    "message": "(service healthbridge-prescription) is unable to consistently start tasks successfully. For more information, see the Troubleshooting section of the Amazon ECS Developer Guide."
+                },
+                {
+                    "id": "22e9b139-f1f8-40e6-9380-d665dafc79ee",
+                    "createdAt": "2026-05-22T07:59:07.399000+00:00",
+                    "message": "(service healthbridge-prescription) was unable to place a task. Reason: CannotPullContainerError: pull image manifest has been retried 7 time(s): failed to resolve ref 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: not found."
+                },
+                {
+                    "id": "89b80c94-f7c2-409a-b91a-a63c9755ff91",
+                    "createdAt": "2026-05-22T07:57:37.920000+00:00",
+                    "message": "(service healthbridge-prescription) has started 1 tasks: (task 4f7fca71663640fa962081574f57ec14)."
+                },
+                {
+                    "id": "b25db883-8c0f-4910-97fe-1e8445902608",
+                    "createdAt": "2026-05-22T07:47:18.942000+00:00",
+                    "message": "(service healthbridge-prescription) is unable to consistently start tasks successfully. For more information, see the Troubleshooting section of the Amazon ECS Developer Guide."
+                },
+                {
+                    "id": "ba412ddf-2535-49a0-8b3e-145fede5bcdf",
+                    "createdAt": "2026-05-22T07:47:18.941000+00:00",
+                    "message": "(service healthbridge-prescription) was unable to place a task. Reason: CannotPullContainerError: pull image manifest has been retried 7 time(s): failed to resolve ref 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: not found."
+                },
+                {
+                    "id": "9ce9230f-0632-47cf-86dd-c29a8e55cf0e",
+                    "createdAt": "2026-05-22T07:45:40.139000+00:00",
+                    "message": "(service healthbridge-prescription) has started 1 tasks: (task e778ea37f6a44ed89d045abf56a36453)."
+                },
+                {
+                    "id": "17532456-3925-47ee-90e4-ad76fb1bac04",
+                    "createdAt": "2026-05-22T07:35:11.473000+00:00",
+                    "message": "(service healthbridge-prescription) is unable to consistently start tasks successfully. For more information, see the Troubleshooting section of the Amazon ECS Developer Guide."
+                },
+                {
+                    "id": "2a171e78-42db-4f24-b50b-4033ed29e6e7",
+                    "createdAt": "2026-05-22T07:35:11.472000+00:00",
+                    "message": "(service healthbridge-prescription) was unable to place a task. Reason: CannotPullContainerError: pull image manifest has been retried 7 time(s): failed to resolve ref 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: not found."
+                },
+                {
+                    "id": "af6ffe43-d45e-46cd-8789-4a853e7e5302",
+                    "createdAt": "2026-05-22T07:33:49.305000+00:00",
+                    "message": "(service healthbridge-prescription) has started 1 tasks: (task 9fc7cfa864d24ab2a35c40b327b63471)."
+                },
+                {
+                    "id": "683cb80e-052b-4967-b111-aff0fe4da864",
+                    "createdAt": "2026-05-22T07:24:07.956000+00:00",
+                    "message": "(service healthbridge-prescription) is unable to consistently start tasks successfully. For more information, see the Troubleshooting section of the Amazon ECS Developer Guide."
+                },
+                {
+                    "id": "af88a721-8d59-4f59-82a0-17030891e8df",
+                    "createdAt": "2026-05-22T07:24:07.955000+00:00",
+                    "message": "(service healthbridge-prescription) was unable to place a task. Reason: CannotPullContainerError: pull image manifest has been retried 7 time(s): failed to resolve ref 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: not found."
+                },
+                {
+                    "id": "39605f97-97e4-4a0b-9d08-4cafd9197ec2",
+                    "createdAt": "2026-05-22T07:22:38.019000+00:00",
+                    "message": "(service healthbridge-prescription) has started 1 tasks: (task 6b7dc9c21b0846ffb001be4412e4442c)."
+                },
+                {
+                    "id": "31c9930d-83e5-4c2d-bac3-ba85c00e2680",
+                    "createdAt": "2026-05-22T07:12:06.631000+00:00",
+                    "message": "(service healthbridge-prescription) is unable to consistently start tasks successfully. For more information, see the Troubleshooting section of the Amazon ECS Developer Guide."
+                },
+                {
+                    "id": "300fe23b-9288-43aa-8aff-1d285daa4b40",
+                    "createdAt": "2026-05-22T07:12:06.630000+00:00",
+                    "message": "(service healthbridge-prescription) was unable to place a task. Reason: CannotPullContainerError: pull image manifest has been retried 7 time(s): failed to resolve ref 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: not found."
+                },
+                {
+                    "id": "5eb1372a-c4d3-4094-98a4-a1407d422629",
+                    "createdAt": "2026-05-22T07:10:36.290000+00:00",
+                    "message": "(service healthbridge-prescription) has started 1 tasks: (task 54eeaa0c32cb44f4a39c7a217ac3b11a)."
+                },
+                {
+                    "id": "1ff5a3e0-6f47-4038-b3eb-79a7f3d3b5e4",
+                    "createdAt": "2026-05-22T07:05:24.180000+00:00",
+                    "message": "(service healthbridge-prescription) was unable to place a task. Reason: CannotPullContainerError: pull image manifest has been retried 7 time(s): failed to resolve ref 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: not found."
+                },
+                {
+                    "id": "8a4605f1-c2fc-4e97-9e26-a90eab3e57ed",
+                    "createdAt": "2026-05-22T07:03:55.198000+00:00",
+                    "message": "(service healthbridge-prescription) has started 1 tasks: (task 0a94481c5f344c99a7ea9cebfe32bc54)."
+                },
+                {
+                    "id": "f9f78d5c-ad2c-4398-ab11-3849279a37b0",
+                    "createdAt": "2026-05-22T06:58:48.957000+00:00",
+                    "message": "(service healthbridge-prescription) was unable to place a task. Reason: CannotPullContainerError: pull image manifest has been retried 7 time(s): failed to resolve ref 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest@sha256:d64f82b227ef068008267bca2fee786702d2b8ed6550dcda596fc4e63ebe3871: not found."
+                },
+                {
+                    "id": "b768b05c-4b4a-43a4-a761-f32975f120ed",
+                    "createdAt": "2026-05-22T06:57:18.129000+00:00",
+                    "message": "(service healthbridge-prescription) has started 1 tasks: (task ebf38c6e277542788479e968aadce300)."
+                }
+            ],
+            "createdAt": "2026-05-21T04:14:19.093000+00:00",
+            "currentServiceRevisions": [
+                {
+                    "arn": "arn:aws:ecs:ap-southeast-2:617998378442:service-revision/healthbridge/healthbridge-prescription/4898542392440064142",
+                    "requestedTaskCount": 1,
+                    "runningTaskCount": 1,
+                    "pendingTaskCount": 0
+                }
+            ],
+            "placementConstraints": [],
+            "placementStrategy": [],
+            "networkConfiguration": {
+                "awsvpcConfiguration": {
+                    "subnets": [
+                        "subnet-0c16a12e0cd387b21",
+                        "subnet-0d0de008f955e1c47"
+                    ],
+                    "securityGroups": [
+                        "sg-0448096f5d35b1317"
+                    ],
+                    "assignPublicIp": "ENABLED"
+                }
+            },
+            "healthCheckGracePeriodSeconds": 0,
+            "schedulingStrategy": "REPLICA",
+            "deploymentController": {
+                "type": "ECS"
+            },
+            "createdBy": "arn:aws:iam::617998378442:user/admin-user",
+            "enableECSManagedTags": false,
+            "propagateTags": "NONE",
+            "enableExecuteCommand": false,
+            "availabilityZoneRebalancing": "ENABLED",
+            "resourceManagementType": "CUSTOMER"
+        }
+    ],
+    "failures": []
+}
