@@ -6,8 +6,11 @@ on:
   workflow_dispatch:
 
 env:
-  AWS_REGION: ap-southeast-2 
+  AWS_REGION: ap-southeast-2
   ECR_REGISTRY: 617998378442.dkr.ecr.ap-southeast-2.amazonaws.com
+  ECS_CLUSTER: healthbridge
+  # Stable Cloud Map DNS namespace — never changes even when Fargate IPs rotate
+  CLOUD_MAP_NAMESPACE: healthbridge.local
 
 jobs:
   build-and-push:
@@ -79,63 +82,69 @@ jobs:
           echo "✅ Pushed: ${{ steps.tags.outputs.IMAGE }}:v1.0.0"
           echo "✅ Pushed: ${{ steps.tags.outputs.IMAGE }}:${{ steps.tags.outputs.SHA_TAG }}"
 
-      - name: Force ECS redeployment and Debug Status
+      - name: Force ECS redeployment (non-gateway services only)
+        # The api-gateway is redeployed by the setup-cloud-map job AFTER stable DNS is confirmed,
+        # so it always starts with correct service URLs.
+        if: matrix.service != 'api-gateway'
         run: |
-          echo "🔄 Scanning ECS clusters for services matching healthbridge-${{ matrix.servi ce }}..."
+          echo "🔄 Force-redeploying ECS service: healthbridge-${{ matrix.service }}..."
+          aws ecs update-service \
+            --cluster ${{ env.ECS_CLUSTER }} \
+            --service healthbridge-${{ matrix.service }} \
+            --force-new-deployment \
+            --no-cli-pager
+          echo "✅ Redeployment triggered for healthbridge-${{ matrix.service }}"
+
+      - name: Capture ECS debug snapshot (api-gateway job only)
+        if: matrix.service == 'api-gateway'
+        run: |
+          echo "=== ECS Cluster & Service Discovery Debugger ==="
+          mkdir -p debug-output
+
+          aws servicediscovery list-namespaces --output json > debug-output/servicediscovery-namespaces.json || true
+          aws servicediscovery list-services --output json > debug-output/servicediscovery-services.json || true
+
           CLUSTERS=$(aws ecs list-clusters --query "clusterArns" --output text)
           for CLUSTER in $CLUSTERS; do
-            echo "Checking cluster: $CLUSTER"
+            CLUSTER_NAME=$(echo "$CLUSTER" | awk -F/ '{print $NF}')
+            echo "Cluster: $CLUSTER_NAME"
+
+            aws ecs describe-clusters --clusters "$CLUSTER" --output json > debug-output/cluster-${CLUSTER_NAME}.json || true
+
             SERVICES=$(aws ecs list-services --cluster "$CLUSTER" --query "serviceArns" --output text)
             for SERVICE in $SERVICES; do
               SVC_NAME=$(echo "$SERVICE" | awk -F/ '{print $NF}')
-              if [[ "$SVC_NAME" == *"healthbridge-${{ matrix.service }}"* || "$SVC_NAME" == *"${{ matrix.service }}"* ]]; then
-                echo "🚀 Force redeploying ECS service '$SVC_NAME' in cluster '$CLUSTER'..."
-                aws ecs update-service --cluster "$CLUSTER" --service "$SVC_NAME" --force-new-deployment
-              fi
+              echo "  Service: $SVC_NAME"
+              aws ecs describe-services --cluster "$CLUSTER" --services "$SERVICE" --output json > debug-output/service-${CLUSTER_NAME}-${SVC_NAME}.json || true
             done
+
+            echo "  Tasks in Cluster:"
+            TASKS=$(aws ecs list-tasks --cluster "$CLUSTER" --query "taskArns" --output text)
+            if [ -n "$TASKS" ] && [ "$TASKS" != "None" ]; then
+              aws ecs describe-tasks --cluster "$CLUSTER" --tasks $TASKS --output json > debug-output/tasks-${CLUSTER_NAME}.json || true
+            fi
           done
 
-          # Only run account-wide debugging in the api-gateway job to prevent logs clutter
-          if [ "${{ matrix.service }}" = "api-gateway" ]; then
-            echo "=== ECS Cluster & Service Discovery Debugger ==="
-            mkdir -p debug-output
-            
-            aws servicediscovery list-namespaces --output json > debug-output/servicediscovery-namespaces.json || true
-            aws servicediscovery list-services --output json > debug-output/servicediscovery-services.json || true
-            
-            for CLUSTER in $CLUSTERS; do
-              CLUSTER_NAME=$(echo "$CLUSTER" | awk -F/ '{print $NF}')
-              echo "Cluster: $CLUSTER_NAME"
-              
-              aws ecs describe-clusters --clusters "$CLUSTER" --output json > debug-output/cluster-${CLUSTER_NAME}.json || true
-              
-              SERVICES=$(aws ecs list-services --cluster "$CLUSTER" --query "serviceArns" --output text)
-              for SERVICE in $SERVICES; do
-                SVC_NAME=$(echo "$SERVICE" | awk -F/ '{print $NF}')
-                echo "  Service: $SVC_NAME"
-                aws ecs describe-services --cluster "$CLUSTER" --services "$SERVICE" --output json > debug-output/service-${CLUSTER_NAME}-${SVC_NAME}.json || true
-              done
-              
-              echo "  Tasks in Cluster:"
-              TASKS=$(aws ecs list-tasks --cluster "$CLUSTER" --query "taskArns" --output text)
-              if [ -n "$TASKS" ] && [ "$TASKS" != "None" ]; then
-                aws ecs describe-tasks --cluster "$CLUSTER" --tasks $TASKS --output json > debug-output/tasks-${CLUSTER_NAME}.json || true
-              fi
-            done
-            
-            # Commit and push debug output back to the repo
-            git config --global user.name "github-actions[bot]"
-            git config --global user.email "github-actions[bot]@users.noreply.github.com"
-            git add debug-output/
-            git commit -m "chore: add ECS debug output [skip ci]" || true
-            git pull --rebase origin main || true
-            git push origin main || true
-          fi
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add debug-output/
+          git commit -m "chore: add ECS debug output [skip ci]" || true
+          git pull --rebase origin main || true
+          git push origin main || true
 
-  update-gateway:
-    name: Update Gateway IPs
+  # ─── Cloud Map Setup ──────────────────────────────────────────────────────────
+  # Runs after all services are built & pushed.
+  # Creates a private DNS namespace (healthbridge.local) and registers each
+  # microservice with a stable DNS entry. ECS automatically updates the record
+  # whenever a Fargate task is replaced — no IP-chasing needed.
+  #
+  # This job is fully idempotent: safe to re-run on every push.
+  # ─────────────────────────────────────────────────────────────────────────────
+  setup-cloud-map:
+    name: Setup Cloud Map & Redeploy Gateway
     needs: build-and-push
     runs-on: ubuntu-latest
+
     steps:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -144,110 +153,256 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
 
-      - name: Update Gateway Service URLs
+      # ── Step 1: Derive VPC ID from the ECS cluster's existing subnet ──────────
+      - name: Derive VPC ID from cluster subnet
+        id: vpc
         run: |
-          SERVICES=("auth" "patient" "appointment" "prescription" "billing" "notification" "analytics")
-          declare -A IPS
+          echo "🔍 Deriving VPC ID from existing ECS cluster subnets..."
 
-          for SVC in "${SERVICES[@]}"; do
-            echo "🔍 Finding tasks for healthbridge-$SVC..."
-            
-            # Retrieve list of task ARNs for the service
-            TASK_ARNS=$(aws ecs list-tasks --cluster healthbridge --service-name healthbridge-$SVC --query "taskArns" --output json)
-            
-            # If no tasks are present or list is empty, wait
-            for i in {1..24}; do
-              if [ -z "$TASK_ARNS" ] || [ "$TASK_ARNS" == "[]" ] || [ "$TASK_ARNS" == "null" ]; then
-                echo "⏳ Waiting for task to be registered..."
-                sleep 5
-                TASK_ARNS=$(aws ecs list-tasks --cluster healthbridge --service-name healthbridge-$SVC --query "taskArns" --output json)
-              else
+          # Pull the subnet from the first ECS service's network configuration
+          SUBNET_ID=$(aws ecs describe-services \
+            --cluster ${{ env.ECS_CLUSTER }} \
+            --services healthbridge-auth \
+            --query "services[0].networkConfiguration.awsvpcConfiguration.subnets[0]" \
+            --output text)
+
+          echo "  Subnet: $SUBNET_ID"
+
+          VPC_ID=$(aws ec2 describe-subnets \
+            --subnet-ids "$SUBNET_ID" \
+            --query "Subnets[0].VpcId" \
+            --output text)
+
+          echo "  VPC: $VPC_ID"
+          echo "vpc_id=$VPC_ID" >> $GITHUB_OUTPUT
+          echo "✅ VPC ID: $VPC_ID"
+
+      # ── Step 2: Create private DNS namespace (idempotent) ─────────────────────
+      - name: Create Cloud Map private DNS namespace
+        id: namespace
+        run: |
+          NAMESPACE="${{ env.CLOUD_MAP_NAMESPACE }}"
+          VPC_ID="${{ steps.vpc.outputs.vpc_id }}"
+
+          echo "🔍 Checking for existing namespace: $NAMESPACE ..."
+          NAMESPACE_ID=$(aws servicediscovery list-namespaces \
+            --query "Namespaces[?Name=='${NAMESPACE}'].Id" \
+            --output text)
+
+          if [ -z "$NAMESPACE_ID" ] || [ "$NAMESPACE_ID" == "None" ]; then
+            echo "🌐 Creating private DNS namespace: $NAMESPACE in VPC $VPC_ID ..."
+            OPERATION_ID=$(aws servicediscovery create-private-dns-namespace \
+              --name "$NAMESPACE" \
+              --vpc "$VPC_ID" \
+              --description "HealthBridge internal service discovery" \
+              --query "OperationId" \
+              --output text)
+
+            echo "⏳ Waiting for namespace creation (operation: $OPERATION_ID)..."
+            for i in {1..30}; do
+              STATUS=$(aws servicediscovery get-operation \
+                --operation-id "$OPERATION_ID" \
+                --query "Operation.Status" \
+                --output text)
+              echo "  Status: $STATUS"
+              if [ "$STATUS" == "SUCCESS" ]; then
                 break
+              elif [ "$STATUS" == "FAIL" ]; then
+                echo "❌ Namespace creation failed!"
+                aws servicediscovery get-operation --operation-id "$OPERATION_ID"
+                exit 1
               fi
+              sleep 5
             done
-            
-            if [ -z "$TASK_ARNS" ] || [ "$TASK_ARNS" == "[]" ] || [ "$TASK_ARNS" == "null" ]; then
-              echo "❌ No tasks found for healthbridge-$SVC after waiting."
-              exit 1
+
+            NAMESPACE_ID=$(aws servicediscovery list-namespaces \
+              --query "Namespaces[?Name=='${NAMESPACE}'].Id" \
+              --output text)
+            echo "✅ Created namespace: $NAMESPACE_ID"
+          else
+            echo "✅ Namespace already exists: $NAMESPACE_ID"
+          fi
+
+          echo "namespace_id=$NAMESPACE_ID" >> $GITHUB_OUTPUT
+
+      # ── Step 3: Create Cloud Map services + attach to ECS services ────────────
+      - name: Register microservices with Cloud Map
+        id: registry
+        run: |
+          NAMESPACE_ID="${{ steps.namespace.outputs.namespace_id }}"
+          CLUSTER="${{ env.ECS_CLUSTER }}"
+
+          # Map: ecs-service-name → dns-name → port
+          declare -A DNS_NAMES=(
+            [auth]="auth"
+            [patient]="patient"
+            [appointment]="appointment"
+            [prescription]="prescription"
+            [billing]="billing"
+            [notification]="notification"
+            [analytics]="analytics"
+          )
+          declare -A PORTS=(
+            [auth]=3001
+            [patient]=3002
+            [appointment]=3003
+            [prescription]=3004
+            [billing]=3005
+            [notification]=3006
+            [analytics]=3007
+          )
+
+          declare -A REGISTRY_ARNS
+
+          for SVC in "${!DNS_NAMES[@]}"; do
+            DNS_NAME="${DNS_NAMES[$SVC]}"
+            PORT="${PORTS[$SVC]}"
+            ECS_SVC="healthbridge-$SVC"
+
+            echo "──────────────────────────────────────────"
+            echo "🔧 Processing: $SVC → ${DNS_NAME}.${{ env.CLOUD_MAP_NAMESPACE }}:${PORT}"
+
+            # Check if Cloud Map service already exists for this name
+            CM_SERVICE_ID=$(aws servicediscovery list-services \
+              --filters "Name=NAMESPACE_ID,Values=${NAMESPACE_ID},Condition=EQ" \
+              --query "Services[?Name=='${DNS_NAME}'].Id" \
+              --output text 2>/dev/null || true)
+
+            if [ -z "$CM_SERVICE_ID" ] || [ "$CM_SERVICE_ID" == "None" ]; then
+              echo "  📝 Creating Cloud Map service: $DNS_NAME ..."
+              CM_SERVICE_ID=$(aws servicediscovery create-service \
+                --name "$DNS_NAME" \
+                --namespace-id "$NAMESPACE_ID" \
+                --dns-config "NamespaceId=${NAMESPACE_ID},RoutingPolicy=WEIGHTED,DnsRecords=[{Type=A,TTL=10}]" \
+                --health-check-custom-config "FailureThreshold=1" \
+                --query "Service.Id" \
+                --output text)
+              echo "  ✅ Created Cloud Map service: $CM_SERVICE_ID"
+            else
+              echo "  ✅ Cloud Map service already exists: $CM_SERVICE_ID"
             fi
-            
-            # Convert JSON array of task ARNs to space-separated string
-            TASK_ARNS_STR=$(echo "$TASK_ARNS" | jq -r '.[]' | tr '\n' ' ')
-            
-            # Find the newest task by parsing the createdAt field from describe-tasks
-            echo "🔍 Describing tasks to find the newest one..."
-            NEWEST_TASK_ARN=$(aws ecs describe-tasks --cluster healthbridge --tasks $TASK_ARNS_STR --query "tasks | sort_by(@, &createdAt) | [-1].taskArn" --output text)
-            
-            if [ -z "$NEWEST_TASK_ARN" ] || [ "$NEWEST_TASK_ARN" == "None" ]; then
-              echo "❌ Failed to identify the newest task ARN for healthbridge-$SVC."
-              exit 1
+
+            CM_SERVICE_ARN="arn:aws:servicediscovery:${{ env.AWS_REGION }}:617998378442:service/${CM_SERVICE_ID}"
+
+            # Check if ECS service already has this registry attached
+            EXISTING_REGISTRY=$(aws ecs describe-services \
+              --cluster "$CLUSTER" \
+              --services "$ECS_SVC" \
+              --query "services[0].serviceRegistries[?registryArn=='${CM_SERVICE_ARN}'].registryArn" \
+              --output text 2>/dev/null || true)
+
+            if [ -z "$EXISTING_REGISTRY" ] || [ "$EXISTING_REGISTRY" == "None" ]; then
+              echo "  🔗 Attaching Cloud Map registry to ECS service: $ECS_SVC ..."
+              aws ecs update-service \
+                --cluster "$CLUSTER" \
+                --service "$ECS_SVC" \
+                --service-registries "[{\"registryArn\":\"${CM_SERVICE_ARN}\",\"containerName\":\"${SVC}\",\"containerPort\":${PORT}}]" \
+                --no-cli-pager
+              echo "  ✅ Registry attached to $ECS_SVC"
+            else
+              echo "  ✅ Registry already attached to $ECS_SVC"
             fi
-            
-            # Wait for this specific task to be RUNNING
-            echo "⏳ Waiting for task $NEWEST_TASK_ARN to reach RUNNING status..."
-            STATUS=$(aws ecs describe-tasks --cluster healthbridge --tasks "$NEWEST_TASK_ARN" --query "tasks[0].lastStatus" --output text)
-            for i in {1..40}; do
-              if [ "$STATUS" != "RUNNING" ] && [ "$STATUS" != "PROVISIONING" ] && [ "$STATUS" != "PENDING" ] && [ "$STATUS" != "ACTIVATING" ]; then
-                echo "⚠️ Unexpected status: $STATUS. Might have failed. Retrying describe..."
-              fi
-              if [ "$STATUS" != "RUNNING" ]; then
-                echo "⏳ Status is $STATUS. Sleeping 5s..."
-                sleep 5
-                STATUS=$(aws ecs describe-tasks --cluster healthbridge --tasks "$NEWEST_TASK_ARN" --query "tasks[0].lastStatus" --output text)
-              else
-                break
-              fi
-            done
-            
-            if [ "$STATUS" != "RUNNING" ]; then
-              echo "❌ Task $NEWEST_TASK_ARN failed to reach RUNNING status (current: $STATUS)."
-              exit 1
-            fi
-            
-            # Fetch the private IP address of the task
-            IP=$(aws ecs describe-tasks --cluster healthbridge --tasks "$NEWEST_TASK_ARN" --query "tasks[0].attachments[0].details[?name=='privateIPv4Address'].value" --output text)
-            
-            if [ -z "$IP" ] || [ "$IP" == "None" ]; then
-              echo "❌ Failed to retrieve private IP for task $NEWEST_TASK_ARN"
-              exit 1
-            fi
-            
-            echo "✅ healthbridge-$SVC running at private IP: $IP"
-            IPS["$SVC"]=$IP
+
+            REGISTRY_ARNS[$SVC]="$CM_SERVICE_ARN"
           done
 
-          echo "📝 Fetching current task definition of healthbridge-api-gateway..."
-          aws ecs describe-task-definition --task-definition healthbridge-api-gateway --query taskDefinition > task-def.json
+          echo "✅ All Cloud Map registrations complete"
 
-          echo "🔄 Updating task definition environment variables with new IPs..."
-          jq --arg auth "http://${IPS[auth]}:3001" \
-             --arg patient "http://${IPS[patient]}:3002" \
-             --arg appointment "http://${IPS[appointment]}:3003" \
-             --arg prescription "http://${IPS[prescription]}:3004" \
-             --arg billing "http://${IPS[billing]}:3005" \
-             --arg notification "http://${IPS[notification]}:3006" \
-             --arg analytics "http://${IPS[analytics]}:3007" \
-             '.containerDefinitions[0].environment |= map(
-                if .name == "AUTH_SERVICE_URL" then .value = $auth
-                elif .name == "PATIENT_SERVICE_URL" then .value = $patient
-                elif .name == "APPOINTMENT_SERVICE_URL" then .value = $appointment
-                elif .name == "PRESCRIPTION_SERVICE_URL" then .value = $prescription
-                elif .name == "BILLING_SERVICE_URL" then .value = $billing
-                elif .name == "NOTIFICATION_SERVICE_URL" then .value = $notification
-                elif .name == "ANALYTICS_SERVICE_URL" then .value = $analytics
-                else . end
+      # ── Step 4: Update api-gateway task definition with stable DNS URLs ────────
+      - name: Update api-gateway task definition with Cloud Map DNS names
+        run: |
+          CLUSTER="${{ env.ECS_CLUSTER }}"
+          NS="${{ env.CLOUD_MAP_NAMESPACE }}"
+
+          echo "📝 Fetching current api-gateway task definition..."
+          aws ecs describe-task-definition \
+            --task-definition healthbridge-api-gateway \
+            --query taskDefinition > task-def.json
+
+          echo "🔄 Patching environment variables with stable Cloud Map DNS names..."
+          jq \
+            --arg auth         "http://auth.${NS}:3001" \
+            --arg patient      "http://patient.${NS}:3002" \
+            --arg appointment  "http://appointment.${NS}:3003" \
+            --arg prescription "http://prescription.${NS}:3004" \
+            --arg billing      "http://billing.${NS}:3005" \
+            --arg notification "http://notification.${NS}:3006" \
+            --arg analytics    "http://analytics.${NS}:3007" \
+            '.containerDefinitions[0].environment |= (
+               # Remove any existing *_SERVICE_URL entries first (idempotent)
+               map(select(.name | test("_SERVICE_URL$") | not))
+               # Then append the stable Cloud Map URLs
+               + [
+                 {"name": "AUTH_SERVICE_URL",          "value": $auth},
+                 {"name": "PATIENT_SERVICE_URL",        "value": $patient},
+                 {"name": "APPOINTMENT_SERVICE_URL",    "value": $appointment},
+                 {"name": "PRESCRIPTION_SERVICE_URL",   "value": $prescription},
+                 {"name": "BILLING_SERVICE_URL",        "value": $billing},
+                 {"name": "NOTIFICATION_SERVICE_URL",   "value": $notification},
+                 {"name": "ANALYTICS_SERVICE_URL",      "value": $analytics}
+               ]
              )' task-def.json > updated-task-def.json
 
-          echo "🧼 Cleaning task definition fields for registration..."
-          jq 'del(.taskDefinitionArn, .revision, .status, .requiresAttributes, .compatibilities, .registeredAt, .registeredBy)' updated-task-def.json > final-task-def.json
+          echo "🧼 Cleaning read-only fields for re-registration..."
+          jq 'del(
+            .taskDefinitionArn,
+            .revision,
+            .status,
+            .requiresAttributes,
+            .compatibilities,
+            .registeredAt,
+            .registeredBy
+          )' updated-task-def.json > final-task-def.json
 
           echo "🚀 Registering new task definition revision..."
-          NEW_TASK_DEF=$(aws ecs register-task-definition --cli-input-json file://final-task-def.json --query "taskDefinition.taskDefinitionArn" --output text)
-          echo "✅ Registered task definition: $NEW_TASK_DEF"
+          NEW_TASK_DEF=$(aws ecs register-task-definition \
+            --cli-input-json file://final-task-def.json \
+            --query "taskDefinition.taskDefinitionArn" \
+            --output text)
+          echo "✅ Registered: $NEW_TASK_DEF"
 
-          echo "🔄 Updating healthbridge-api-gateway service with the new task definition..."
-          aws ecs update-service --cluster healthbridge --service healthbridge-api-gateway --task-definition "$NEW_TASK_DEF" --force-new-deployment
-          echo "🎉 Gateway service successfully updated!"
+          echo "🔄 Deploying api-gateway with stable Cloud Map service URLs..."
+          aws ecs update-service \
+            --cluster "$CLUSTER" \
+            --service healthbridge-api-gateway \
+            --task-definition "$NEW_TASK_DEF" \
+            --force-new-deployment \
+            --no-cli-pager
+          echo "✅ api-gateway redeployment triggered with Cloud Map DNS names"
 
+      # ── Step 5: Health check — wait for gateway to confirm all services healthy ─
+      - name: Wait for api-gateway health check
+        run: |
+          echo "⏳ Waiting 90s for api-gateway task to stabilise..."
+          sleep 90
 
+          echo "🔍 Fetching ALB DNS name for healthbridge-api-gateway..."
+          ALB_DNS=$(aws elbv2 describe-load-balancers \
+            --query "LoadBalancers[?contains(LoadBalancerName,'healthbridge')].DNSName" \
+            --output text | head -n1)
 
+          if [ -z "$ALB_DNS" ] || [ "$ALB_DNS" == "None" ]; then
+            echo "⚠️  Could not resolve ALB DNS — skipping live health check."
+            echo "    Run manually: curl http://<your-alb-dns>/api/health"
+            exit 0
+          fi
+
+          echo "🌐 Checking: http://${ALB_DNS}/api/health"
+          RESPONSE=$(curl -sf --max-time 15 "http://${ALB_DNS}/api/health" || echo "CURL_FAILED")
+
+          if [ "$RESPONSE" == "CURL_FAILED" ]; then
+            echo "⚠️  Health check request failed (gateway may still be starting). Check manually."
+            exit 0
+          fi
+
+          echo "📋 Health check response:"
+          echo "$RESPONSE" | jq '.'
+
+          UNHEALTHY=$(echo "$RESPONSE" | jq '[.services[] | select(.status != "healthy")] | length')
+          if [ "$UNHEALTHY" -eq 0 ]; then
+            echo "🎉 All services healthy! Cloud Map service discovery is working."
+          else
+            echo "⚠️  $UNHEALTHY service(s) not yet healthy — they may still be starting up."
+            echo "    This is expected within the first few minutes of a fresh deployment."
+            echo "$RESPONSE" | jq '[.services[] | select(.status != "healthy")]'
+          fi
