@@ -30,15 +30,15 @@
             },
             "deployments": [
                 {
-                    "id": "ecs-svc/7152470583130608342",
+                    "id": "ecs-svc/8738348318937092524",
                     "status": "PRIMARY",
                     "taskDefinition": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-billing:1",
                     "desiredCount": 1,
                     "pendingCount": 1,
                     "runningCount": 0,
                     "failedTasks": 0,
-                    "createdAt": "2026-05-23T18:28:09.778000+00:00",
-                    "updatedAt": "2026-05-23T18:28:20.355000+00:00",
+                    "createdAt": "2026-05-23T18:35:02.362000+00:00",
+                    "updatedAt": "2026-05-23T18:35:14.463000+00:00",
                     "launchType": "FARGATE",
                     "platformVersion": "1.4.0",
                     "platformFamily": "Linux",
@@ -55,18 +55,18 @@
                         }
                     },
                     "rolloutState": "IN_PROGRESS",
-                    "rolloutStateReason": "ECS deployment ecs-svc/7152470583130608342 in progress."
+                    "rolloutStateReason": "ECS deployment ecs-svc/8738348318937092524 in progress."
                 },
                 {
-                    "id": "ecs-svc/3609262046695576736",
+                    "id": "ecs-svc/2107745438616523136",
                     "status": "ACTIVE",
                     "taskDefinition": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-billing:1",
                     "desiredCount": 1,
                     "pendingCount": 0,
                     "runningCount": 1,
                     "failedTasks": 0,
-                    "createdAt": "2026-05-23T18:20:03.469000+00:00",
-                    "updatedAt": "2026-05-23T18:28:20.362000+00:00",
+                    "createdAt": "2026-05-23T18:29:22.705000+00:00",
+                    "updatedAt": "2026-05-23T18:35:14.471000+00:00",
                     "launchType": "FARGATE",
                     "platformVersion": "1.4.0",
                     "platformFamily": "Linux",
@@ -83,11 +83,41 @@
                         }
                     },
                     "rolloutState": "COMPLETED",
-                    "rolloutStateReason": "ECS deployment ecs-svc/3609262046695576736 completed."
+                    "rolloutStateReason": "ECS deployment ecs-svc/2107745438616523136 completed."
                 }
             ],
             "roleArn": "arn:aws:iam::617998378442:role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS",
             "events": [
+                {
+                    "id": "470982cf-e546-4c73-95c8-21a59d331705",
+                    "createdAt": "2026-05-23T18:35:15.189000+00:00",
+                    "message": "(service healthbridge-billing) has started 1 tasks: (task 3a6e7e90b94b4efa82ecac1ac04908f4)."
+                },
+                {
+                    "id": "035ef1a4-358a-4455-960c-ac035b7f0105",
+                    "createdAt": "2026-05-23T18:33:49.007000+00:00",
+                    "message": "(service healthbridge-billing) has reached a steady state."
+                },
+                {
+                    "id": "b07d981c-2714-4ce3-a1a9-2f81131d798e",
+                    "createdAt": "2026-05-23T18:33:49.006000+00:00",
+                    "message": "(service healthbridge-billing) (deployment ecs-svc/2107745438616523136) deployment completed."
+                },
+                {
+                    "id": "2e6570ed-6e8d-4c23-a993-1a419c9a7662",
+                    "createdAt": "2026-05-23T18:32:14.749000+00:00",
+                    "message": "(service healthbridge-billing) has stopped 1 running tasks: (task c912a64d356b45e3b94fe64ff2b44b50)."
+                },
+                {
+                    "id": "e5924915-f54b-472e-ad30-9ed8d20d559d",
+                    "createdAt": "2026-05-23T18:30:50.061000+00:00",
+                    "message": "(service healthbridge-billing) has started 1 tasks: (task f1b1b237c91245438bdc839fbd9541d9)."
+                },
+                {
+                    "id": "d2520940-94ff-4cca-9ad5-873f9833b2a7",
+                    "createdAt": "2026-05-23T18:29:24.911000+00:00",
+                    "message": "(service healthbridge-billing) has stopped 1 running tasks: (task 81ad567e2dee485f80bf18eadc8d2ccf)."
+                },
                 {
                     "id": "8325c0da-014a-42b1-842c-cb9505e0acd8",
                     "createdAt": "2026-05-23T18:28:20.852000+00:00",
@@ -557,49 +587,19 @@
                     "id": "f49df7d3-eac3-4d97-957e-fba9d00613bb",
                     "createdAt": "2026-05-21T04:41:34.990000+00:00",
                     "message": "(service healthbridge-billing) has started 1 tasks: (task 1da4866ba69c4268b65a64859b95fab8)."
-                },
-                {
-                    "id": "c3c89683-43e7-4685-952a-64ef5251234b",
-                    "createdAt": "2026-05-21T04:40:32.795000+00:00",
-                    "message": "(service healthbridge-billing) has started 1 tasks: (task efda289b08c34547a14957c8f82065c7)."
-                },
-                {
-                    "id": "6fa1f86c-832b-42df-ae98-fa34061a34b9",
-                    "createdAt": "2026-05-21T04:39:41.851000+00:00",
-                    "message": "(service healthbridge-billing) has started 1 tasks: (task c0dce8021ee146c9ba3876b8b1f4f138)."
-                },
-                {
-                    "id": "a853b8e1-6561-4344-9552-5226db6cd5ef",
-                    "createdAt": "2026-05-21T04:38:50.316000+00:00",
-                    "message": "(service healthbridge-billing) has started 1 tasks: (task d990fd2655f545629203e361a9e08916)."
-                },
-                {
-                    "id": "e606a613-2fb0-4f11-a7f9-ee6d806e3a5b",
-                    "createdAt": "2026-05-21T04:37:50.224000+00:00",
-                    "message": "(service healthbridge-billing) has started 1 tasks: (task 65155a52702d415b898e0657bab570e2)."
-                },
-                {
-                    "id": "32f000fd-ff95-412c-a331-3ae69eba6201",
-                    "createdAt": "2026-05-21T04:36:59.044000+00:00",
-                    "message": "(service healthbridge-billing) has started 1 tasks: (task 102631067b3840dfaef58c113a396bdd)."
-                },
-                {
-                    "id": "0bfe53aa-1731-4435-a9fc-4cefcbd19ea0",
-                    "createdAt": "2026-05-21T04:36:08.398000+00:00",
-                    "message": "(service healthbridge-billing) has started 1 tasks: (task 5ff18553ae0a46dfa62c7c0355ffbe67)."
                 }
             ],
             "createdAt": "2026-05-21T04:14:20.072000+00:00",
-            "currentServiceDeployment": "arn:aws:ecs:ap-southeast-2:617998378442:service-deployment/healthbridge/healthbridge-billing/rX4-MJ1wmw3oQarHUW9Xo",
+            "currentServiceDeployment": "arn:aws:ecs:ap-southeast-2:617998378442:service-deployment/healthbridge/healthbridge-billing/Qqn8_bDwBz-MI82-sKYos",
             "currentServiceRevisions": [
                 {
-                    "arn": "arn:aws:ecs:ap-southeast-2:617998378442:service-revision/healthbridge/healthbridge-billing/7152470583130608342",
+                    "arn": "arn:aws:ecs:ap-southeast-2:617998378442:service-revision/healthbridge/healthbridge-billing/8738348318937092524",
                     "requestedTaskCount": 1,
                     "runningTaskCount": 0,
                     "pendingTaskCount": 1
                 },
                 {
-                    "arn": "arn:aws:ecs:ap-southeast-2:617998378442:service-revision/healthbridge/healthbridge-billing/3609262046695576736",
+                    "arn": "arn:aws:ecs:ap-southeast-2:617998378442:service-revision/healthbridge/healthbridge-billing/2107745438616523136",
                     "requestedTaskCount": 1,
                     "runningTaskCount": 1,
                     "pendingTaskCount": 0
