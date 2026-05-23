@@ -83,8 +83,9 @@ jobs:
           echo "✅ Pushed: ${{ steps.tags.outputs.IMAGE }}:${{ steps.tags.outputs.SHA_TAG }}"
 
       - name: Force ECS redeployment (non-gateway services only)
-        # The api-gateway is redeployed by the setup-cloud-map job AFTER stable DNS is confirmed,
-        # so it always starts with correct service URLs.
+        # The api-gateway is redeployed by the setup-cloud-map job AFTER stable DNS is confirmed.
+        # Downstream services are redeployed here to pick up the new image, then AGAIN in
+        # setup-cloud-map after Cloud Map registries are attached so their IPs get registered.
         if: matrix.service != 'api-gateway'
         run: |
           echo "🔄 Force-redeploying ECS service: healthbridge-${{ matrix.service }}..."
@@ -297,16 +298,24 @@ jobs:
                 --cluster "$CLUSTER" \
                 --service "$ECS_SVC" \
                 --service-registries "[{\"registryArn\":\"${CM_SERVICE_ARN}\"}]" \
+                --force-new-deployment \
                 --no-cli-pager
-              echo "  ✅ Registry attached to $ECS_SVC"
+              echo "  ✅ Registry attached + redeployment triggered for $ECS_SVC"
             else
               echo "  ✅ Registry already attached to $ECS_SVC"
+              echo "  🔄 Forcing redeployment to ensure Cloud Map instance registration..."
+              aws ecs update-service \
+                --cluster "$CLUSTER" \
+                --service "$ECS_SVC" \
+                --force-new-deployment \
+                --no-cli-pager
+              echo "  ✅ Redeployment triggered for $ECS_SVC"
             fi
 
             REGISTRY_ARNS[$SVC]="$CM_SERVICE_ARN"
           done
 
-          echo "✅ All Cloud Map registrations complete"
+          echo "✅ All Cloud Map registrations + redeployments complete"
 
       # ── Step 4: Update api-gateway task definition with stable DNS URLs ────────
       - name: Update api-gateway task definition with Cloud Map DNS names
@@ -373,8 +382,8 @@ jobs:
       # ── Step 5: Health check — wait for gateway to confirm all services healthy ─
       - name: Wait for api-gateway health check
         run: |
-          echo "⏳ Waiting 90s for api-gateway task to stabilise..."
-          sleep 90
+          echo "⏳ Waiting 120s for all services to stabilise after Cloud Map redeployment..."
+          sleep 120
 
           echo "🔍 Fetching ALB DNS name for healthbridge-api-gateway..."
           ALB_DNS=$(aws elbv2 describe-load-balancers \
