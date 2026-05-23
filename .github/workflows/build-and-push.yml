@@ -76,3 +76,20 @@ jobs:
           echo "✅ Pushed: ${{ steps.tags.outputs.IMAGE }}:latest"
           echo "✅ Pushed: ${{ steps.tags.outputs.IMAGE }}:v1.0.0"
           echo "✅ Pushed: ${{ steps.tags.outputs.IMAGE }}:${{ steps.tags.outputs.SHA_TAG }}"
+
+      - name: Force ECS redeployment
+        run: |
+          echo "🔄 Scanning ECS clusters for services matching healthbridge-${{ matrix.service }}..."
+          CLUSTERS=$(aws ecs list-clusters --query "clusterArns" --output text)
+          for CLUSTER in $CLUSTERS; do
+            echo "Checking cluster: $CLUSTER"
+            SERVICES=$(aws ecs list-services --cluster "$CLUSTER" --query "serviceArns" --output text)
+            for SERVICE in $SERVICES; do
+              SVC_NAME=$(echo "$SERVICE" | awk -F/ '{print $NF}')
+              if [[ "$SVC_NAME" == *"healthbridge-${{ matrix.service }}"* || "$SVC_NAME" == *"${{ matrix.service }}"* ]]; then
+                echo "🚀 Force redeploying ECS service '$SVC_NAME' in cluster '$CLUSTER'..."
+                aws ecs update-service --cluster "$CLUSTER" --service "$SVC_NAME" --force-new-deployment
+              fi
+            done
+          done
+
