@@ -30,15 +30,15 @@
             },
             "deployments": [
                 {
-                    "id": "ecs-svc/0890774430004529119",
+                    "id": "ecs-svc/2657403553669751823",
                     "status": "PRIMARY",
                     "taskDefinition": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-notification:1",
                     "desiredCount": 1,
                     "pendingCount": 1,
                     "runningCount": 0,
                     "failedTasks": 0,
-                    "createdAt": "2026-05-23T18:19:02.507000+00:00",
-                    "updatedAt": "2026-05-23T18:19:13.270000+00:00",
+                    "createdAt": "2026-05-23T18:28:08.537000+00:00",
+                    "updatedAt": "2026-05-23T18:28:32.662000+00:00",
                     "launchType": "FARGATE",
                     "platformVersion": "1.4.0",
                     "platformFamily": "Linux",
@@ -55,18 +55,18 @@
                         }
                     },
                     "rolloutState": "IN_PROGRESS",
-                    "rolloutStateReason": "ECS deployment ecs-svc/0890774430004529119 in progress."
+                    "rolloutStateReason": "ECS deployment ecs-svc/2657403553669751823 in progress."
                 },
                 {
-                    "id": "ecs-svc/9884494592222087261",
+                    "id": "ecs-svc/6182765224757204534",
                     "status": "ACTIVE",
                     "taskDefinition": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-notification:1",
                     "desiredCount": 1,
                     "pendingCount": 0,
                     "runningCount": 1,
                     "failedTasks": 0,
-                    "createdAt": "2026-05-23T18:10:25.749000+00:00",
-                    "updatedAt": "2026-05-23T18:19:13.277000+00:00",
+                    "createdAt": "2026-05-23T18:19:42.431000+00:00",
+                    "updatedAt": "2026-05-23T18:28:32.723000+00:00",
                     "launchType": "FARGATE",
                     "platformVersion": "1.4.0",
                     "platformFamily": "Linux",
@@ -83,11 +83,41 @@
                         }
                     },
                     "rolloutState": "COMPLETED",
-                    "rolloutStateReason": "ECS deployment ecs-svc/9884494592222087261 completed."
+                    "rolloutStateReason": "ECS deployment ecs-svc/6182765224757204534 completed."
                 }
             ],
             "roleArn": "arn:aws:iam::617998378442:role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS",
             "events": [
+                {
+                    "id": "e6708136-35b1-43c6-a214-4702233d8e31",
+                    "createdAt": "2026-05-23T18:28:17.353000+00:00",
+                    "message": "(service healthbridge-notification) has started 1 tasks: (task 9b09a23d70fa4b93a4c16cdcdb4b1dc9)."
+                },
+                {
+                    "id": "0da5b13d-7762-4fb8-a85d-5969ff015259",
+                    "createdAt": "2026-05-23T18:24:32.211000+00:00",
+                    "message": "(service healthbridge-notification) has reached a steady state."
+                },
+                {
+                    "id": "990f6b56-2fed-472a-9959-a5fa924338f4",
+                    "createdAt": "2026-05-23T18:24:32.210000+00:00",
+                    "message": "(service healthbridge-notification) (deployment ecs-svc/6182765224757204534) deployment completed."
+                },
+                {
+                    "id": "c86c2cfc-16ea-4e64-be85-4e0cdb0b2f34",
+                    "createdAt": "2026-05-23T18:22:36.245000+00:00",
+                    "message": "(service healthbridge-notification) has stopped 1 running tasks: (task cbec382dd9d4472eb57eefa836b22b55)."
+                },
+                {
+                    "id": "f66fdd50-ec25-4bb5-8272-8a19b71b4ebe",
+                    "createdAt": "2026-05-23T18:21:33.165000+00:00",
+                    "message": "(service healthbridge-notification) has started 1 tasks: (task 012d8a0b694f4192bc6ff2154440b4cd)."
+                },
+                {
+                    "id": "af63780c-1b65-404b-8577-356d4ad0172a",
+                    "createdAt": "2026-05-23T18:20:18.433000+00:00",
+                    "message": "(service healthbridge-notification) has stopped 1 running tasks: (task 12158c6f714e4de89e9400a75094a7da)."
+                },
                 {
                     "id": "17280f06-f017-442b-9686-8d25e60dad7b",
                     "createdAt": "2026-05-23T18:19:13.867000+00:00",
@@ -557,49 +587,19 @@
                     "id": "05672ad0-bfa6-43b7-b4f1-204aac3d5bc7",
                     "createdAt": "2026-05-21T04:36:01.222000+00:00",
                     "message": "(service healthbridge-notification) has started 1 tasks: (task ce6baad6c3cd449c8e25cd2077162d8b)."
-                },
-                {
-                    "id": "011719a3-ab84-46c4-b260-f7bc9c5f3741",
-                    "createdAt": "2026-05-21T04:35:09.832000+00:00",
-                    "message": "(service healthbridge-notification) has started 1 tasks: (task f5df7bbd43d440b78bba28b65faae94c)."
-                },
-                {
-                    "id": "dc5c6512-3977-4bcd-b358-cbf1db0f324d",
-                    "createdAt": "2026-05-21T04:34:20.301000+00:00",
-                    "message": "(service healthbridge-notification) has started 1 tasks: (task 64305a6d94304b6e9e0dbb3654cf74ef)."
-                },
-                {
-                    "id": "3b58d6ac-ecd3-418c-88be-e74d2b656faa",
-                    "createdAt": "2026-05-21T04:33:29.113000+00:00",
-                    "message": "(service healthbridge-notification) has started 1 tasks: (task fcd05abfcdf14c6faba333e6e165c24e)."
-                },
-                {
-                    "id": "df493dfc-5e1c-4226-8afe-8afa696a57b6",
-                    "createdAt": "2026-05-21T04:32:35.113000+00:00",
-                    "message": "(service healthbridge-notification) has started 1 tasks: (task 4f86ab95c6f646a2aef0a52ad28964d2)."
-                },
-                {
-                    "id": "cc7e500b-2395-4d95-b04c-b69529f20f34",
-                    "createdAt": "2026-05-21T04:31:45.785000+00:00",
-                    "message": "(service healthbridge-notification) has started 1 tasks: (task b39c2278fccd4bd99521b61f05e6a31c)."
-                },
-                {
-                    "id": "1e78676a-225f-4761-893f-672e95c82ff4",
-                    "createdAt": "2026-05-21T04:30:45.932000+00:00",
-                    "message": "(service healthbridge-notification) has started 1 tasks: (task 3fbc4cb2971b40cc94ef5d3ee921d007)."
                 }
             ],
             "createdAt": "2026-05-21T04:14:21.086000+00:00",
-            "currentServiceDeployment": "arn:aws:ecs:ap-southeast-2:617998378442:service-deployment/healthbridge/healthbridge-notification/9sSX4GwmrXOtaNnen3dn3",
+            "currentServiceDeployment": "arn:aws:ecs:ap-southeast-2:617998378442:service-deployment/healthbridge/healthbridge-notification/0O_rj_7U8xum5xNAtE3OK",
             "currentServiceRevisions": [
                 {
-                    "arn": "arn:aws:ecs:ap-southeast-2:617998378442:service-revision/healthbridge/healthbridge-notification/0890774430004529119",
+                    "arn": "arn:aws:ecs:ap-southeast-2:617998378442:service-revision/healthbridge/healthbridge-notification/2657403553669751823",
                     "requestedTaskCount": 1,
                     "runningTaskCount": 0,
                     "pendingTaskCount": 1
                 },
                 {
-                    "arn": "arn:aws:ecs:ap-southeast-2:617998378442:service-revision/healthbridge/healthbridge-notification/9884494592222087261",
+                    "arn": "arn:aws:ecs:ap-southeast-2:617998378442:service-revision/healthbridge/healthbridge-notification/6182765224757204534",
                     "requestedTaskCount": 1,
                     "runningTaskCount": 1,
                     "pendingTaskCount": 0

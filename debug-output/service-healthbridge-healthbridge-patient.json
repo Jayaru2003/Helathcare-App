@@ -30,15 +30,15 @@
             },
             "deployments": [
                 {
-                    "id": "ecs-svc/3008772226327814427",
+                    "id": "ecs-svc/0591064414231725492",
                     "status": "PRIMARY",
                     "taskDefinition": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-patient:8",
                     "desiredCount": 1,
                     "pendingCount": 0,
                     "runningCount": 1,
                     "failedTasks": 0,
-                    "createdAt": "2026-05-23T18:10:39.475000+00:00",
-                    "updatedAt": "2026-05-23T18:15:49.026000+00:00",
+                    "createdAt": "2026-05-23T18:19:52.978000+00:00",
+                    "updatedAt": "2026-05-23T18:24:52.229000+00:00",
                     "launchType": "FARGATE",
                     "platformVersion": "1.4.0",
                     "platformFamily": "Linux",
@@ -55,11 +55,41 @@
                         }
                     },
                     "rolloutState": "COMPLETED",
-                    "rolloutStateReason": "ECS deployment ecs-svc/3008772226327814427 completed."
+                    "rolloutStateReason": "ECS deployment ecs-svc/0591064414231725492 completed."
                 }
             ],
             "roleArn": "arn:aws:iam::617998378442:role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS",
             "events": [
+                {
+                    "id": "821064fb-7c79-4ee2-b3ce-3364b68e3ff1",
+                    "createdAt": "2026-05-23T18:24:52.236000+00:00",
+                    "message": "(service healthbridge-patient) has reached a steady state."
+                },
+                {
+                    "id": "d2a2acc7-ab32-41fc-b09c-d4bc2262b1a7",
+                    "createdAt": "2026-05-23T18:24:52.235000+00:00",
+                    "message": "(service healthbridge-patient) (deployment ecs-svc/0591064414231725492) deployment completed."
+                },
+                {
+                    "id": "c3a26632-ecfa-4f39-bfd3-ec42f2eb00b5",
+                    "createdAt": "2026-05-23T18:22:42.242000+00:00",
+                    "message": "(service healthbridge-patient) has stopped 1 running tasks: (task a394b0e8193c43229bbb369f16c2176d)."
+                },
+                {
+                    "id": "844ec3e8-cb3f-4f9c-a075-94a5a9bd8f22",
+                    "createdAt": "2026-05-23T18:21:18.510000+00:00",
+                    "message": "(service healthbridge-patient) has started 1 tasks: (task e992a476fb3b473c83265af1664cc241)."
+                },
+                {
+                    "id": "2b0ab2ad-e4ba-4be9-95f8-c38f5f2461c0",
+                    "createdAt": "2026-05-23T18:20:04.130000+00:00",
+                    "message": "(service healthbridge-patient) stopped 1 pending tasks."
+                },
+                {
+                    "id": "433f52e2-c777-4681-936c-3eae96439413",
+                    "createdAt": "2026-05-23T18:19:32.831000+00:00",
+                    "message": "(service healthbridge-patient) has started 1 tasks: (task a5e552c7021e4af0b0ef92582b66ad15)."
+                },
                 {
                     "id": "a3d96b44-e485-47fc-b274-07bf890c5b13",
                     "createdAt": "2026-05-23T18:15:49.032000+00:00",
@@ -529,42 +559,12 @@
                     "id": "58b2cdfa-c244-46c6-aa11-099ac6ad8cde",
                     "createdAt": "2026-05-22T12:41:50.509000+00:00",
                     "message": "(service healthbridge-patient) has started 1 tasks: (task 4001c9575de8421fab37933ea0fefcd0)."
-                },
-                {
-                    "id": "169a19a9-fd48-4034-9ffe-328047d661e3",
-                    "createdAt": "2026-05-22T12:41:18.140000+00:00",
-                    "message": "(service healthbridge-patient) has reached a steady state."
-                },
-                {
-                    "id": "80677b30-8d06-44db-8e72-5f9d5cae99bd",
-                    "createdAt": "2026-05-22T12:40:46.382000+00:00",
-                    "message": "(service healthbridge-patient) has started 1 tasks: (task 9d062f68ddfd419181967813a3ba447b)."
-                },
-                {
-                    "id": "d5ceb4f2-ab53-4ed2-894d-9be9be304b67",
-                    "createdAt": "2026-05-22T12:40:14.817000+00:00",
-                    "message": "(service healthbridge-patient) has reached a steady state."
-                },
-                {
-                    "id": "f7968e6d-8b5d-41bb-820b-644da2aa7f5c",
-                    "createdAt": "2026-05-22T12:39:46.423000+00:00",
-                    "message": "(service healthbridge-patient) has started 1 tasks: (task e48f99e0a1ed417c8ef81145ede81721)."
-                },
-                {
-                    "id": "171adf99-cd0a-416f-bd53-c1260d533c02",
-                    "createdAt": "2026-05-22T12:39:13.242000+00:00",
-                    "message": "(service healthbridge-patient) has reached a steady state."
-                },
-                {
-                    "id": "c73d761f-fe34-4fc8-b32d-809b2954d8ca",
-                    "createdAt": "2026-05-22T12:38:43.438000+00:00",
-                    "message": "(service healthbridge-patient) has started 1 tasks: (task cad8fe1238cb4c9a85cd47bf0d989805)."
                 }
             ],
             "createdAt": "2026-05-21T04:14:17.232000+00:00",
             "currentServiceRevisions": [
                 {
-                    "arn": "arn:aws:ecs:ap-southeast-2:617998378442:service-revision/healthbridge/healthbridge-patient/3008772226327814427",
+                    "arn": "arn:aws:ecs:ap-southeast-2:617998378442:service-revision/healthbridge/healthbridge-patient/0591064414231725492",
                     "requestedTaskCount": 1,
                     "runningTaskCount": 1,
                     "pendingTaskCount": 0

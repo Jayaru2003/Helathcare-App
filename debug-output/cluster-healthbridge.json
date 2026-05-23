@@ -6,7 +6,7 @@
             "status": "ACTIVE",
             "registeredContainerInstancesCount": 0,
             "runningTasksCount": 8,
-            "pendingTasksCount": 0,
+            "pendingTasksCount": 2,
             "activeServicesCount": 8,
             "statistics": [],
             "tags": [],
