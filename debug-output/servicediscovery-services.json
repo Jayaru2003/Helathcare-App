@@ -1,3 +1,25 @@
 {
-    "Services": []
+    "Services": [
+        {
+            "Id": "srv-uo2buzkwwks4ascc",
+            "Arn": "arn:aws:servicediscovery:ap-southeast-2:617998378442:service/srv-uo2buzkwwks4ascc",
+            "ResourceOwner": "617998378442",
+            "Name": "notification",
+            "Type": "DNS_HTTP",
+            "DnsConfig": {
+                "RoutingPolicy": "WEIGHTED",
+                "DnsRecords": [
+                    {
+                        "Type": "A",
+                        "TTL": 10
+                    }
+                ]
+            },
+            "HealthCheckCustomConfig": {
+                "FailureThreshold": 1
+            },
+            "CreateDate": "2026-05-23T18:03:06.763000+00:00",
+            "CreatedByAccount": "617998378442"
+        }
+    ]
 }

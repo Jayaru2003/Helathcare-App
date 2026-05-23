@@ -1,3 +1,24 @@
 {
-    "Namespaces": []
+    "Namespaces": [
+        {
+            "Id": "ns-vxbsgb6odwl7drug",
+            "Arn": "arn:aws:servicediscovery:ap-southeast-2:617998378442:namespace/ns-vxbsgb6odwl7drug",
+            "ResourceOwner": "617998378442",
+            "Name": "healthbridge.local",
+            "Type": "DNS_PRIVATE",
+            "Description": "HealthBridge internal service discovery",
+            "Properties": {
+                "DnsProperties": {
+                    "HostedZoneId": "Z0467740Y8OVJCDC1EFY",
+                    "SOA": {
+                        "TTL": 15
+                    }
+                },
+                "HttpProperties": {
+                    "HttpName": "healthbridge.local"
+                }
+            },
+            "CreateDate": "2026-05-23T18:03:02.549000+00:00"
+        }
+    ]
 }
