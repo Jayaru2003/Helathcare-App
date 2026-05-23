@@ -1,6 +1,132 @@
 {
     "Services": [
         {
+            "Id": "srv-7fvwzs4xvekdtm67",
+            "Arn": "arn:aws:servicediscovery:ap-southeast-2:617998378442:service/srv-7fvwzs4xvekdtm67",
+            "ResourceOwner": "617998378442",
+            "Name": "appointment",
+            "Type": "DNS_HTTP",
+            "DnsConfig": {
+                "RoutingPolicy": "WEIGHTED",
+                "DnsRecords": [
+                    {
+                        "Type": "A",
+                        "TTL": 10
+                    }
+                ]
+            },
+            "HealthCheckCustomConfig": {
+                "FailureThreshold": 1
+            },
+            "CreateDate": "2026-05-23T18:10:28.813000+00:00",
+            "CreatedByAccount": "617998378442"
+        },
+        {
+            "Id": "srv-gi6e4vgvoxel7uwq",
+            "Arn": "arn:aws:servicediscovery:ap-southeast-2:617998378442:service/srv-gi6e4vgvoxel7uwq",
+            "ResourceOwner": "617998378442",
+            "Name": "prescription",
+            "Type": "DNS_HTTP",
+            "DnsConfig": {
+                "RoutingPolicy": "WEIGHTED",
+                "DnsRecords": [
+                    {
+                        "Type": "A",
+                        "TTL": 10
+                    }
+                ]
+            },
+            "HealthCheckCustomConfig": {
+                "FailureThreshold": 1
+            },
+            "CreateDate": "2026-05-23T18:11:02.796000+00:00",
+            "CreatedByAccount": "617998378442"
+        },
+        {
+            "Id": "srv-gq4g6pduf7jmuzkc",
+            "Arn": "arn:aws:servicediscovery:ap-southeast-2:617998378442:service/srv-gq4g6pduf7jmuzkc",
+            "ResourceOwner": "617998378442",
+            "Name": "auth",
+            "Type": "DNS_HTTP",
+            "DnsConfig": {
+                "RoutingPolicy": "WEIGHTED",
+                "DnsRecords": [
+                    {
+                        "Type": "A",
+                        "TTL": 10
+                    }
+                ]
+            },
+            "HealthCheckCustomConfig": {
+                "FailureThreshold": 1
+            },
+            "CreateDate": "2026-05-23T18:10:56.017000+00:00",
+            "CreatedByAccount": "617998378442"
+        },
+        {
+            "Id": "srv-hsw6cozrxkenefzc",
+            "Arn": "arn:aws:servicediscovery:ap-southeast-2:617998378442:service/srv-hsw6cozrxkenefzc",
+            "ResourceOwner": "617998378442",
+            "Name": "analytics",
+            "Type": "DNS_HTTP",
+            "DnsConfig": {
+                "RoutingPolicy": "WEIGHTED",
+                "DnsRecords": [
+                    {
+                        "Type": "A",
+                        "TTL": 10
+                    }
+                ]
+            },
+            "HealthCheckCustomConfig": {
+                "FailureThreshold": 1
+            },
+            "CreateDate": "2026-05-23T18:10:42.548000+00:00",
+            "CreatedByAccount": "617998378442"
+        },
+        {
+            "Id": "srv-lnsgty64qzmj3gqd",
+            "Arn": "arn:aws:servicediscovery:ap-southeast-2:617998378442:service/srv-lnsgty64qzmj3gqd",
+            "ResourceOwner": "617998378442",
+            "Name": "billing",
+            "Type": "DNS_HTTP",
+            "DnsConfig": {
+                "RoutingPolicy": "WEIGHTED",
+                "DnsRecords": [
+                    {
+                        "Type": "A",
+                        "TTL": 10
+                    }
+                ]
+            },
+            "HealthCheckCustomConfig": {
+                "FailureThreshold": 1
+            },
+            "CreateDate": "2026-05-23T18:10:49.337000+00:00",
+            "CreatedByAccount": "617998378442"
+        },
+        {
+            "Id": "srv-tzhdqxks6xsqdw26",
+            "Arn": "arn:aws:servicediscovery:ap-southeast-2:617998378442:service/srv-tzhdqxks6xsqdw26",
+            "ResourceOwner": "617998378442",
+            "Name": "patient",
+            "Type": "DNS_HTTP",
+            "DnsConfig": {
+                "RoutingPolicy": "WEIGHTED",
+                "DnsRecords": [
+                    {
+                        "Type": "A",
+                        "TTL": 10
+                    }
+                ]
+            },
+            "HealthCheckCustomConfig": {
+                "FailureThreshold": 1
+            },
+            "CreateDate": "2026-05-23T18:10:35.765000+00:00",
+            "CreatedByAccount": "617998378442"
+        },
+        {
             "Id": "srv-uo2buzkwwks4ascc",
             "Arn": "arn:aws:servicediscovery:ap-southeast-2:617998378442:service/srv-uo2buzkwwks4ascc",
             "ResourceOwner": "617998378442",
