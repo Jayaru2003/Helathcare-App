@@ -266,7 +266,7 @@ function makeProxy(serviceName: ServiceName): ReturnType<typeof createProxyMiddl
     },
   };
 
-  return createProxyMiddleware(options);
+  return createProxyMiddleware(publicPrefix, options);
 }
 
 // ─── Proxy Routes ─────────────────────────────────────────────────────────────
@@ -276,14 +276,18 @@ function makeProxy(serviceName: ServiceName): ReturnType<typeof createProxyMiddl
 // The proxy middleware BYPASSES body parsing middleware because it intercepts
 // the request before the body has been fully consumed. This is correct
 // behaviour: the raw body stream is forwarded as-is to the downstream service.
+//
+// By mounting the proxy middleware on root app.use() and letting http-proxy-middleware
+// handle the path filtering, we prevent Express from truncating the prefix, ensuring
+// path rewriting (e.g. /api/patients → /api/v1/patients) functions correctly.
 
-app.use('/api/auth',          makeProxy('auth'));
-app.use('/api/patients',      makeProxy('patient'));
-app.use('/api/appointments',  makeProxy('appointment'));
-app.use('/api/prescriptions', makeProxy('prescription'));
-app.use('/api/billing',       makeProxy('billing'));
-app.use('/api/notifications', makeProxy('notification'));
-app.use('/api/analytics',     makeProxy('analytics'));
+app.use(makeProxy('auth'));
+app.use(makeProxy('patient'));
+app.use(makeProxy('appointment'));
+app.use(makeProxy('prescription'));
+app.use(makeProxy('billing'));
+app.use(makeProxy('notification'));
+app.use(makeProxy('analytics'));
 
 // ─── 404 Catch-All ───────────────────────────────────────────────────────────
 
