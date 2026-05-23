@@ -9,7 +9,7 @@
             "status": "ACTIVE",
             "desiredCount": 1,
             "runningCount": 1,
-            "pendingCount": 1,
+            "pendingCount": 0,
             "launchType": "FARGATE",
             "platformVersion": "LATEST",
             "platformFamily": "Linux",
@@ -26,15 +26,43 @@
             },
             "deployments": [
                 {
-                    "id": "ecs-svc/9582633365703368013",
+                    "id": "ecs-svc/3301132313162868512",
                     "status": "PRIMARY",
                     "taskDefinition": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-notification:1",
-                    "desiredCount": 1,
-                    "pendingCount": 1,
+                    "desiredCount": 0,
+                    "pendingCount": 0,
                     "runningCount": 0,
                     "failedTasks": 0,
+                    "createdAt": "2026-05-23T17:27:34.276000+00:00",
+                    "updatedAt": "2026-05-23T17:27:42.913000+00:00",
+                    "launchType": "FARGATE",
+                    "platformVersion": "1.4.0",
+                    "platformFamily": "Linux",
+                    "networkConfiguration": {
+                        "awsvpcConfiguration": {
+                            "subnets": [
+                                "subnet-0c16a12e0cd387b21",
+                                "subnet-0d0de008f955e1c47"
+                            ],
+                            "securityGroups": [
+                                "sg-0448096f5d35b1317"
+                            ],
+                            "assignPublicIp": "ENABLED"
+                        }
+                    },
+                    "rolloutState": "IN_PROGRESS",
+                    "rolloutStateReason": "ECS deployment ecs-svc/3301132313162868512 in progress."
+                },
+                {
+                    "id": "ecs-svc/9582633365703368013",
+                    "status": "ACTIVE",
+                    "taskDefinition": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-notification:1",
+                    "desiredCount": 1,
+                    "pendingCount": 0,
+                    "runningCount": 1,
+                    "failedTasks": 0,
                     "createdAt": "2026-05-23T17:24:38.890000+00:00",
-                    "updatedAt": "2026-05-23T17:24:50.839000+00:00",
+                    "updatedAt": "2026-05-23T17:27:42.871000+00:00",
                     "launchType": "FARGATE",
                     "platformVersion": "1.4.0",
                     "platformFamily": "Linux",
@@ -52,38 +80,15 @@
                     },
                     "rolloutState": "IN_PROGRESS",
                     "rolloutStateReason": "ECS deployment ecs-svc/9582633365703368013 in progress."
-                },
-                {
-                    "id": "ecs-svc/3279492286844159823",
-                    "status": "ACTIVE",
-                    "taskDefinition": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-notification:1",
-                    "desiredCount": 1,
-                    "pendingCount": 0,
-                    "runningCount": 1,
-                    "failedTasks": 0,
-                    "createdAt": "2026-05-23T17:19:32.313000+00:00",
-                    "updatedAt": "2026-05-23T17:24:50.845000+00:00",
-                    "launchType": "FARGATE",
-                    "platformVersion": "1.4.0",
-                    "platformFamily": "Linux",
-                    "networkConfiguration": {
-                        "awsvpcConfiguration": {
-                            "subnets": [
-                                "subnet-0c16a12e0cd387b21",
-                                "subnet-0d0de008f955e1c47"
-                            ],
-                            "securityGroups": [
-                                "sg-0448096f5d35b1317"
-                            ],
-                            "assignPublicIp": "ENABLED"
-                        }
-                    },
-                    "rolloutState": "COMPLETED",
-                    "rolloutStateReason": "ECS deployment ecs-svc/3279492286844159823 completed."
                 }
             ],
             "roleArn": "arn:aws:iam::617998378442:role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS",
             "events": [
+                {
+                    "id": "930fccf9-5e8e-4ebf-b8e0-d1513a4bf619",
+                    "createdAt": "2026-05-23T17:25:55.617000+00:00",
+                    "message": "(service healthbridge-notification) has stopped 1 running tasks: (task 93e61b540257493bbce18c62406c376d)."
+                },
                 {
                     "id": "b1f1a359-8585-4ebe-b6ab-16c2adcbd592",
                     "createdAt": "2026-05-23T17:24:51.314000+00:00",
@@ -561,16 +566,16 @@
                 }
             ],
             "createdAt": "2026-05-21T04:14:21.086000+00:00",
-            "currentServiceDeployment": "arn:aws:ecs:ap-southeast-2:617998378442:service-deployment/healthbridge/healthbridge-notification/QH7FNcVzAtCW-wSZ-e90l",
+            "currentServiceDeployment": "arn:aws:ecs:ap-southeast-2:617998378442:service-deployment/healthbridge/healthbridge-notification/BTI4yzmADsaeuqMglj4Wg",
             "currentServiceRevisions": [
                 {
-                    "arn": "arn:aws:ecs:ap-southeast-2:617998378442:service-revision/healthbridge/healthbridge-notification/9582633365703368013",
-                    "requestedTaskCount": 1,
+                    "arn": "arn:aws:ecs:ap-southeast-2:617998378442:service-revision/healthbridge/healthbridge-notification/3301132313162868512",
+                    "requestedTaskCount": 0,
                     "runningTaskCount": 0,
-                    "pendingTaskCount": 1
+                    "pendingTaskCount": 0
                 },
                 {
-                    "arn": "arn:aws:ecs:ap-southeast-2:617998378442:service-revision/healthbridge/healthbridge-notification/3279492286844159823",
+                    "arn": "arn:aws:ecs:ap-southeast-2:617998378442:service-revision/healthbridge/healthbridge-notification/9582633365703368013",
                     "requestedTaskCount": 1,
                     "runningTaskCount": 1,
                     "pendingTaskCount": 0
