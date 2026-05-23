@@ -132,4 +132,122 @@ jobs:
             git push origin main || true
           fi
 
+  update-gateway:
+    name: Update Gateway IPs
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Update Gateway Service URLs
+        run: |
+          SERVICES=("auth" "patient" "appointment" "prescription" "billing" "notification" "analytics")
+          declare -A IPS
+
+          for SVC in "${SERVICES[@]}"; do
+            echo "🔍 Finding tasks for healthbridge-$SVC..."
+            
+            # Retrieve list of task ARNs for the service
+            TASK_ARNS=$(aws ecs list-tasks --cluster healthbridge --service-name healthbridge-$SVC --query "taskArns" --output json)
+            
+            # If no tasks are present or list is empty, wait
+            for i in {1..24}; do
+              if [ -z "$TASK_ARNS" ] || [ "$TASK_ARNS" == "[]" ] || [ "$TASK_ARNS" == "null" ]; then
+                echo "⏳ Waiting for task to be registered..."
+                sleep 5
+                TASK_ARNS=$(aws ecs list-tasks --cluster healthbridge --service-name healthbridge-$SVC --query "taskArns" --output json)
+              else
+                break
+              fi
+            done
+            
+            if [ -z "$TASK_ARNS" ] || [ "$TASK_ARNS" == "[]" ] || [ "$TASK_ARNS" == "null" ]; then
+              echo "❌ No tasks found for healthbridge-$SVC after waiting."
+              exit 1
+            fi
+            
+            # Convert JSON array of task ARNs to space-separated string
+            TASK_ARNS_STR=$(echo "$TASK_ARNS" | jq -r '.[]' | tr '\n' ' ')
+            
+            # Find the newest task by parsing the createdAt field from describe-tasks
+            echo "🔍 Describing tasks to find the newest one..."
+            NEWEST_TASK_ARN=$(aws ecs describe-tasks --cluster healthbridge --tasks $TASK_ARNS_STR --query "tasks | sort_by(@, &createdAt) | [-1].taskArn" --output text)
+            
+            if [ -z "$NEWEST_TASK_ARN" ] || [ "$NEWEST_TASK_ARN" == "None" ]; then
+              echo "❌ Failed to identify the newest task ARN for healthbridge-$SVC."
+              exit 1
+            fi
+            
+            # Wait for this specific task to be RUNNING
+            echo "⏳ Waiting for task $NEWEST_TASK_ARN to reach RUNNING status..."
+            STATUS=$(aws ecs describe-tasks --cluster healthbridge --tasks "$NEWEST_TASK_ARN" --query "tasks[0].lastStatus" --output text)
+            for i in {1..40}; do
+              if [ "$STATUS" != "RUNNING" ] && [ "$STATUS" != "PROVISIONING" ] && [ "$STATUS" != "PENDING" ] && [ "$STATUS" != "ACTIVATING" ]; then
+                echo "⚠️ Unexpected status: $STATUS. Might have failed. Retrying describe..."
+              fi
+              if [ "$STATUS" != "RUNNING" ]; then
+                echo "⏳ Status is $STATUS. Sleeping 5s..."
+                sleep 5
+                STATUS=$(aws ecs describe-tasks --cluster healthbridge --tasks "$NEWEST_TASK_ARN" --query "tasks[0].lastStatus" --output text)
+              else
+                break
+              fi
+            done
+            
+            if [ "$STATUS" != "RUNNING" ]; then
+              echo "❌ Task $NEWEST_TASK_ARN failed to reach RUNNING status (current: $STATUS)."
+              exit 1
+            fi
+            
+            # Fetch the private IP address of the task
+            IP=$(aws ecs describe-tasks --cluster healthbridge --tasks "$NEWEST_TASK_ARN" --query "tasks[0].attachments[0].details[?name=='privateIPv4Address'].value" --output text)
+            
+            if [ -z "$IP" ] || [ "$IP" == "None" ]; then
+              echo "❌ Failed to retrieve private IP for task $NEWEST_TASK_ARN"
+              exit 1
+            fi
+            
+            echo "✅ healthbridge-$SVC running at private IP: $IP"
+            IPS["$SVC"]=$IP
+          done
+
+          echo "📝 Fetching current task definition of healthbridge-api-gateway..."
+          aws ecs describe-task-definition --task-definition healthbridge-api-gateway --query taskDefinition > task-def.json
+
+          echo "🔄 Updating task definition environment variables with new IPs..."
+          jq --arg auth "http://${IPS[auth]}:3001" \
+             --arg patient "http://${IPS[patient]}:3002" \
+             --arg appointment "http://${IPS[appointment]}:3003" \
+             --arg prescription "http://${IPS[prescription]}:3004" \
+             --arg billing "http://${IPS[billing]}:3005" \
+             --arg notification "http://${IPS[notification]}:3006" \
+             --arg analytics "http://${IPS[analytics]}:3007" \
+             '.containerDefinitions[0].environment |= map(
+                if .name == "AUTH_SERVICE_URL" then .value = $auth
+                elif .name == "PATIENT_SERVICE_URL" then .value = $patient
+                elif .name == "APPOINTMENT_SERVICE_URL" then .value = $appointment
+                elif .name == "PRESCRIPTION_SERVICE_URL" then .value = $prescription
+                elif .name == "BILLING_SERVICE_URL" then .value = $billing
+                elif .name == "NOTIFICATION_SERVICE_URL" then .value = $notification
+                elif .name == "ANALYTICS_SERVICE_URL" then .value = $analytics
+                else . end
+             )' task-def.json > updated-task-def.json
+
+          echo "🧼 Cleaning task definition fields for registration..."
+          jq 'del(.taskDefinitionArn, .revision, .status, .requiresAttributes, .compatibilities, .registeredAt, .registeredBy)' updated-task-def.json > final-task-def.json
+
+          echo "🚀 Registering new task definition revision..."
+          NEW_TASK_DEF=$(aws ecs register-task-definition --cli-input-json file://final-task-def.json --query "taskDefinition.taskDefinitionArn" --output text)
+          echo "✅ Registered task definition: $NEW_TASK_DEF"
+
+          echo "🔄 Updating healthbridge-api-gateway service with the new task definition..."
+          aws ecs update-service --cluster healthbridge --service healthbridge-api-gateway --task-definition "$NEW_TASK_DEF" --force-new-deployment
+          echo "🎉 Gateway service successfully updated!"
+
+
 
