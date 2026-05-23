@@ -415,3 +415,50 @@ jobs:
             echo "    This is expected within the first few minutes of a fresh deployment."
             echo "$RESPONSE" | jq '[.services[] | select(.status != "healthy")]'
           fi
+
+      - name: Capture Cloud Map & Route 53 debug snapshot
+        if: always()
+        run: |
+          echo "=== Cloud Map & Route 53 Final State Debugger ==="
+          mkdir -p debug-output
+
+          VPC_ID="${{ steps.vpc.outputs.vpc_id }}"
+          NS_ID="${{ steps.namespace.outputs.namespace_id }}"
+
+          echo "VPC: $VPC_ID" > debug-output/network-debug.txt
+          echo "Namespace: $NS_ID" >> debug-output/network-debug.txt
+
+          if [ -n "$VPC_ID" ] && [ "$VPC_ID" != "None" ]; then
+            # Describe VPC Attributes
+            aws ec2 describe-vpc-attribute --vpc-id "$VPC_ID" --attribute enableDnsSupport --output json > debug-output/vpc-dns-support.json || true
+            aws ec2 describe-vpc-attribute --vpc-id "$VPC_ID" --attribute enableDnsHostnames --output json > debug-output/vpc-dns-hostnames.json || true
+          fi
+
+          if [ -n "$NS_ID" ] && [ "$NS_ID" != "None" ]; then
+            # Describe Hosted Zone from Namespace
+            HOSTED_ZONE_ID=$(aws servicediscovery get-namespace --id "$NS_ID" --query "Namespace.Properties.DnsProperties.HostedZoneId" --output text)
+            echo "Hosted Zone: $HOSTED_ZONE_ID" >> debug-output/network-debug.txt
+
+            if [ -n "$HOSTED_ZONE_ID" ] && [ "$HOSTED_ZONE_ID" != "None" ]; then
+              aws route53 get-hosted-zone --id "$HOSTED_ZONE_ID" --output json > debug-output/route53-zone.json || true
+              aws route53 list-resource-record-sets --hosted-zone-id "$HOSTED_ZONE_ID" --output json > debug-output/route53-records.json || true
+            fi
+
+            # List Cloud Map Services and Instances
+            aws servicediscovery list-services --filters "Name=NAMESPACE_ID,Values=${NS_ID},Condition=EQ" --output json > debug-output/servicediscovery-services-final.json || true
+
+            # For each service, list instances
+            SVC_IDS=$(aws servicediscovery list-services --filters "Name=NAMESPACE_ID,Values=${NS_ID},Condition=EQ" --query "Services[].Id" --output text)
+            for SVC_ID in $SVC_IDS; do
+              SVC_NAME=$(aws servicediscovery get-service --id "$SVC_ID" --query "Service.Name" --output text)
+              aws servicediscovery list-instances --service-id "$SVC_ID" --output json > debug-output/instances-${SVC_NAME}-${SVC_ID}.json || true
+            done
+          fi
+
+          # Commit the debug output
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add debug-output/
+          git commit -m "chore: add Cloud Map and Route 53 final state debug output [skip ci]" || true
+          git pull --rebase origin main || true
+          git push origin main || true
