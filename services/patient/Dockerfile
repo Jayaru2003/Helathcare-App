@@ -45,6 +45,10 @@ COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/libs ./libs
 COPY --from=builder /app/services/patient/dist ./dist
 COPY --from=builder /app/services/patient/prisma ./prisma
+# ⚡ CRITICAL FIX: Mirror schema at the exact path baked into the generated Prisma client
+# The builder-stage client resolves: node_modules/.prisma/client → ../../services/patient/prisma
+# Without this directory, Prisma's query engine throws at runtime → blank 500 response
+COPY --from=builder /app/services/patient/prisma ./services/patient/prisma
 COPY --from=builder /app/services/patient/package.json ./package.json
 
 # Optional: reduce image size
