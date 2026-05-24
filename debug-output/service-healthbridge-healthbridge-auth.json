@@ -17,7 +17,7 @@
             "launchType": "FARGATE",
             "platformVersion": "LATEST",
             "platformFamily": "Linux",
-            "taskDefinition": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-auth:1",
+            "taskDefinition": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-auth:2",
             "deploymentConfiguration": {
                 "deploymentCircuitBreaker": {
                     "enable": false,
@@ -30,15 +30,43 @@
             },
             "deployments": [
                 {
-                    "id": "ecs-svc/5562625732254831391",
+                    "id": "ecs-svc/0159569711777576032",
                     "status": "PRIMARY",
-                    "taskDefinition": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-auth:1",
+                    "taskDefinition": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-auth:2",
+                    "desiredCount": 1,
+                    "pendingCount": 0,
+                    "runningCount": 0,
+                    "failedTasks": 0,
+                    "createdAt": "2026-05-24T04:22:26.029000+00:00",
+                    "updatedAt": "2026-05-24T04:22:39.939000+00:00",
+                    "launchType": "FARGATE",
+                    "platformVersion": "1.4.0",
+                    "platformFamily": "Linux",
+                    "networkConfiguration": {
+                        "awsvpcConfiguration": {
+                            "subnets": [
+                                "subnet-0c16a12e0cd387b21",
+                                "subnet-0d0de008f955e1c47"
+                            ],
+                            "securityGroups": [
+                                "sg-0448096f5d35b1317"
+                            ],
+                            "assignPublicIp": "ENABLED"
+                        }
+                    },
+                    "rolloutState": "IN_PROGRESS",
+                    "rolloutStateReason": "ECS deployment ecs-svc/0159569711777576032 in progress."
+                },
+                {
+                    "id": "ecs-svc/1126541332899868980",
+                    "status": "ACTIVE",
+                    "taskDefinition": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-auth:2",
                     "desiredCount": 1,
                     "pendingCount": 0,
                     "runningCount": 1,
                     "failedTasks": 0,
-                    "createdAt": "2026-05-23T18:36:15.715000+00:00",
-                    "updatedAt": "2026-05-23T18:40:49.953000+00:00",
+                    "createdAt": "2026-05-24T03:39:45.012000+00:00",
+                    "updatedAt": "2026-05-24T04:22:39.945000+00:00",
                     "launchType": "FARGATE",
                     "platformVersion": "1.4.0",
                     "platformFamily": "Linux",
@@ -55,516 +83,58 @@
                         }
                     },
                     "rolloutState": "COMPLETED",
-                    "rolloutStateReason": "ECS deployment ecs-svc/5562625732254831391 completed."
+                    "rolloutStateReason": "ECS deployment ecs-svc/1126541332899868980 completed."
                 }
             ],
             "roleArn": "arn:aws:iam::617998378442:role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS",
             "events": [
                 {
-                    "id": "37b5d991-92c9-49d8-99d6-108b4e021e85",
-                    "createdAt": "2026-05-23T18:40:49.959000+00:00",
+                    "id": "80f0fc3b-e6c1-416d-a85f-b5ae0d6aa4f8",
+                    "createdAt": "2026-05-24T03:43:06.330000+00:00",
                     "message": "(service healthbridge-auth) has reached a steady state."
                 },
                 {
-                    "id": "3d319df4-7f62-4f88-92db-fe11e88912dd",
-                    "createdAt": "2026-05-23T18:40:49.958000+00:00",
-                    "message": "(service healthbridge-auth) (deployment ecs-svc/5562625732254831391) deployment completed."
+                    "id": "3da38e43-8181-473a-985a-6b7ec1954275",
+                    "createdAt": "2026-05-24T03:43:06.329000+00:00",
+                    "message": "(service healthbridge-auth) (deployment ecs-svc/1126541332899868980) deployment completed."
                 },
                 {
-                    "id": "03497915-61c9-4e4f-9b72-7381ce685975",
-                    "createdAt": "2026-05-23T18:39:05.556000+00:00",
-                    "message": "(service healthbridge-auth) has stopped 1 running tasks: (task 110681fd2e9947db97d7ac2c2f419eaf)."
+                    "id": "dfc711a4-775e-43de-9a83-7b40a9af348f",
+                    "createdAt": "2026-05-24T03:41:12.512000+00:00",
+                    "message": "(service healthbridge-auth) has stopped 1 running tasks: (task c52a99c04e6d434588a5068b824e9d2c)."
                 },
                 {
-                    "id": "cd8b693c-6fce-45ab-b8f7-0899186944a6",
-                    "createdAt": "2026-05-23T18:38:01.947000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task 117f76badac2431cb6b19f247328d356)."
+                    "id": "3ea9e3d4-68a0-4119-bb85-6f2907d37c9d",
+                    "createdAt": "2026-05-24T03:39:58.018000+00:00",
+                    "message": "(service healthbridge-auth) has started 1 tasks: (task a8091d9b19cf4df99e900b93019ff559)."
                 },
                 {
-                    "id": "0ee4213d-4349-4ed0-8ce3-a64d626f0ab5",
-                    "createdAt": "2026-05-23T18:36:36.118000+00:00",
-                    "message": "(service healthbridge-auth) has stopped 1 running tasks: (task c63d1215607a497187c4ee66ef8fe05f)."
-                },
-                {
-                    "id": "e808d046-6313-4ffd-b352-f9e91091272e",
-                    "createdAt": "2026-05-23T18:35:23.248000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task 110681fd2e9947db97d7ac2c2f419eaf)."
-                },
-                {
-                    "id": "aa359136-a0d5-4c36-a858-bcb6b2a7b8ac",
-                    "createdAt": "2026-05-23T18:33:47.002000+00:00",
+                    "id": "25606757-207a-42e1-ab80-91e93a42c83d",
+                    "createdAt": "2026-05-24T03:26:08.208000+00:00",
                     "message": "(service healthbridge-auth) has reached a steady state."
                 },
                 {
-                    "id": "3b7ee185-750f-462b-ba1d-ccc7a8eed1db",
-                    "createdAt": "2026-05-23T18:33:47.001000+00:00",
-                    "message": "(service healthbridge-auth) (deployment ecs-svc/1031197910434544959) deployment completed."
+                    "id": "b1c51806-902d-41c5-95a8-4a807ac2eaaf",
+                    "createdAt": "2026-05-24T03:26:08.207000+00:00",
+                    "message": "(service healthbridge-auth) (deployment ecs-svc/0629571808249191081) deployment completed."
                 },
                 {
-                    "id": "f8040808-a307-42d3-8a76-8cf4064a4877",
-                    "createdAt": "2026-05-23T18:32:01.100000+00:00",
-                    "message": "(service healthbridge-auth) has stopped 1 running tasks: (task d8916393639f4a059c2daceec8152b30)."
-                },
-                {
-                    "id": "d323a4bb-3fdf-4f61-8cd6-2280ecb07fdb",
-                    "createdAt": "2026-05-23T18:30:56.251000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task c63d1215607a497187c4ee66ef8fe05f)."
-                },
-                {
-                    "id": "ccff876a-577c-4efe-8c06-1b1b12460692",
-                    "createdAt": "2026-05-23T18:29:31.562000+00:00",
-                    "message": "(service healthbridge-auth) has stopped 1 running tasks: (task c0ecc93d06c64f19a52d4cebc98f37eb)."
-                },
-                {
-                    "id": "412f80cf-fc02-434b-8ec6-0a4dfd5f5cc8",
-                    "createdAt": "2026-05-23T18:28:28.416000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task d8916393639f4a059c2daceec8152b30)."
-                },
-                {
-                    "id": "29717206-04b1-478a-902e-eb455f1b55d9",
-                    "createdAt": "2026-05-23T18:24:35.602000+00:00",
-                    "message": "(service healthbridge-auth) has reached a steady state."
-                },
-                {
-                    "id": "af8e6c63-c430-4b94-9faa-3381279f2b6c",
-                    "createdAt": "2026-05-23T18:24:35.601000+00:00",
-                    "message": "(service healthbridge-auth) (deployment ecs-svc/7929791368256440536) deployment completed."
-                },
-                {
-                    "id": "819c16c4-1b42-4dec-bc97-8ed0ee08e86b",
-                    "createdAt": "2026-05-23T18:22:58.313000+00:00",
-                    "message": "(service healthbridge-auth) has stopped 1 running tasks: (task eee8acd726b744f6863e4cb7a41641a5)."
-                },
-                {
-                    "id": "63dac9f3-f02b-4d3e-9463-387669abacfb",
-                    "createdAt": "2026-05-23T18:21:54.678000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task c0ecc93d06c64f19a52d4cebc98f37eb)."
-                },
-                {
-                    "id": "cc18285c-27bf-420d-a271-cff0ef01e83d",
-                    "createdAt": "2026-05-23T18:20:29.422000+00:00",
-                    "message": "(service healthbridge-auth) has stopped 1 running tasks: (task 31f12311fa0f4b0596d6220a41bfdd15)."
-                },
-                {
-                    "id": "5bfc28ef-77b7-4b86-9d2e-d8664e400f2c",
-                    "createdAt": "2026-05-23T18:19:15.595000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task eee8acd726b744f6863e4cb7a41641a5)."
-                },
-                {
-                    "id": "097f31d5-41dc-4acd-a023-c78555c17cfc",
-                    "createdAt": "2026-05-23T18:15:06.761000+00:00",
-                    "message": "(service healthbridge-auth) has reached a steady state."
-                },
-                {
-                    "id": "3fc638ba-dbe6-4dd2-afe7-c1cdc974161f",
-                    "createdAt": "2026-05-23T18:15:06.760000+00:00",
-                    "message": "(service healthbridge-auth) (deployment ecs-svc/2644801816340908054) deployment completed."
-                },
-                {
-                    "id": "ee06b3fe-8c11-4865-b3cd-dac6be9fa269",
-                    "createdAt": "2026-05-23T18:13:25.047000+00:00",
-                    "message": "(service healthbridge-auth) has stopped 1 running tasks: (task ce0e5fd14f694088ba661c6e61ecc3be)."
-                },
-                {
-                    "id": "d8225765-ff15-46ca-b355-fcf42918ba96",
-                    "createdAt": "2026-05-23T18:12:12.496000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task 31f12311fa0f4b0596d6220a41bfdd15)."
-                },
-                {
-                    "id": "048150d7-e356-4ce3-92d8-7f2f46f949d0",
-                    "createdAt": "2026-05-23T18:11:07.079000+00:00",
-                    "message": "(service healthbridge-auth) has stopped 1 running tasks: (task 784db52edcf247f39e1061e3c8d8bc30)."
-                },
-                {
-                    "id": "25f80a42-1877-4224-9ede-fc8b1e87a964",
-                    "createdAt": "2026-05-23T18:09:54.269000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task ce0e5fd14f694088ba661c6e61ecc3be)."
-                },
-                {
-                    "id": "e822d722-1272-490d-a407-1b90b9288f1e",
-                    "createdAt": "2026-05-23T18:04:44.226000+00:00",
-                    "message": "(service healthbridge-auth) has reached a steady state."
-                },
-                {
-                    "id": "003aef8b-2e51-401b-ba36-2ed5a567b4e3",
-                    "createdAt": "2026-05-23T18:04:44.225000+00:00",
-                    "message": "(service healthbridge-auth) (deployment ecs-svc/9370674128780504323) deployment completed."
-                },
-                {
-                    "id": "00d6499d-510f-4b77-af51-0163776b3fb2",
-                    "createdAt": "2026-05-23T18:02:59.749000+00:00",
-                    "message": "(service healthbridge-auth) has stopped 1 running tasks: (task 555be8e195294f65a9223a33acb10094)."
-                },
-                {
-                    "id": "241387b0-fae9-4c90-9d7c-57b0e35746b4",
-                    "createdAt": "2026-05-23T18:01:55.531000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task 784db52edcf247f39e1061e3c8d8bc30)."
-                },
-                {
-                    "id": "faffc727-3435-48ff-8bcb-127ef2081ad9",
-                    "createdAt": "2026-05-23T17:35:26.889000+00:00",
-                    "message": "(service healthbridge-auth) has reached a steady state."
-                },
-                {
-                    "id": "081d5e1f-33c2-4215-bb14-4a38175c57f1",
-                    "createdAt": "2026-05-23T17:35:26.888000+00:00",
-                    "message": "(service healthbridge-auth) (deployment ecs-svc/9535718208030437775) deployment completed."
-                },
-                {
-                    "id": "48b95bb1-c835-4aaa-8214-48f56d2dde43",
-                    "createdAt": "2026-05-23T17:33:34.995000+00:00",
-                    "message": "(service healthbridge-auth) has stopped 1 running tasks: (task 2d0f55132be34ecaa03f3752b96f144a)."
-                },
-                {
-                    "id": "027f707e-064a-409e-82ae-413471974370",
-                    "createdAt": "2026-05-23T17:32:31.933000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task 555be8e195294f65a9223a33acb10094)."
-                },
-                {
-                    "id": "32a0bf9f-f83d-4442-89aa-f1cd749cbe21",
-                    "createdAt": "2026-05-23T17:31:03.954000+00:00",
-                    "message": "(service healthbridge-auth) has reached a steady state."
-                },
-                {
-                    "id": "c4a18e45-581f-456b-90ba-e90dbdd2d5b7",
-                    "createdAt": "2026-05-23T17:31:03.953000+00:00",
-                    "message": "(service healthbridge-auth) (deployment ecs-svc/1293009623115740517) deployment completed."
-                },
-                {
-                    "id": "b6915d86-5154-4dee-a4c0-6fe8246e411c",
-                    "createdAt": "2026-05-23T17:29:09.744000+00:00",
-                    "message": "(service healthbridge-auth) has stopped 1 running tasks: (task cec12d2482c14551913e55da9eb41ac7)."
-                },
-                {
-                    "id": "41e91864-6659-4339-93df-fd5f2b830078",
-                    "createdAt": "2026-05-23T17:27:56.551000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task 2d0f55132be34ecaa03f3752b96f144a)."
-                },
-                {
-                    "id": "1b8a3f11-50b2-4974-8464-7dfdc8cf9368",
-                    "createdAt": "2026-05-23T17:25:58.200000+00:00",
-                    "message": "(service healthbridge-auth) has stopped 1 running tasks: (task e30c0d124be2443ba8f052901e0ed408)."
-                },
-                {
-                    "id": "0aee9698-c673-4d66-b196-f2c4abc8b1bd",
-                    "createdAt": "2026-05-23T17:24:55.300000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task cec12d2482c14551913e55da9eb41ac7)."
-                },
-                {
-                    "id": "13eb0f1a-ca69-4f6d-8c8a-4086fb0dee0c",
-                    "createdAt": "2026-05-23T17:22:33.112000+00:00",
-                    "message": "(service healthbridge-auth) has reached a steady state."
-                },
-                {
-                    "id": "4e2b369c-68e6-4ed9-b4ca-14aae923ed93",
-                    "createdAt": "2026-05-23T17:22:33.111000+00:00",
-                    "message": "(service healthbridge-auth) (deployment ecs-svc/3404088540545970055) deployment completed."
-                },
-                {
-                    "id": "33838d40-c0d1-4216-b2f3-b6298db7dffc",
-                    "createdAt": "2026-05-23T17:20:51.127000+00:00",
-                    "message": "(service healthbridge-auth) has stopped 1 running tasks: (task e27398bb810c4d6cab5c2c71e7ad9f6e)."
-                },
-                {
-                    "id": "7b1d7889-8eed-45a3-99d0-ba6240edc372",
-                    "createdAt": "2026-05-23T17:19:46.959000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task e30c0d124be2443ba8f052901e0ed408)."
-                },
-                {
-                    "id": "6cb9ac67-d7d1-498f-be9a-95862dca3c51",
-                    "createdAt": "2026-05-23T17:18:23.148000+00:00",
-                    "message": "(service healthbridge-auth) has stopped 1 running tasks: (task 4945df6cab22477ca4e9a4686013bef1)."
-                },
-                {
-                    "id": "9df6990b-09a2-424f-a4be-c6e6beee9908",
-                    "createdAt": "2026-05-23T17:17:19.626000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task e27398bb810c4d6cab5c2c71e7ad9f6e)."
-                },
-                {
-                    "id": "9b1b478e-d1a5-4642-8d88-2eef554d1e7a",
-                    "createdAt": "2026-05-23T17:14:28.034000+00:00",
-                    "message": "(service healthbridge-auth) has reached a steady state."
-                },
-                {
-                    "id": "a47c96a1-dda8-426f-9379-77e68088be69",
-                    "createdAt": "2026-05-23T17:14:28.033000+00:00",
-                    "message": "(service healthbridge-auth) (deployment ecs-svc/8738350065825422440) deployment completed."
-                },
-                {
-                    "id": "709d5985-a22e-4308-9f82-ca8abf8336e2",
-                    "createdAt": "2026-05-23T17:12:32.276000+00:00",
-                    "message": "(service healthbridge-auth) has stopped 1 running tasks: (task 8897b624921145d9ba3da9f60b4682c5)."
-                },
-                {
-                    "id": "ffd1ae1c-5cc2-42e1-b047-7b8203813329",
-                    "createdAt": "2026-05-23T17:11:19.130000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task 4945df6cab22477ca4e9a4686013bef1)."
-                },
-                {
-                    "id": "9c1b36d4-a25b-4b4d-b3bb-a8083c3d60e5",
-                    "createdAt": "2026-05-23T11:22:36.323000+00:00",
-                    "message": "(service healthbridge-auth) has reached a steady state."
-                },
-                {
-                    "id": "ebe0c01c-ee4a-45eb-a4a6-cd7e76a1f64b",
-                    "createdAt": "2026-05-23T05:22:06.337000+00:00",
-                    "message": "(service healthbridge-auth) has reached a steady state."
-                },
-                {
-                    "id": "fbc0aec8-93c0-42e8-91ae-79ecaa63f381",
-                    "createdAt": "2026-05-22T23:22:04.428000+00:00",
-                    "message": "(service healthbridge-auth) has reached a steady state."
-                },
-                {
-                    "id": "92b0f8a5-a696-433a-9e01-327968580966",
-                    "createdAt": "2026-05-22T17:22:00.007000+00:00",
-                    "message": "(service healthbridge-auth) has reached a steady state."
-                },
-                {
-                    "id": "84fe5244-8240-4b0f-b539-c03504cf1e71",
-                    "createdAt": "2026-05-22T11:21:39.497000+00:00",
-                    "message": "(service healthbridge-auth) has reached a steady state."
-                },
-                {
-                    "id": "0ef76834-8ac2-4e54-b22d-9e2d671ee1eb",
-                    "createdAt": "2026-05-22T05:21:18.908000+00:00",
-                    "message": "(service healthbridge-auth) has reached a steady state."
-                },
-                {
-                    "id": "6ccf9d1c-61a8-453b-a31e-d780ad418b9c",
-                    "createdAt": "2026-05-21T23:20:54.485000+00:00",
-                    "message": "(service healthbridge-auth) has reached a steady state."
-                },
-                {
-                    "id": "cb9fdf10-e2aa-4ee9-a075-03a1ee67859b",
-                    "createdAt": "2026-05-21T17:20:40.251000+00:00",
-                    "message": "(service healthbridge-auth) has reached a steady state."
-                },
-                {
-                    "id": "fc484cc0-b33e-4bac-ab72-ccf299aedd91",
-                    "createdAt": "2026-05-21T11:20:16.977000+00:00",
-                    "message": "(service healthbridge-auth) has reached a steady state."
-                },
-                {
-                    "id": "380b2650-142c-4438-8d5b-09ba3fa95cc7",
-                    "createdAt": "2026-05-21T05:20:05.581000+00:00",
-                    "message": "(service healthbridge-auth) has reached a steady state."
-                },
-                {
-                    "id": "ec406a53-e298-43c6-8bf1-b7b8eadfe345",
-                    "createdAt": "2026-05-21T05:20:05.580000+00:00",
-                    "message": "(service healthbridge-auth) (deployment ecs-svc/4437053255257906068) deployment completed."
-                },
-                {
-                    "id": "8f0bcd17-af05-461e-b968-398babe5cf54",
-                    "createdAt": "2026-05-21T05:18:08.834000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task 8897b624921145d9ba3da9f60b4682c5)."
-                },
-                {
-                    "id": "7741cf7d-24b8-4b0f-9a4d-c103282c3a7b",
-                    "createdAt": "2026-05-21T05:17:59.417000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task 29a5c8d79a9047beb8f874cfbbc9c834)."
-                },
-                {
-                    "id": "cee0f0a3-c955-4fb7-a432-20514cf91419",
-                    "createdAt": "2026-05-21T05:17:03.374000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task 4591024b63bb4e9a9dda992726e9e477)."
-                },
-                {
-                    "id": "5c8a0452-70d4-49e6-8399-59fdb15ac35e",
-                    "createdAt": "2026-05-21T05:16:02.849000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task ee3c182f28134971813065571bf28681)."
-                },
-                {
-                    "id": "d51ab2bb-1e07-41e0-9bc5-438875ebadcd",
-                    "createdAt": "2026-05-21T05:12:22.854000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task da637deb1a484fa29bfe6168adf9330a)."
-                },
-                {
-                    "id": "a2a3d101-ee8b-41a0-8c0e-54c716de3c07",
-                    "createdAt": "2026-05-21T05:11:31.349000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task 331caea700444dedbb7a299e1782b3de)."
-                },
-                {
-                    "id": "d4aec5b8-f43e-4201-9263-fd0182e6d7f6",
-                    "createdAt": "2026-05-21T05:10:38.183000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task ed12d0d1599e47129da3af848ea870c0)."
-                },
-                {
-                    "id": "ed215c0f-c584-4d5f-a06c-e3545abeae49",
-                    "createdAt": "2026-05-21T05:09:46.492000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task 5a2c93ed23ab4d30a564952b15df0036)."
-                },
-                {
-                    "id": "c4236b5f-8a94-4fe0-8f60-987c7ed9cb29",
-                    "createdAt": "2026-05-21T05:08:46.154000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task 27b25ca4ec0f4a3e95ea65112693fa88)."
-                },
-                {
-                    "id": "ea3a7896-fc41-48cd-b21c-1b981173b679",
-                    "createdAt": "2026-05-21T05:07:56.323000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task 6d76d9b410d448d4a2bc828f4d9d7097)."
-                },
-                {
-                    "id": "a055964a-5671-463a-bc1a-2b8fd4f314a9",
-                    "createdAt": "2026-05-21T05:06:57.051000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task be54b3acb417425e9885eb2f96c86bd6)."
-                },
-                {
-                    "id": "1c21d445-eaef-4f6c-9969-b6a06114ec94",
-                    "createdAt": "2026-05-21T05:06:05.294000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task 1225e039652945e18d62afab5cd771bc)."
-                },
-                {
-                    "id": "7e55fa0c-fe32-4e43-bf6b-9b8d9617c1af",
-                    "createdAt": "2026-05-21T05:05:14.232000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task 4436a4f76551434a82f0af96b7710099)."
-                },
-                {
-                    "id": "6515d466-7877-469b-bb23-01c823dbf31a",
-                    "createdAt": "2026-05-21T05:04:16.723000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task 6ba550bda5664cc5a509ec052320804e)."
-                },
-                {
-                    "id": "bcd272f2-13df-4406-9d0f-8c78b0fbe56a",
-                    "createdAt": "2026-05-21T05:03:35.488000+00:00",
-                    "message": "(service healthbridge-auth) stopped 1 pending tasks."
-                },
-                {
-                    "id": "f2115c20-9c76-468e-aa8c-45ac418daf79",
-                    "createdAt": "2026-05-21T05:03:24.774000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task 813bb61a94b74d63bb2891e447dc0d12)."
-                },
-                {
-                    "id": "b286f2dd-94e8-4c07-81c3-a3c1b4ac324c",
-                    "createdAt": "2026-05-21T05:03:03.887000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task f21f8d88c8514d8d86e20106df4154d7)."
-                },
-                {
-                    "id": "20de1160-b453-4509-bcf0-b2defe4d8928",
-                    "createdAt": "2026-05-21T05:02:31.348000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task b158dd44b8a447c892f45d7fad51188f)."
-                },
-                {
-                    "id": "25812d3a-560f-49f6-8a69-4b4a06780eea",
-                    "createdAt": "2026-05-21T05:01:28.598000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task 79462e59167c442580961e41aaa0b00d)."
-                },
-                {
-                    "id": "090bb5ea-84db-4da6-838b-290cb9c2d7b4",
-                    "createdAt": "2026-05-21T05:00:25.025000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task 3b7dcac77aef41239463262fad3004c5)."
-                },
-                {
-                    "id": "a05e09bd-683d-4c85-a1b5-b8096ed71ee0",
-                    "createdAt": "2026-05-21T04:59:34.995000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task 1b2a8b8d31ce400d80044f9d6b4675f8)."
-                },
-                {
-                    "id": "974a7047-e5cb-448f-84e7-f6d661291d26",
-                    "createdAt": "2026-05-21T04:58:44.275000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task f202500508a649d781870ca998f12458)."
-                },
-                {
-                    "id": "d9a6982d-7692-45c1-ae04-524aba6b66d9",
-                    "createdAt": "2026-05-21T04:57:32.092000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task ffbf704cf45b42d09902c56e0dcfd775)."
-                },
-                {
-                    "id": "6cb31268-5646-4d70-bea3-0564f576e86f",
-                    "createdAt": "2026-05-21T04:56:39.158000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task 224ddf99dfde463fac395c88d9976b9b)."
-                },
-                {
-                    "id": "77ae5114-dbec-4995-9732-362d5b18e05a",
-                    "createdAt": "2026-05-21T04:55:46.635000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task e6eee1f9568a4e2c9883aebd1247e60e)."
-                },
-                {
-                    "id": "17bb7e3c-5c60-4d27-a892-bd9d0ecb52e7",
-                    "createdAt": "2026-05-21T04:55:14.855000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task f0da10f7feae4cb5bfecb1ec239a015a)."
-                },
-                {
-                    "id": "cfca02db-a942-4b7b-8ad1-0b28d105aa8e",
-                    "createdAt": "2026-05-21T04:54:46.831000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task 4e82f28d32ba4c9ebffca5069f1cdfae)."
-                },
-                {
-                    "id": "767f69a1-a6de-4d4a-98b8-6a2205ad506b",
-                    "createdAt": "2026-05-21T04:53:55.885000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task 6eb9b992edb7484aa5d24d1af2db6d6f)."
-                },
-                {
-                    "id": "dfcdaae8-c82c-499c-a32e-03c6c315d0c7",
-                    "createdAt": "2026-05-21T04:52:55.687000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task 0e4a36cf1ea04eaaa8134e3536588faa)."
-                },
-                {
-                    "id": "6b4a0413-1bb3-4851-bfcb-4a2a5a9070a9",
-                    "createdAt": "2026-05-21T04:51:54.866000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task 42c600ff199f40da86aaeea9e0f8181d)."
-                },
-                {
-                    "id": "d4e4b60a-25cb-4298-bd4d-107540fa64c2",
-                    "createdAt": "2026-05-21T04:51:04.929000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task 323f66442b88459982dca3790a04f6dc)."
-                },
-                {
-                    "id": "14b83477-eab0-4017-a46d-57f3166ff3e3",
-                    "createdAt": "2026-05-21T04:50:15.518000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task df8c3047e1f14b0ca04a43e44fb37847)."
-                },
-                {
-                    "id": "cde15567-24aa-47e4-a30b-98ede014e184",
-                    "createdAt": "2026-05-21T04:49:27.764000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task 941a59aaa9f84d13b01658cb4a62ceee)."
-                },
-                {
-                    "id": "bea382d7-40bb-4faf-a591-f87df6a42bb8",
-                    "createdAt": "2026-05-21T04:48:27.300000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task 6c8bd869b6d64a768f5bc0b29417d44d)."
-                },
-                {
-                    "id": "3eee180c-8b60-462f-94ba-fba4218522c1",
-                    "createdAt": "2026-05-21T04:47:37.663000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task be4654186ecc43599549f20a9730daf8)."
-                },
-                {
-                    "id": "ed31d909-c7e8-450e-8768-638b7f4edad5",
-                    "createdAt": "2026-05-21T04:46:48.412000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task 550808c6502c4020921b84c1a8f2273c)."
-                },
-                {
-                    "id": "4752bcff-2033-487c-94c8-d50a480625c0",
-                    "createdAt": "2026-05-21T04:45:55.951000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task 9738570bc513453ea365db4b432ec2e7)."
-                },
-                {
-                    "id": "e52f03f4-7f59-45db-8189-3edc69e9294e",
-                    "createdAt": "2026-05-21T04:44:54.943000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task 002a341ee23e4a4bae9c190b71245180)."
-                },
-                {
-                    "id": "afd698e0-f92c-43a5-a9ab-5aec75b5d289",
-                    "createdAt": "2026-05-21T04:44:02.958000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task a6d74c4d8a4f4d049adb183cee2ee72e)."
-                },
-                {
-                    "id": "9df58925-e47d-495f-8e8d-1c3e35957d05",
-                    "createdAt": "2026-05-21T04:43:11.480000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task 27ac99e004f74e72b1b4aa11c4a3ff82)."
-                },
-                {
-                    "id": "0e13a15d-15d2-4c0c-9e53-c67f197c800d",
-                    "createdAt": "2026-05-21T04:42:22.075000+00:00",
-                    "message": "(service healthbridge-auth) has started 1 tasks: (task e587fdd09f7a43c38cf07bc7efdadbce)."
+                    "id": "3f4e0519-8170-4012-8a4e-8148c5f76f90",
+                    "createdAt": "2026-05-24T03:24:33.946000+00:00",
+                    "message": "(service healthbridge-auth) has started 1 tasks: (task c52a99c04e6d434588a5068b824e9d2c)."
                 }
             ],
-            "createdAt": "2026-05-21T04:14:16.222000+00:00",
+            "createdAt": "2026-05-24T03:24:12.549000+00:00",
+            "currentServiceDeployment": "arn:aws:ecs:ap-southeast-2:617998378442:service-deployment/healthbridge/healthbridge-auth/SwZ4aQs6UeCv6s4xDQ9Qa",
             "currentServiceRevisions": [
                 {
-                    "arn": "arn:aws:ecs:ap-southeast-2:617998378442:service-revision/healthbridge/healthbridge-auth/5562625732254831391",
+                    "arn": "arn:aws:ecs:ap-southeast-2:617998378442:service-revision/healthbridge/healthbridge-auth/0159569711777576032",
+                    "requestedTaskCount": 1,
+                    "runningTaskCount": 0,
+                    "pendingTaskCount": 0
+                },
+                {
+                    "arn": "arn:aws:ecs:ap-southeast-2:617998378442:service-revision/healthbridge/healthbridge-auth/1126541332899868980",
                     "requestedTaskCount": 1,
                     "runningTaskCount": 1,
                     "pendingTaskCount": 0
