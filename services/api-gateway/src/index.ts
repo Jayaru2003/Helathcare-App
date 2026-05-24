@@ -84,13 +84,15 @@ app.use(
 );
 
 // ─── Body Parsing ─────────────────────────────────────────────────────────────
-// NOTE: body parsing MUST NOT be applied to proxied routes — it consumes the
-// stream and the downstream service will receive an empty body. We apply it
-// only before the local /api/health handler below, then disable it for the
-// proxy mount paths by placing the proxy middleware AFTER this point.
-
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true }));
+// IMPORTANT: Do NOT add express.json() / express.urlencoded() here.
+// This gateway is a pure reverse proxy. Parsing the body at the gateway
+// level consumes the raw request stream; http-proxy-middleware then has
+// nothing left to pipe to the downstream service, which causes POST/PUT/PATCH
+// requests to stall until the ALB kills them with a 504 Gateway Timeout.
+//
+// All local gateway routes (/health, /api/health, /api/debug-env) are GET
+// endpoints — they never need a request body. Body parsing happens inside
+// each downstream microservice for the routes that actually need it.
 
 // ─── Rate Limiting ────────────────────────────────────────────────────────────
 
