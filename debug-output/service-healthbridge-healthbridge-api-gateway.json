@@ -19,7 +19,7 @@
             "launchType": "FARGATE",
             "platformVersion": "LATEST",
             "platformFamily": "Linux",
-            "taskDefinition": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-api-gateway:13",
+            "taskDefinition": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-api-gateway:16",
             "deploymentConfiguration": {
                 "deploymentCircuitBreaker": {
                     "enable": false,
@@ -32,15 +32,15 @@
             },
             "deployments": [
                 {
-                    "id": "ecs-svc/7339848966144178495",
+                    "id": "ecs-svc/0207091259736486108",
                     "status": "PRIMARY",
-                    "taskDefinition": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-api-gateway:13",
+                    "taskDefinition": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-api-gateway:16",
                     "desiredCount": 1,
                     "pendingCount": 0,
                     "runningCount": 1,
                     "failedTasks": 0,
-                    "createdAt": "2026-05-24T04:23:43.655000+00:00",
-                    "updatedAt": "2026-05-24T04:26:48.492000+00:00",
+                    "createdAt": "2026-05-24T17:09:29.386000+00:00",
+                    "updatedAt": "2026-05-24T17:12:22.624000+00:00",
                     "launchType": "FARGATE",
                     "platformVersion": "1.4.0",
                     "platformFamily": "Linux",
@@ -57,11 +57,91 @@
                         }
                     },
                     "rolloutState": "COMPLETED",
-                    "rolloutStateReason": "ECS deployment ecs-svc/7339848966144178495 completed."
+                    "rolloutStateReason": "ECS deployment ecs-svc/0207091259736486108 completed."
                 }
             ],
             "roleArn": "arn:aws:iam::617998378442:role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS",
             "events": [
+                {
+                    "id": "e8e14895-dfc0-4806-aafb-02be7f194fa1",
+                    "createdAt": "2026-05-24T17:12:22.631000+00:00",
+                    "message": "(service healthbridge-api-gateway) has reached a steady state."
+                },
+                {
+                    "id": "cd7a83c3-6402-44eb-aeed-1697094571d9",
+                    "createdAt": "2026-05-24T17:12:22.630000+00:00",
+                    "message": "(service healthbridge-api-gateway) (deployment ecs-svc/0207091259736486108) deployment completed."
+                },
+                {
+                    "id": "3a59a15e-3aed-4f19-ae59-14b5396e79c1",
+                    "createdAt": "2026-05-24T17:11:18.268000+00:00",
+                    "message": "(service healthbridge-api-gateway, taskSet ecs-svc/3992678159531932530) has begun draining connections on 1 tasks."
+                },
+                {
+                    "id": "30311d16-de63-45ab-b408-c311bf857e1f",
+                    "createdAt": "2026-05-24T17:11:18.263000+00:00",
+                    "message": "(service healthbridge-api-gateway) deregistered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-southeast-2:617998378442:targetgroup/healthbridge-api-tg/2afb2b0a9c912559)"
+                },
+                {
+                    "id": "cc5db387-3236-449b-a3f3-baed6d8d4b0a",
+                    "createdAt": "2026-05-24T17:11:07.976000+00:00",
+                    "message": "(service healthbridge-api-gateway) has stopped 1 running tasks: (task 2bf26dd1550c45fdb252205a0623c5b3)."
+                },
+                {
+                    "id": "42f5b32e-dff4-4d17-be6c-e49617fd1d55",
+                    "createdAt": "2026-05-24T17:10:16.037000+00:00",
+                    "message": "(service healthbridge-api-gateway) registered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-southeast-2:617998378442:targetgroup/healthbridge-api-tg/2afb2b0a9c912559)"
+                },
+                {
+                    "id": "7387c29a-87f1-4a3e-b632-74e816051c8b",
+                    "createdAt": "2026-05-24T17:09:43.810000+00:00",
+                    "message": "(service healthbridge-api-gateway) has started 1 tasks: (task 0938e7517ad64e5aae94bf856ea061af)."
+                },
+                {
+                    "id": "f44fa265-612a-467c-9136-0ef8faf58b41",
+                    "createdAt": "2026-05-24T16:41:12.753000+00:00",
+                    "message": "(service healthbridge-api-gateway) has reached a steady state."
+                },
+                {
+                    "id": "6c0616ef-763d-4027-8d74-64d8fc212256",
+                    "createdAt": "2026-05-24T10:40:33.598000+00:00",
+                    "message": "(service healthbridge-api-gateway) has reached a steady state."
+                },
+                {
+                    "id": "5dc659f4-6e9b-489c-a394-2d02c05a000c",
+                    "createdAt": "2026-05-24T04:40:13.963000+00:00",
+                    "message": "(service healthbridge-api-gateway) has reached a steady state."
+                },
+                {
+                    "id": "75c1ad8f-269a-40e8-9c14-d74526528518",
+                    "createdAt": "2026-05-24T04:40:13.962000+00:00",
+                    "message": "(service healthbridge-api-gateway) (deployment ecs-svc/3992678159531932530) deployment completed."
+                },
+                {
+                    "id": "3a2f94cb-760c-43b8-9186-10fa6aa8e95b",
+                    "createdAt": "2026-05-24T04:39:10.701000+00:00",
+                    "message": "(service healthbridge-api-gateway, taskSet ecs-svc/7339848966144178495) has begun draining connections on 1 tasks."
+                },
+                {
+                    "id": "6df006b5-7d2e-4cf2-b453-f24001618784",
+                    "createdAt": "2026-05-24T04:39:10.696000+00:00",
+                    "message": "(service healthbridge-api-gateway) deregistered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-southeast-2:617998378442:targetgroup/healthbridge-api-tg/2afb2b0a9c912559)"
+                },
+                {
+                    "id": "4b3d43bd-69ab-4331-89b0-1623ea97538b",
+                    "createdAt": "2026-05-24T04:39:00.234000+00:00",
+                    "message": "(service healthbridge-api-gateway) has stopped 1 running tasks: (task bab74ae8e1cf40d1a191a675909c3f08)."
+                },
+                {
+                    "id": "2d6e7649-47b6-43d6-83f6-360fb7cd0934",
+                    "createdAt": "2026-05-24T04:38:07.572000+00:00",
+                    "message": "(service healthbridge-api-gateway) registered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-southeast-2:617998378442:targetgroup/healthbridge-api-tg/2afb2b0a9c912559)"
+                },
+                {
+                    "id": "712ebd0d-e117-487e-80b7-db5d46579cc4",
+                    "createdAt": "2026-05-24T04:37:46.949000+00:00",
+                    "message": "(service healthbridge-api-gateway) has started 1 tasks: (task 2bf26dd1550c45fdb252205a0623c5b3)."
+                },
                 {
                     "id": "14d0edcd-acc2-4e97-a2ca-c408422d5972",
                     "createdAt": "2026-05-24T04:26:48.498000+00:00",
@@ -481,92 +561,12 @@
                     "id": "96c9c2f9-7f32-4664-aa94-5029b56a8a21",
                     "createdAt": "2026-05-23T17:40:33.222000+00:00",
                     "message": "(service healthbridge-api-gateway) registered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-southeast-2:617998378442:targetgroup/healthbridge-api-tg/2afb2b0a9c912559)"
-                },
-                {
-                    "id": "3344983b-c317-4379-ac38-04301dd4802b",
-                    "createdAt": "2026-05-23T17:40:12.652000+00:00",
-                    "message": "(service healthbridge-api-gateway) has started 1 tasks: (task 5319d2cf493a4165941a9e2cd1f5e32d)."
-                },
-                {
-                    "id": "5b3976f9-1f7d-4ee8-aa86-7fbf091606f5",
-                    "createdAt": "2026-05-23T17:33:49.978000+00:00",
-                    "message": "(service healthbridge-api-gateway, taskSet ecs-svc/3651220011105035107) has begun draining connections on 1 tasks."
-                },
-                {
-                    "id": "d826d9f4-4ef1-460b-a081-9b9f3578a789",
-                    "createdAt": "2026-05-23T17:33:49.974000+00:00",
-                    "message": "(service healthbridge-api-gateway) deregistered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-southeast-2:617998378442:targetgroup/healthbridge-api-tg/2afb2b0a9c912559)"
-                },
-                {
-                    "id": "dac92d8f-a9cf-4c02-88d2-4f7a29a7b2b4",
-                    "createdAt": "2026-05-23T17:33:40.429000+00:00",
-                    "message": "(service healthbridge-api-gateway) has stopped 1 running tasks: (task ad3029c4357842ea9dd26f3cf7f2c071)."
-                },
-                {
-                    "id": "f5e6c537-7855-46b8-ad2b-83b5c54d8b68",
-                    "createdAt": "2026-05-23T17:32:57.343000+00:00",
-                    "message": "(service healthbridge-api-gateway) registered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-southeast-2:617998378442:targetgroup/healthbridge-api-tg/2afb2b0a9c912559)"
-                },
-                {
-                    "id": "ff506e4b-934b-44ef-ae57-dd07fb0319e3",
-                    "createdAt": "2026-05-23T17:32:37.383000+00:00",
-                    "message": "(service healthbridge-api-gateway) has started 1 tasks: (task e752501b7ea04774929249bd9bd54910)."
-                },
-                {
-                    "id": "a64cfa53-7224-46a6-8b8e-e0166b0a1db7",
-                    "createdAt": "2026-05-23T17:29:57.510000+00:00",
-                    "message": "(service healthbridge-api-gateway) has reached a steady state."
-                },
-                {
-                    "id": "684341e1-e841-42c9-926e-b27bcdb79277",
-                    "createdAt": "2026-05-23T17:29:57.509000+00:00",
-                    "message": "(service healthbridge-api-gateway) (deployment ecs-svc/3651220011105035107) deployment completed."
-                },
-                {
-                    "id": "99b14b85-f4b6-4a29-8b77-e148df2d50aa",
-                    "createdAt": "2026-05-23T17:29:02.964000+00:00",
-                    "message": "(service healthbridge-api-gateway, taskSet ecs-svc/7455350723639861105) has begun draining connections on 1 tasks."
-                },
-                {
-                    "id": "bc5e7ed9-b54b-4acf-b1c5-a6f5cad7c4d4",
-                    "createdAt": "2026-05-23T17:29:02.959000+00:00",
-                    "message": "(service healthbridge-api-gateway) deregistered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-southeast-2:617998378442:targetgroup/healthbridge-api-tg/2afb2b0a9c912559)"
-                },
-                {
-                    "id": "4453f40b-3d97-4864-8332-baa81eed2fca",
-                    "createdAt": "2026-05-23T17:28:52.951000+00:00",
-                    "message": "(service healthbridge-api-gateway) has stopped 1 running tasks: (task ff7f460badb64107b92b41f865ac650f)."
-                },
-                {
-                    "id": "c654fbed-8889-47cc-9c7a-a0a1a996c95d",
-                    "createdAt": "2026-05-23T17:28:21.199000+00:00",
-                    "message": "(service healthbridge-api-gateway) registered 1 targets in (target-group arn:aws:elasticloadbalancing:ap-southeast-2:617998378442:targetgroup/healthbridge-api-tg/2afb2b0a9c912559)"
-                },
-                {
-                    "id": "d20b7a4f-ebb5-4170-8c8a-19257e4f6c95",
-                    "createdAt": "2026-05-23T17:27:50.092000+00:00",
-                    "message": "(service healthbridge-api-gateway) has started 1 tasks: (task ad3029c4357842ea9dd26f3cf7f2c071)."
-                },
-                {
-                    "id": "6aa74b63-1192-4166-9435-2f9d47b64900",
-                    "createdAt": "2026-05-23T17:27:16.926000+00:00",
-                    "message": "(service healthbridge-api-gateway) has reached a steady state."
-                },
-                {
-                    "id": "3ec30b50-06ff-40e7-8af5-82ef48a90f70",
-                    "createdAt": "2026-05-23T17:27:16.925000+00:00",
-                    "message": "(service healthbridge-api-gateway) (deployment ecs-svc/7455350723639861105) deployment completed."
-                },
-                {
-                    "id": "e5aa7b89-079c-4a49-a841-f9185091f3c5",
-                    "createdAt": "2026-05-23T17:26:13.869000+00:00",
-                    "message": "(service healthbridge-api-gateway, taskSet ecs-svc/5803796055241121870) has begun draining connections on 1 tasks."
                 }
             ],
             "createdAt": "2026-05-22T18:41:42.001000+00:00",
             "currentServiceRevisions": [
                 {
-                    "arn": "arn:aws:ecs:ap-southeast-2:617998378442:service-revision/healthbridge/healthbridge-api-gateway/7339848966144178495",
+                    "arn": "arn:aws:ecs:ap-southeast-2:617998378442:service-revision/healthbridge/healthbridge-api-gateway/0207091259736486108",
                     "requestedTaskCount": 1,
                     "runningTaskCount": 1,
                     "pendingTaskCount": 0
