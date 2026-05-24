@@ -29,12 +29,15 @@ app.use((_req, res) => {
   res.status(404).json({ success: false, statusCode: 404, message: 'Route not found' });
 });
 
-app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
+app.use((err: Error & { statusCode?: number }, _req: Request, res: Response, _next: NextFunction) => {
   console.error('[Auth Service] Error:', err);
-  res.status(500).json({
+  const status = err.statusCode ?? 500;
+  res.status(status).json({
     success: false,
-    statusCode: 500,
-    message: process.env.NODE_ENV === 'production' ? 'Internal Server Error' : err.message,
+    statusCode: status,
+    message: process.env.NODE_ENV === 'production' && status === 500
+      ? 'Internal Server Error'
+      : err.message,
     timestamp: new Date().toISOString(),
   });
 });
