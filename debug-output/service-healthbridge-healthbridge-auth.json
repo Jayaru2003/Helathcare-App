@@ -30,15 +30,15 @@
             },
             "deployments": [
                 {
-                    "id": "ecs-svc/8601022460753550558",
+                    "id": "ecs-svc/6335445899062576424",
                     "status": "PRIMARY",
                     "taskDefinition": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-auth:2",
                     "desiredCount": 0,
                     "pendingCount": 0,
                     "runningCount": 0,
                     "failedTasks": 0,
-                    "createdAt": "2026-05-25T06:03:01.224000+00:00",
-                    "updatedAt": "2026-05-25T06:03:10.960000+00:00",
+                    "createdAt": "2026-05-25T06:10:31.473000+00:00",
+                    "updatedAt": "2026-05-25T06:10:38.290000+00:00",
                     "launchType": "FARGATE",
                     "platformVersion": "1.4.0",
                     "platformFamily": "Linux",
@@ -55,18 +55,18 @@
                         }
                     },
                     "rolloutState": "IN_PROGRESS",
-                    "rolloutStateReason": "ECS deployment ecs-svc/8601022460753550558 in progress."
+                    "rolloutStateReason": "ECS deployment ecs-svc/6335445899062576424 in progress."
                 },
                 {
-                    "id": "ecs-svc/7659129024155088289",
+                    "id": "ecs-svc/8601022460753550558",
                     "status": "ACTIVE",
                     "taskDefinition": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-auth:2",
                     "desiredCount": 1,
                     "pendingCount": 0,
                     "runningCount": 1,
                     "failedTasks": 0,
-                    "createdAt": "2026-05-24T18:31:44.393000+00:00",
-                    "updatedAt": "2026-05-25T06:03:01.225000+00:00",
+                    "createdAt": "2026-05-25T06:03:01.224000+00:00",
+                    "updatedAt": "2026-05-25T06:10:38.243000+00:00",
                     "launchType": "FARGATE",
                     "platformVersion": "1.4.0",
                     "platformFamily": "Linux",
@@ -83,11 +83,31 @@
                         }
                     },
                     "rolloutState": "COMPLETED",
-                    "rolloutStateReason": "ECS deployment ecs-svc/7659129024155088289 completed."
+                    "rolloutStateReason": "ECS deployment ecs-svc/8601022460753550558 completed."
                 }
             ],
             "roleArn": "arn:aws:iam::617998378442:role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS",
             "events": [
+                {
+                    "id": "1877fe19-ec7f-40ff-a6af-aea77ffc10c2",
+                    "createdAt": "2026-05-25T06:06:30.545000+00:00",
+                    "message": "(service healthbridge-auth) has reached a steady state."
+                },
+                {
+                    "id": "7d35a1b6-c28c-4049-8258-782b6c83f5d7",
+                    "createdAt": "2026-05-25T06:06:30.544000+00:00",
+                    "message": "(service healthbridge-auth) (deployment ecs-svc/8601022460753550558) deployment completed."
+                },
+                {
+                    "id": "292761ca-2d09-4e66-8a01-f7e4724fa2ff",
+                    "createdAt": "2026-05-25T06:04:56.229000+00:00",
+                    "message": "(service healthbridge-auth) has stopped 1 running tasks: (task 110939dc3db74a5199a0a39765b2021e)."
+                },
+                {
+                    "id": "ff722076-185b-468c-9853-6f9ba9aa7693",
+                    "createdAt": "2026-05-25T06:03:32.953000+00:00",
+                    "message": "(service healthbridge-auth) has started 1 tasks: (task 692fa5225e8142bda3903991b1b8fdac)."
+                },
                 {
                     "id": "0287f19e-db99-407e-8207-64633793e5c2",
                     "createdAt": "2026-05-25T00:37:18.372000+00:00",
@@ -230,16 +250,16 @@
                 }
             ],
             "createdAt": "2026-05-24T03:24:12.549000+00:00",
-            "currentServiceDeployment": "arn:aws:ecs:ap-southeast-2:617998378442:service-deployment/healthbridge/healthbridge-auth/j-41_H0TkeOYvifdVygv8",
+            "currentServiceDeployment": "arn:aws:ecs:ap-southeast-2:617998378442:service-deployment/healthbridge/healthbridge-auth/7jafN1PrCuTZS8NGx9ENF",
             "currentServiceRevisions": [
                 {
-                    "arn": "arn:aws:ecs:ap-southeast-2:617998378442:service-revision/healthbridge/healthbridge-auth/8601022460753550558",
+                    "arn": "arn:aws:ecs:ap-southeast-2:617998378442:service-revision/healthbridge/healthbridge-auth/6335445899062576424",
                     "requestedTaskCount": 0,
                     "runningTaskCount": 0,
                     "pendingTaskCount": 0
                 },
                 {
-                    "arn": "arn:aws:ecs:ap-southeast-2:617998378442:service-revision/healthbridge/healthbridge-auth/7659129024155088289",
+                    "arn": "arn:aws:ecs:ap-southeast-2:617998378442:service-revision/healthbridge/healthbridge-auth/8601022460753550558",
                     "requestedTaskCount": 1,
                     "runningTaskCount": 1,
                     "pendingTaskCount": 0
