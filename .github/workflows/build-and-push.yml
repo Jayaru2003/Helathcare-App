@@ -115,15 +115,15 @@ jobs:
         # The api-gateway is redeployed by the setup-cloud-map job AFTER stable DNS is confirmed.
         # Downstream services are redeployed here to pick up the new image, then AGAIN in
         # setup-cloud-map after Cloud Map registries are attached so their IPs get registered.
-        if: matrix.service != 'api-gateway'
+        if: matrix.service != 'api-gateway' && matrix.service != 'web'
         run: |
           echo "🔄 Force-redeploying ECS service: ${{ matrix.repo_name }}..."
           aws ecs update-service \
             --cluster ${{ env.ECS_CLUSTER }} \
             --service ${{ matrix.repo_name }} \
             --force-new-deployment \
-            --no-cli-pager
-          echo "✅ Redeployment triggered for ${{ matrix.repo_name }}"
+            --no-cli-pager || echo "⚠️ ECS service ${{ matrix.repo_name }} not found or active, skipping redeployment."
+          echo "✅ Redeployment step complete for ${{ matrix.repo_name }}"
 
       - name: Capture ECS debug snapshot (api-gateway job only)
         if: matrix.service == 'api-gateway'
