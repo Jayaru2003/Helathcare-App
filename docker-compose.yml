@@ -127,6 +127,14 @@ services:
       - '3000:3000'
     env_file:
       - services/api-gateway/.env.example
+    environment:
+      - AUTH_SERVICE_URL=http://auth:3001
+      - PATIENT_SERVICE_URL=http://patient:3002
+      - APPOINTMENT_SERVICE_URL=http://appointment:3003
+      - PRESCRIPTION_SERVICE_URL=http://prescription:3004
+      - BILLING_SERVICE_URL=http://billing:3005
+      - NOTIFICATION_SERVICE_URL=http://notification:3006
+      - ANALYTICS_SERVICE_URL=http://analytics:3007
     networks:
       - healthbridge-network
     depends_on:

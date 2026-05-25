@@ -56,7 +56,7 @@ const app: Application = express();
 app.use(helmet());
 app.use(
   cors({
-    origin: CORS_ORIGIN,
+    origin: CORS_ORIGIN === '*' && NODE_ENV === 'development' ? true : CORS_ORIGIN,
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Request-Id', 'X-Correlation-Id'],
@@ -246,6 +246,14 @@ function makeProxy(serviceName: ServiceName): ReturnType<typeof createProxyMiddl
       const rid = (req as any).requestId;
       if (rid) proxyReq.setHeader('X-Request-Id', rid);
       console.info(`[Proxy → ${serviceName}] ${(req as any).method} ${(req as any).url} → ${target}${proxyReq.path}`);
+    },
+
+    // Clean up downstream CORS headers to prevent them from overriding the API Gateway's CORS policies
+    onProxyRes: (proxyRes) => {
+      delete proxyRes.headers['access-control-allow-origin'];
+      delete proxyRes.headers['access-control-allow-credentials'];
+      delete proxyRes.headers['access-control-allow-methods'];
+      delete proxyRes.headers['access-control-allow-headers'];
     },
 
     // Return a structured 502 instead of crashing when the upstream is down (v2 flat API).
