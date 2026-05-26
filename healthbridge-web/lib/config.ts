@@ -2,15 +2,15 @@ const rawApiUrl = process.env.NEXT_PUBLIC_API_URL?.trim();
 const normalizedApiUrl = rawApiUrl ? rawApiUrl.replace(/\/+$/, "") : "";
 
 /**
- * In production (Amplify), prefer explicit NEXT_PUBLIC_API_URL.
- * If not set, keep requests relative so Next rewrites can still proxy `/api/*`.
+ * Always use same-origin relative requests in the browser.
+ * Otherwise Amplify will send the request cross-origin and CORS will block it.
+ *
+ * Next rewrites (next.config.js) will forward `/api/*` to the real backend.
  */
-// Important for AWS Amplify:
-// If we call the API gateway with an absolute URL from the browser, you can hit CORS issues.
-// We avoid that by using same-origin relative requests in production and letting Next rewrites
-// forward `/api/*` to the API gateway.
 export const API_BASE_URL =
-  process.env.NODE_ENV === "production" ? "" : (normalizedApiUrl || "http://localhost:3000");
+  typeof window !== "undefined"
+    ? ""
+    : (normalizedApiUrl || "http://localhost:3000");
 
 export const ROLES = {
   PATIENT: "patient",
