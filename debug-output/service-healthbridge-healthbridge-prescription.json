@@ -30,15 +30,15 @@
             },
             "deployments": [
                 {
-                    "id": "ecs-svc/2972936862128056714",
+                    "id": "ecs-svc/8344364427809409140",
                     "status": "PRIMARY",
                     "taskDefinition": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-prescription:2",
                     "desiredCount": 0,
                     "pendingCount": 0,
                     "runningCount": 0,
                     "failedTasks": 0,
-                    "createdAt": "2026-05-25T06:48:27.367000+00:00",
-                    "updatedAt": "2026-05-25T06:48:31.128000+00:00",
+                    "createdAt": "2026-05-26T16:44:12.808000+00:00",
+                    "updatedAt": "2026-05-26T16:44:23.209000+00:00",
                     "launchType": "FARGATE",
                     "platformVersion": "1.4.0",
                     "platformFamily": "Linux",
@@ -55,18 +55,18 @@
                         }
                     },
                     "rolloutState": "IN_PROGRESS",
-                    "rolloutStateReason": "ECS deployment ecs-svc/2972936862128056714 in progress."
+                    "rolloutStateReason": "ECS deployment ecs-svc/8344364427809409140 in progress."
                 },
                 {
-                    "id": "ecs-svc/4885095106601815309",
+                    "id": "ecs-svc/9228846572272981527",
                     "status": "ACTIVE",
                     "taskDefinition": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-prescription:2",
                     "desiredCount": 1,
                     "pendingCount": 0,
                     "runningCount": 1,
                     "failedTasks": 0,
-                    "createdAt": "2026-05-25T06:12:37.393000+00:00",
-                    "updatedAt": "2026-05-25T06:48:31.087000+00:00",
+                    "createdAt": "2026-05-25T06:50:23.246000+00:00",
+                    "updatedAt": "2026-05-26T16:44:23.163000+00:00",
                     "launchType": "FARGATE",
                     "platformVersion": "1.4.0",
                     "platformFamily": "Linux",
@@ -83,11 +83,66 @@
                         }
                     },
                     "rolloutState": "COMPLETED",
-                    "rolloutStateReason": "ECS deployment ecs-svc/4885095106601815309 completed."
+                    "rolloutStateReason": "ECS deployment ecs-svc/9228846572272981527 completed."
                 }
             ],
             "roleArn": "arn:aws:iam::617998378442:role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS",
             "events": [
+                {
+                    "id": "9ea18f75-e712-4ba6-8c5b-778b19c3d022",
+                    "createdAt": "2026-05-26T12:57:24.398000+00:00",
+                    "message": "(service healthbridge-prescription) has reached a steady state."
+                },
+                {
+                    "id": "6b0b5479-4767-40cc-b204-3a778762b3f5",
+                    "createdAt": "2026-05-26T06:57:07.410000+00:00",
+                    "message": "(service healthbridge-prescription) has reached a steady state."
+                },
+                {
+                    "id": "c907c482-fbdb-4437-982f-1c220cbc58da",
+                    "createdAt": "2026-05-26T00:57:02.453000+00:00",
+                    "message": "(service healthbridge-prescription) has reached a steady state."
+                },
+                {
+                    "id": "dc19ab63-c238-48e5-b6c6-65e150c84269",
+                    "createdAt": "2026-05-25T18:56:42.689000+00:00",
+                    "message": "(service healthbridge-prescription) has reached a steady state."
+                },
+                {
+                    "id": "71192183-2e5a-4806-8f97-26368304e96f",
+                    "createdAt": "2026-05-25T12:56:23.399000+00:00",
+                    "message": "(service healthbridge-prescription) has reached a steady state."
+                },
+                {
+                    "id": "323aedb6-3c51-486e-9fee-325849f7b72f",
+                    "createdAt": "2026-05-25T06:56:03.400000+00:00",
+                    "message": "(service healthbridge-prescription) has reached a steady state."
+                },
+                {
+                    "id": "cb3f831d-d7d9-4060-8c5b-efe3de7b363a",
+                    "createdAt": "2026-05-25T06:56:03.399000+00:00",
+                    "message": "(service healthbridge-prescription) (deployment ecs-svc/9228846572272981527) deployment completed."
+                },
+                {
+                    "id": "908f44fa-b32a-442a-a0e6-2ce5353b562d",
+                    "createdAt": "2026-05-25T06:54:08.775000+00:00",
+                    "message": "(service healthbridge-prescription) has stopped 1 running tasks: (task 252ba6ea1a6f428a9b29f41ae15c0029)."
+                },
+                {
+                    "id": "07425c30-5df6-4f4d-a4b8-3accb4afbf1f",
+                    "createdAt": "2026-05-25T06:51:32.648000+00:00",
+                    "message": "(service healthbridge-prescription) has started 1 tasks: (task 023d978f7ef545ecb076d8603d8fd1d9)."
+                },
+                {
+                    "id": "4411444b-b0af-4efc-9357-8496c0d6ef50",
+                    "createdAt": "2026-05-25T06:50:06.151000+00:00",
+                    "message": "(service healthbridge-prescription) has stopped 1 running tasks: (task d3a997025882481ca6f0538d6ea4cd23)."
+                },
+                {
+                    "id": "c3c4f36a-0e1f-45e7-89bb-83eb7ba82f9f",
+                    "createdAt": "2026-05-25T06:48:40.473000+00:00",
+                    "message": "(service healthbridge-prescription) has started 1 tasks: (task 252ba6ea1a6f428a9b29f41ae15c0029)."
+                },
                 {
                     "id": "a77ba55e-f0c0-48b1-ad26-44915bcd5979",
                     "createdAt": "2026-05-25T06:17:08.249000+00:00",
@@ -260,16 +315,16 @@
                 }
             ],
             "createdAt": "2026-05-24T03:24:19.187000+00:00",
-            "currentServiceDeployment": "arn:aws:ecs:ap-southeast-2:617998378442:service-deployment/healthbridge/healthbridge-prescription/Q41k3MI5NbVaUU7zQ2UBO",
+            "currentServiceDeployment": "arn:aws:ecs:ap-southeast-2:617998378442:service-deployment/healthbridge/healthbridge-prescription/chW4hs7eE5GwPV3dUmeSU",
             "currentServiceRevisions": [
                 {
-                    "arn": "arn:aws:ecs:ap-southeast-2:617998378442:service-revision/healthbridge/healthbridge-prescription/2972936862128056714",
+                    "arn": "arn:aws:ecs:ap-southeast-2:617998378442:service-revision/healthbridge/healthbridge-prescription/8344364427809409140",
                     "requestedTaskCount": 0,
                     "runningTaskCount": 0,
                     "pendingTaskCount": 0
                 },
                 {
-                    "arn": "arn:aws:ecs:ap-southeast-2:617998378442:service-revision/healthbridge/healthbridge-prescription/4885095106601815309",
+                    "arn": "arn:aws:ecs:ap-southeast-2:617998378442:service-revision/healthbridge/healthbridge-prescription/9228846572272981527",
                     "requestedTaskCount": 1,
                     "runningTaskCount": 1,
                     "pendingTaskCount": 0

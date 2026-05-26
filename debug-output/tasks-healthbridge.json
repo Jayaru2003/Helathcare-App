@@ -3,29 +3,29 @@
         {
             "attachments": [
                 {
-                    "id": "6dd06420-fb5a-4502-96d1-dbd623632068",
+                    "id": "10dc9866-5d33-4c28-ba08-914e6cc88910",
                     "type": "ElasticNetworkInterface",
                     "status": "ATTACHED",
                     "details": [
                         {
                             "name": "subnetId",
-                            "value": "subnet-0d0de008f955e1c47"
+                            "value": "subnet-0c16a12e0cd387b21"
                         },
                         {
                             "name": "networkInterfaceId",
-                            "value": "eni-034fae62843448b57"
+                            "value": "eni-0c7a7ee914fe6b2f3"
                         },
                         {
                             "name": "macAddress",
-                            "value": "02:b5:7c:86:cb:53"
+                            "value": "02:39:f5:64:0a:eb"
                         },
                         {
                             "name": "privateDnsName",
-                            "value": "ip-10-0-4-109.ap-southeast-2.compute.internal"
+                            "value": "ip-10-0-3-12.ap-southeast-2.compute.internal"
                         },
                         {
                             "name": "privateIPv4Address",
-                            "value": "10.0.4.109"
+                            "value": "10.0.3.12"
                         }
                     ]
                 }
@@ -39,21 +39,21 @@
             "availabilityZone": "ap-southeast-2a",
             "clusterArn": "arn:aws:ecs:ap-southeast-2:617998378442:cluster/healthbridge",
             "connectivity": "CONNECTED",
-            "connectivityAt": "2026-05-25T06:13:21.767000+00:00",
+            "connectivityAt": "2026-05-25T06:51:36.612000+00:00",
             "containers": [
                 {
-                    "containerArn": "arn:aws:ecs:ap-southeast-2:617998378442:container/healthbridge/0df6c5278b064012ba80d236013b3b50/864a86fa-1b29-4140-9e80-29997f50814c",
-                    "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/0df6c5278b064012ba80d236013b3b50",
-                    "name": "analytics",
-                    "image": "617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-analytics:latest",
-                    "imageDigest": "sha256:774320a95f99494201aa5ffb3979be04e338c696f0a4f88964f4c08c867e68ed",
-                    "runtimeId": "0df6c5278b064012ba80d236013b3b50-1544569995",
+                    "containerArn": "arn:aws:ecs:ap-southeast-2:617998378442:container/healthbridge/023d978f7ef545ecb076d8603d8fd1d9/07482f26-cbce-4982-9a0d-fa62cc662972",
+                    "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/023d978f7ef545ecb076d8603d8fd1d9",
+                    "name": "prescription",
+                    "image": "617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest",
+                    "imageDigest": "sha256:80899d7e03253902f27f36f5fb57c714a1512979f67ed236e42ab764f351f822",
+                    "runtimeId": "023d978f7ef545ecb076d8603d8fd1d9-2642827053",
                     "lastStatus": "RUNNING",
                     "networkBindings": [],
                     "networkInterfaces": [
                         {
-                            "attachmentId": "6dd06420-fb5a-4502-96d1-dbd623632068",
-                            "privateIpv4Address": "10.0.4.109"
+                            "attachmentId": "10dc9866-5d33-4c28-ba08-914e6cc88910",
+                            "privateIpv4Address": "10.0.3.12"
                         }
                     ],
                     "healthStatus": "HEALTHY",
@@ -61,166 +61,12 @@
                 }
             ],
             "cpu": "256",
-            "createdAt": "2026-05-25T06:13:17.764000+00:00",
-            "desiredStatus": "RUNNING",
-            "enableExecuteCommand": false,
-            "group": "service:healthbridge-analytics",
-            "healthStatus": "HEALTHY",
-            "lastStatus": "RUNNING",
-            "launchType": "FARGATE",
-            "memory": "512",
-            "overrides": {
-                "containerOverrides": [
-                    {
-                        "name": "analytics"
-                    }
-                ],
-                "inferenceAcceleratorOverrides": []
-            },
-            "platformVersion": "1.4.0",
-            "platformFamily": "Linux",
-            "pullStartedAt": "2026-05-25T06:13:28.677000+00:00",
-            "pullStoppedAt": "2026-05-25T06:13:39.711000+00:00",
-            "startedAt": "2026-05-25T06:13:49.545000+00:00",
-            "startedBy": "ecs-svc/2730374688404229225",
-            "tags": [],
-            "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/0df6c5278b064012ba80d236013b3b50",
-            "taskDefinitionArn": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-analytics:1",
-            "version": 5,
-            "ephemeralStorage": {
-                "sizeInGiB": 20
-            },
-            "fargateEphemeralStorage": {
-                "sizeInGiB": 20
-            }
-        },
-        {
-            "attachments": [
-                {
-                    "id": "61694baa-81de-4a4d-8f4f-5e3e0dbd6474",
-                    "type": "ElasticNetworkInterface",
-                    "status": "ATTACHED",
-                    "details": [
-                        {
-                            "name": "subnetId",
-                            "value": "subnet-0d0de008f955e1c47"
-                        },
-                        {
-                            "name": "networkInterfaceId",
-                            "value": "eni-045c058c07663ce2e"
-                        },
-                        {
-                            "name": "macAddress",
-                            "value": "02:0b:3f:6f:e0:a5"
-                        },
-                        {
-                            "name": "privateDnsName",
-                            "value": "ip-10-0-4-190.ap-southeast-2.compute.internal"
-                        },
-                        {
-                            "name": "privateIPv4Address",
-                            "value": "10.0.4.190"
-                        }
-                    ]
-                }
-            ],
-            "attributes": [
-                {
-                    "name": "ecs.cpu-architecture",
-                    "value": "x86_64"
-                }
-            ],
-            "availabilityZone": "ap-southeast-2a",
-            "clusterArn": "arn:aws:ecs:ap-southeast-2:617998378442:cluster/healthbridge",
-            "containers": [
-                {
-                    "containerArn": "arn:aws:ecs:ap-southeast-2:617998378442:container/healthbridge/1b989d7d6cb04b58a750cdd9fd73d9fa/453e6711-aa7e-4997-a01f-ec571701c5e1",
-                    "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/1b989d7d6cb04b58a750cdd9fd73d9fa",
-                    "name": "billing",
-                    "image": "617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-billing:latest",
-                    "lastStatus": "PENDING",
-                    "networkInterfaces": [
-                        {
-                            "attachmentId": "61694baa-81de-4a4d-8f4f-5e3e0dbd6474",
-                            "privateIpv4Address": "10.0.4.190"
-                        }
-                    ],
-                    "healthStatus": "UNKNOWN",
-                    "cpu": "0"
-                }
-            ],
-            "cpu": "256",
-            "createdAt": "2026-05-25T06:48:31.583000+00:00",
-            "desiredStatus": "RUNNING",
-            "enableExecuteCommand": false,
-            "group": "service:healthbridge-billing",
-            "healthStatus": "UNKNOWN",
-            "lastStatus": "PENDING",
-            "launchType": "FARGATE",
-            "memory": "512",
-            "overrides": {
-                "containerOverrides": [
-                    {
-                        "name": "billing"
-                    }
-                ],
-                "inferenceAcceleratorOverrides": []
-            },
-            "platformVersion": "1.4.0",
-            "platformFamily": "Linux",
-            "startedBy": "ecs-svc/1457865493781182225",
-            "tags": [],
-            "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/1b989d7d6cb04b58a750cdd9fd73d9fa",
-            "taskDefinitionArn": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-billing:1",
-            "version": 2,
-            "ephemeralStorage": {
-                "sizeInGiB": 20
-            },
-            "fargateEphemeralStorage": {
-                "sizeInGiB": 20
-            }
-        },
-        {
-            "attachments": [
-                {
-                    "id": "e99670df-f94f-4d37-86b9-54e40a8084ac",
-                    "type": "ElasticNetworkInterface",
-                    "status": "PRECREATED",
-                    "details": [
-                        {
-                            "name": "subnetId",
-                            "value": "subnet-0c16a12e0cd387b21"
-                        }
-                    ]
-                }
-            ],
-            "attributes": [
-                {
-                    "name": "ecs.cpu-architecture",
-                    "value": "x86_64"
-                }
-            ],
-            "availabilityZone": "ap-southeast-2a",
-            "clusterArn": "arn:aws:ecs:ap-southeast-2:617998378442:cluster/healthbridge",
-            "containers": [
-                {
-                    "containerArn": "arn:aws:ecs:ap-southeast-2:617998378442:container/healthbridge/252ba6ea1a6f428a9b29f41ae15c0029/2902d2eb-d1e8-4b9d-9258-0b32dbf8ff5e",
-                    "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/252ba6ea1a6f428a9b29f41ae15c0029",
-                    "name": "prescription",
-                    "image": "617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest",
-                    "lastStatus": "PENDING",
-                    "networkInterfaces": [],
-                    "healthStatus": "UNKNOWN",
-                    "cpu": "0"
-                }
-            ],
-            "cpu": "256",
-            "createdAt": "2026-05-25T06:48:40.419000+00:00",
+            "createdAt": "2026-05-25T06:51:32.592000+00:00",
             "desiredStatus": "RUNNING",
             "enableExecuteCommand": false,
             "group": "service:healthbridge-prescription",
-            "healthStatus": "UNKNOWN",
-            "lastStatus": "PROVISIONING",
+            "healthStatus": "HEALTHY",
+            "lastStatus": "RUNNING",
             "launchType": "FARGATE",
             "memory": "512",
             "overrides": {
@@ -233,11 +79,14 @@
             },
             "platformVersion": "1.4.0",
             "platformFamily": "Linux",
-            "startedBy": "ecs-svc/2972936862128056714",
+            "pullStartedAt": "2026-05-25T06:51:47.519000+00:00",
+            "pullStoppedAt": "2026-05-25T06:51:58.087000+00:00",
+            "startedAt": "2026-05-25T06:52:12.357000+00:00",
+            "startedBy": "ecs-svc/9228846572272981527",
             "tags": [],
-            "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/252ba6ea1a6f428a9b29f41ae15c0029",
+            "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/023d978f7ef545ecb076d8603d8fd1d9",
             "taskDefinitionArn": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-prescription:2",
-            "version": 1,
+            "version": 5,
             "ephemeralStorage": {
                 "sizeInGiB": 20
             },
@@ -248,7 +97,7 @@
         {
             "attachments": [
                 {
-                    "id": "64c1edeb-e00f-4e9d-a344-0d822764f5d6",
+                    "id": "c0dbd709-4017-47be-bfd4-8d0f990a902a",
                     "type": "ElasticNetworkInterface",
                     "status": "ATTACHED",
                     "details": [
@@ -258,19 +107,19 @@
                         },
                         {
                             "name": "networkInterfaceId",
-                            "value": "eni-04b193923b30e4ef9"
+                            "value": "eni-06a3a5af21735e30c"
                         },
                         {
                             "name": "macAddress",
-                            "value": "02:1b:8a:56:e2:3d"
+                            "value": "02:3a:51:33:d2:c9"
                         },
                         {
                             "name": "privateDnsName",
-                            "value": "ip-10-0-3-92.ap-southeast-2.compute.internal"
+                            "value": "ip-10-0-3-67.ap-southeast-2.compute.internal"
                         },
                         {
                             "name": "privateIPv4Address",
-                            "value": "10.0.3.92"
+                            "value": "10.0.3.67"
                         }
                     ]
                 }
@@ -284,21 +133,115 @@
             "availabilityZone": "ap-southeast-2a",
             "clusterArn": "arn:aws:ecs:ap-southeast-2:617998378442:cluster/healthbridge",
             "connectivity": "CONNECTED",
-            "connectivityAt": "2026-05-25T06:13:50.185000+00:00",
+            "connectivityAt": "2026-05-25T06:51:03.602000+00:00",
             "containers": [
                 {
-                    "containerArn": "arn:aws:ecs:ap-southeast-2:617998378442:container/healthbridge/431e41527ba8475bbf001a7ee38ff962/0bf0b36d-f084-4ded-9fdb-b0890e7bcbfe",
-                    "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/431e41527ba8475bbf001a7ee38ff962",
-                    "name": "appointment",
-                    "image": "617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-appointment:latest",
-                    "imageDigest": "sha256:fb26f5acd498df3bfc15df9a5f63a69a8392eaad477c943c931af2f4b9304fdc",
-                    "runtimeId": "431e41527ba8475bbf001a7ee38ff962-2196483386",
+                    "containerArn": "arn:aws:ecs:ap-southeast-2:617998378442:container/healthbridge/11bc841c0657414faa139c0eb4face1f/a470b998-8f77-45e5-b0fb-46077155cf28",
+                    "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/11bc841c0657414faa139c0eb4face1f",
+                    "name": "billing",
+                    "image": "617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-billing:latest",
+                    "imageDigest": "sha256:bd37f4beaa8d71a06e3f646fc0b4ebb7dad919f204f617569a6b1b748b957dee",
+                    "runtimeId": "11bc841c0657414faa139c0eb4face1f-1097859292",
                     "lastStatus": "RUNNING",
                     "networkBindings": [],
                     "networkInterfaces": [
                         {
-                            "attachmentId": "64c1edeb-e00f-4e9d-a344-0d822764f5d6",
-                            "privateIpv4Address": "10.0.3.92"
+                            "attachmentId": "c0dbd709-4017-47be-bfd4-8d0f990a902a",
+                            "privateIpv4Address": "10.0.3.67"
+                        }
+                    ],
+                    "healthStatus": "HEALTHY",
+                    "cpu": "0"
+                }
+            ],
+            "cpu": "256",
+            "createdAt": "2026-05-25T06:50:58.697000+00:00",
+            "desiredStatus": "RUNNING",
+            "enableExecuteCommand": false,
+            "group": "service:healthbridge-billing",
+            "healthStatus": "HEALTHY",
+            "lastStatus": "RUNNING",
+            "launchType": "FARGATE",
+            "memory": "512",
+            "overrides": {
+                "containerOverrides": [
+                    {
+                        "name": "billing"
+                    }
+                ],
+                "inferenceAcceleratorOverrides": []
+            },
+            "platformVersion": "1.4.0",
+            "platformFamily": "Linux",
+            "pullStartedAt": "2026-05-25T06:51:13.058000+00:00",
+            "pullStoppedAt": "2026-05-25T06:51:20.080000+00:00",
+            "startedAt": "2026-05-25T06:51:29.450000+00:00",
+            "startedBy": "ecs-svc/2519386798485266074",
+            "tags": [],
+            "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/11bc841c0657414faa139c0eb4face1f",
+            "taskDefinitionArn": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-billing:1",
+            "version": 5,
+            "ephemeralStorage": {
+                "sizeInGiB": 20
+            },
+            "fargateEphemeralStorage": {
+                "sizeInGiB": 20
+            }
+        },
+        {
+            "attachments": [
+                {
+                    "id": "3f464f8e-3144-49c9-a960-810776a5fc2f",
+                    "type": "ElasticNetworkInterface",
+                    "status": "ATTACHED",
+                    "details": [
+                        {
+                            "name": "subnetId",
+                            "value": "subnet-0c16a12e0cd387b21"
+                        },
+                        {
+                            "name": "networkInterfaceId",
+                            "value": "eni-0e88697b9c5d80cf9"
+                        },
+                        {
+                            "name": "macAddress",
+                            "value": "02:41:ce:0b:3c:29"
+                        },
+                        {
+                            "name": "privateDnsName",
+                            "value": "ip-10-0-3-150.ap-southeast-2.compute.internal"
+                        },
+                        {
+                            "name": "privateIPv4Address",
+                            "value": "10.0.3.150"
+                        }
+                    ]
+                }
+            ],
+            "attributes": [
+                {
+                    "name": "ecs.cpu-architecture",
+                    "value": "x86_64"
+                }
+            ],
+            "availabilityZone": "ap-southeast-2a",
+            "clusterArn": "arn:aws:ecs:ap-southeast-2:617998378442:cluster/healthbridge",
+            "connectivity": "CONNECTED",
+            "connectivityAt": "2026-05-25T06:51:46.834000+00:00",
+            "containers": [
+                {
+                    "containerArn": "arn:aws:ecs:ap-southeast-2:617998378442:container/healthbridge/181c56995fb348caba26e935f950b338/abc5b79a-7f60-49a2-bb9b-7097282651ee",
+                    "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/181c56995fb348caba26e935f950b338",
+                    "name": "appointment",
+                    "image": "617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-appointment:latest",
+                    "imageDigest": "sha256:b5742d75213938a9b39fabd7527a51ab7be9ac6c613ae435c85080cb5388ff73",
+                    "runtimeId": "181c56995fb348caba26e935f950b338-2196483386",
+                    "lastStatus": "RUNNING",
+                    "networkBindings": [],
+                    "networkInterfaces": [
+                        {
+                            "attachmentId": "3f464f8e-3144-49c9-a960-810776a5fc2f",
+                            "privateIpv4Address": "10.0.3.150"
                         }
                     ],
                     "healthStatus": "UNKNOWN",
@@ -306,7 +249,7 @@
                 }
             ],
             "cpu": "256",
-            "createdAt": "2026-05-25T06:13:46.473000+00:00",
+            "createdAt": "2026-05-25T06:51:42.283000+00:00",
             "desiredStatus": "RUNNING",
             "enableExecuteCommand": false,
             "group": "service:healthbridge-appointment",
@@ -324,12 +267,12 @@
             },
             "platformVersion": "1.4.0",
             "platformFamily": "Linux",
-            "pullStartedAt": "2026-05-25T06:14:00.981000+00:00",
-            "pullStoppedAt": "2026-05-25T06:14:08.640000+00:00",
-            "startedAt": "2026-05-25T06:14:25.594000+00:00",
-            "startedBy": "ecs-svc/1641354862313367878",
+            "pullStartedAt": "2026-05-25T06:51:53.860000+00:00",
+            "pullStoppedAt": "2026-05-25T06:52:06.936000+00:00",
+            "startedAt": "2026-05-25T06:52:26.938000+00:00",
+            "startedBy": "ecs-svc/3784097087658374808",
             "tags": [],
-            "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/431e41527ba8475bbf001a7ee38ff962",
+            "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/181c56995fb348caba26e935f950b338",
             "taskDefinitionArn": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-appointment:11",
             "version": 5,
             "ephemeralStorage": {
@@ -342,7 +285,7 @@
         {
             "attachments": [
                 {
-                    "id": "73fdb769-6ba0-4309-a3d5-3684c3652863",
+                    "id": "1823fd0f-618a-46c0-8650-6c6dcca14ad6",
                     "type": "ElasticNetworkInterface",
                     "status": "ATTACHED",
                     "details": [
@@ -352,19 +295,19 @@
                         },
                         {
                             "name": "networkInterfaceId",
-                            "value": "eni-00e7a6cd1c38d300d"
+                            "value": "eni-0d35fe9b05a797b39"
                         },
                         {
                             "name": "macAddress",
-                            "value": "02:9d:69:8c:13:6b"
+                            "value": "02:c2:2a:a2:a4:11"
                         },
                         {
                             "name": "privateDnsName",
-                            "value": "ip-10-0-4-249.ap-southeast-2.compute.internal"
+                            "value": "ip-10-0-4-11.ap-southeast-2.compute.internal"
                         },
                         {
                             "name": "privateIPv4Address",
-                            "value": "10.0.4.249"
+                            "value": "10.0.4.11"
                         }
                     ]
                 }
@@ -378,21 +321,21 @@
             "availabilityZone": "ap-southeast-2a",
             "clusterArn": "arn:aws:ecs:ap-southeast-2:617998378442:cluster/healthbridge",
             "connectivity": "CONNECTED",
-            "connectivityAt": "2026-05-25T06:13:41.668000+00:00",
+            "connectivityAt": "2026-05-25T06:50:54.880000+00:00",
             "containers": [
                 {
-                    "containerArn": "arn:aws:ecs:ap-southeast-2:617998378442:container/healthbridge/663bb275d007419686502dd0a4ca6b57/ff542920-ff89-44b3-ac82-7f75f412b5ec",
-                    "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/663bb275d007419686502dd0a4ca6b57",
-                    "name": "patient",
-                    "image": "617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-patient:latest",
-                    "imageDigest": "sha256:854bd647d7b40e6c0030e596152d8c8bfcb8be1f3f286b5294d13734201f5950",
-                    "runtimeId": "663bb275d007419686502dd0a4ca6b57-2163104094",
+                    "containerArn": "arn:aws:ecs:ap-southeast-2:617998378442:container/healthbridge/53b8e8119209426180f8c86e8298d849/78db4814-8cdb-482a-aba3-b2afdc193e38",
+                    "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/53b8e8119209426180f8c86e8298d849",
+                    "name": "api-gateway",
+                    "image": "617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-api-gateway:latest",
+                    "imageDigest": "sha256:3c072602223c18fe51fc08cc9d024371ab23d011bfdea1aba03ad854f60de160",
+                    "runtimeId": "53b8e8119209426180f8c86e8298d849-3510052496",
                     "lastStatus": "RUNNING",
                     "networkBindings": [],
                     "networkInterfaces": [
                         {
-                            "attachmentId": "73fdb769-6ba0-4309-a3d5-3684c3652863",
-                            "privateIpv4Address": "10.0.4.249"
+                            "attachmentId": "1823fd0f-618a-46c0-8650-6c6dcca14ad6",
+                            "privateIpv4Address": "10.0.4.11"
                         }
                     ],
                     "healthStatus": "UNKNOWN",
@@ -400,10 +343,10 @@
                 }
             ],
             "cpu": "256",
-            "createdAt": "2026-05-25T06:13:37.716000+00:00",
+            "createdAt": "2026-05-25T06:50:49.486000+00:00",
             "desiredStatus": "RUNNING",
             "enableExecuteCommand": false,
-            "group": "service:healthbridge-patient",
+            "group": "service:healthbridge-api-gateway",
             "healthStatus": "UNKNOWN",
             "lastStatus": "RUNNING",
             "launchType": "FARGATE",
@@ -411,20 +354,20 @@
             "overrides": {
                 "containerOverrides": [
                     {
-                        "name": "patient"
+                        "name": "api-gateway"
                     }
                 ],
                 "inferenceAcceleratorOverrides": []
             },
             "platformVersion": "1.4.0",
             "platformFamily": "Linux",
-            "pullStartedAt": "2026-05-25T06:13:48.822000+00:00",
-            "pullStoppedAt": "2026-05-25T06:13:56.319000+00:00",
-            "startedAt": "2026-05-25T06:14:13.728000+00:00",
-            "startedBy": "ecs-svc/7782048066635079742",
+            "pullStartedAt": "2026-05-25T06:51:02.934000+00:00",
+            "pullStoppedAt": "2026-05-25T06:51:11.822000+00:00",
+            "startedAt": "2026-05-25T06:51:22.137000+00:00",
+            "startedBy": "ecs-svc/7891278427803305825",
             "tags": [],
-            "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/663bb275d007419686502dd0a4ca6b57",
-            "taskDefinitionArn": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-patient:11",
+            "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/53b8e8119209426180f8c86e8298d849",
+            "taskDefinitionArn": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-api-gateway:19",
             "version": 5,
             "ephemeralStorage": {
                 "sizeInGiB": 20
@@ -436,72 +379,7 @@
         {
             "attachments": [
                 {
-                    "id": "5ce89f8d-a8b2-447d-ac67-20861117259b",
-                    "type": "ElasticNetworkInterface",
-                    "status": "PRECREATED",
-                    "details": [
-                        {
-                            "name": "subnetId",
-                            "value": "subnet-0d0de008f955e1c47"
-                        }
-                    ]
-                }
-            ],
-            "attributes": [
-                {
-                    "name": "ecs.cpu-architecture",
-                    "value": "x86_64"
-                }
-            ],
-            "availabilityZone": "ap-southeast-2a",
-            "clusterArn": "arn:aws:ecs:ap-southeast-2:617998378442:cluster/healthbridge",
-            "containers": [
-                {
-                    "containerArn": "arn:aws:ecs:ap-southeast-2:617998378442:container/healthbridge/7f126bb3f753476493e2908760958319/782e8c35-f6aa-456c-834b-0cbbbca300f0",
-                    "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/7f126bb3f753476493e2908760958319",
-                    "name": "notification",
-                    "image": "617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-notification:latest",
-                    "lastStatus": "PENDING",
-                    "networkInterfaces": [],
-                    "healthStatus": "UNKNOWN",
-                    "cpu": "0"
-                }
-            ],
-            "cpu": "256",
-            "createdAt": "2026-05-25T06:48:40.659000+00:00",
-            "desiredStatus": "RUNNING",
-            "enableExecuteCommand": false,
-            "group": "service:healthbridge-notification",
-            "healthStatus": "UNKNOWN",
-            "lastStatus": "PROVISIONING",
-            "launchType": "FARGATE",
-            "memory": "512",
-            "overrides": {
-                "containerOverrides": [
-                    {
-                        "name": "notification"
-                    }
-                ],
-                "inferenceAcceleratorOverrides": []
-            },
-            "platformVersion": "1.4.0",
-            "platformFamily": "Linux",
-            "startedBy": "ecs-svc/6857751779954215173",
-            "tags": [],
-            "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/7f126bb3f753476493e2908760958319",
-            "taskDefinitionArn": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-notification:1",
-            "version": 1,
-            "ephemeralStorage": {
-                "sizeInGiB": 20
-            },
-            "fargateEphemeralStorage": {
-                "sizeInGiB": 20
-            }
-        },
-        {
-            "attachments": [
-                {
-                    "id": "d2f54635-a6b3-4436-8ce6-d5556ffffa7a",
+                    "id": "fd259f8c-83c1-4745-acc1-a03e3fb9ef93",
                     "type": "ElasticNetworkInterface",
                     "status": "ATTACHED",
                     "details": [
@@ -511,19 +389,19 @@
                         },
                         {
                             "name": "networkInterfaceId",
-                            "value": "eni-0caf907835879aea2"
+                            "value": "eni-015eb5d2c6a0a2182"
                         },
                         {
                             "name": "macAddress",
-                            "value": "02:1d:6c:c8:3b:33"
+                            "value": "02:3f:a3:c9:94:d5"
                         },
                         {
                             "name": "privateDnsName",
-                            "value": "ip-10-0-4-134.ap-southeast-2.compute.internal"
+                            "value": "ip-10-0-4-207.ap-southeast-2.compute.internal"
                         },
                         {
                             "name": "privateIPv4Address",
-                            "value": "10.0.4.134"
+                            "value": "10.0.4.207"
                         }
                     ]
                 }
@@ -537,201 +415,21 @@
             "availabilityZone": "ap-southeast-2a",
             "clusterArn": "arn:aws:ecs:ap-southeast-2:617998378442:cluster/healthbridge",
             "connectivity": "CONNECTED",
-            "connectivityAt": "2026-05-25T06:13:32.205000+00:00",
+            "connectivityAt": "2026-05-25T06:51:16.785000+00:00",
             "containers": [
                 {
-                    "containerArn": "arn:aws:ecs:ap-southeast-2:617998378442:container/healthbridge/96e17de3be534f83b056deb2280963e3/1ab40688-2d74-44c1-8de3-8d53e6928ec9",
-                    "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/96e17de3be534f83b056deb2280963e3",
-                    "name": "auth",
-                    "image": "617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-auth:latest",
-                    "imageDigest": "sha256:c45d8ff11103e8d8c8b28dd8f2b13d2bf0fbc6f0889c60aa96e7c9a0516134dc",
-                    "runtimeId": "96e17de3be534f83b056deb2280963e3-2503977039",
-                    "lastStatus": "RUNNING",
-                    "networkBindings": [],
-                    "networkInterfaces": [
-                        {
-                            "attachmentId": "d2f54635-a6b3-4436-8ce6-d5556ffffa7a",
-                            "privateIpv4Address": "10.0.4.134"
-                        }
-                    ],
-                    "healthStatus": "UNKNOWN",
-                    "cpu": "0"
-                }
-            ],
-            "cpu": "256",
-            "createdAt": "2026-05-25T06:13:26.532000+00:00",
-            "desiredStatus": "RUNNING",
-            "enableExecuteCommand": false,
-            "group": "service:healthbridge-auth",
-            "healthStatus": "UNKNOWN",
-            "lastStatus": "RUNNING",
-            "launchType": "FARGATE",
-            "memory": "512",
-            "overrides": {
-                "containerOverrides": [
-                    {
-                        "name": "auth"
-                    }
-                ],
-                "inferenceAcceleratorOverrides": []
-            },
-            "platformVersion": "1.4.0",
-            "platformFamily": "Linux",
-            "pullStartedAt": "2026-05-25T06:13:40.521000+00:00",
-            "pullStoppedAt": "2026-05-25T06:13:46.674000+00:00",
-            "startedAt": "2026-05-25T06:14:05.796000+00:00",
-            "startedBy": "ecs-svc/2537360473470519693",
-            "tags": [],
-            "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/96e17de3be534f83b056deb2280963e3",
-            "taskDefinitionArn": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-auth:2",
-            "version": 5,
-            "ephemeralStorage": {
-                "sizeInGiB": 20
-            },
-            "fargateEphemeralStorage": {
-                "sizeInGiB": 20
-            }
-        },
-        {
-            "attachments": [
-                {
-                    "id": "f53455d6-fde3-496d-8635-c28a32bab9b6",
-                    "type": "ElasticNetworkInterface",
-                    "status": "ATTACHED",
-                    "details": [
-                        {
-                            "name": "subnetId",
-                            "value": "subnet-0d0de008f955e1c47"
-                        },
-                        {
-                            "name": "networkInterfaceId",
-                            "value": "eni-05d1e4b88a2c2eb0e"
-                        },
-                        {
-                            "name": "macAddress",
-                            "value": "02:bf:2e:b2:b9:4d"
-                        },
-                        {
-                            "name": "privateDnsName",
-                            "value": "ip-10-0-4-50.ap-southeast-2.compute.internal"
-                        },
-                        {
-                            "name": "privateIPv4Address",
-                            "value": "10.0.4.50"
-                        }
-                    ]
-                }
-            ],
-            "attributes": [
-                {
-                    "name": "ecs.cpu-architecture",
-                    "value": "x86_64"
-                }
-            ],
-            "availabilityZone": "ap-southeast-2a",
-            "clusterArn": "arn:aws:ecs:ap-southeast-2:617998378442:cluster/healthbridge",
-            "containers": [
-                {
-                    "containerArn": "arn:aws:ecs:ap-southeast-2:617998378442:container/healthbridge/ae3f49398e584d72967125e024208a89/3919d6ea-625c-4baf-9492-ed5ce369164f",
-                    "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/ae3f49398e584d72967125e024208a89",
-                    "name": "analytics",
-                    "image": "617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-analytics:latest",
-                    "lastStatus": "PENDING",
-                    "networkInterfaces": [
-                        {
-                            "attachmentId": "f53455d6-fde3-496d-8635-c28a32bab9b6",
-                            "privateIpv4Address": "10.0.4.50"
-                        }
-                    ],
-                    "healthStatus": "UNKNOWN",
-                    "cpu": "0"
-                }
-            ],
-            "cpu": "256",
-            "createdAt": "2026-05-25T06:48:31.583000+00:00",
-            "desiredStatus": "RUNNING",
-            "enableExecuteCommand": false,
-            "group": "service:healthbridge-analytics",
-            "healthStatus": "UNKNOWN",
-            "lastStatus": "PROVISIONING",
-            "launchType": "FARGATE",
-            "memory": "512",
-            "overrides": {
-                "containerOverrides": [
-                    {
-                        "name": "analytics"
-                    }
-                ],
-                "inferenceAcceleratorOverrides": []
-            },
-            "platformVersion": "1.4.0",
-            "platformFamily": "Linux",
-            "startedBy": "ecs-svc/3197864898853968835",
-            "tags": [],
-            "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/ae3f49398e584d72967125e024208a89",
-            "taskDefinitionArn": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-analytics:1",
-            "version": 1,
-            "ephemeralStorage": {
-                "sizeInGiB": 20
-            },
-            "fargateEphemeralStorage": {
-                "sizeInGiB": 20
-            }
-        },
-        {
-            "attachments": [
-                {
-                    "id": "e842f0c6-6508-436d-a0ba-4974b0aa1ae1",
-                    "type": "ElasticNetworkInterface",
-                    "status": "ATTACHED",
-                    "details": [
-                        {
-                            "name": "subnetId",
-                            "value": "subnet-0d0de008f955e1c47"
-                        },
-                        {
-                            "name": "networkInterfaceId",
-                            "value": "eni-0ada742a9f1e66718"
-                        },
-                        {
-                            "name": "macAddress",
-                            "value": "02:f9:6e:f6:17:07"
-                        },
-                        {
-                            "name": "privateDnsName",
-                            "value": "ip-10-0-4-19.ap-southeast-2.compute.internal"
-                        },
-                        {
-                            "name": "privateIPv4Address",
-                            "value": "10.0.4.19"
-                        }
-                    ]
-                }
-            ],
-            "attributes": [
-                {
-                    "name": "ecs.cpu-architecture",
-                    "value": "x86_64"
-                }
-            ],
-            "availabilityZone": "ap-southeast-2a",
-            "clusterArn": "arn:aws:ecs:ap-southeast-2:617998378442:cluster/healthbridge",
-            "connectivity": "CONNECTED",
-            "connectivityAt": "2026-05-25T06:13:23.154000+00:00",
-            "containers": [
-                {
-                    "containerArn": "arn:aws:ecs:ap-southeast-2:617998378442:container/healthbridge/b66722ba27c341a7b320454d5333bcc9/6f788f97-a305-4064-b8d6-525ab873343e",
-                    "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/b66722ba27c341a7b320454d5333bcc9",
+                    "containerArn": "arn:aws:ecs:ap-southeast-2:617998378442:container/healthbridge/6e785c2fc58549ad8c0df9d2d155acab/21b3cdfa-0ee0-4239-a1ab-e7a96fc4fb72",
+                    "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/6e785c2fc58549ad8c0df9d2d155acab",
                     "name": "notification",
                     "image": "617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-notification:latest",
-                    "imageDigest": "sha256:ca7bc5903b1d5894d2f2fc24a215afed82824ffdfddd5b10cc19960cc84c55f0",
-                    "runtimeId": "b66722ba27c341a7b320454d5333bcc9-3929878598",
+                    "imageDigest": "sha256:153fa4519f4a223df457ac71ddd68093383df07acd97fcdaaeedf7dc41712d6e",
+                    "runtimeId": "6e785c2fc58549ad8c0df9d2d155acab-3929878598",
                     "lastStatus": "RUNNING",
                     "networkBindings": [],
                     "networkInterfaces": [
                         {
-                            "attachmentId": "e842f0c6-6508-436d-a0ba-4974b0aa1ae1",
-                            "privateIpv4Address": "10.0.4.19"
+                            "attachmentId": "fd259f8c-83c1-4745-acc1-a03e3fb9ef93",
+                            "privateIpv4Address": "10.0.4.207"
                         }
                     ],
                     "healthStatus": "HEALTHY",
@@ -739,7 +437,7 @@
                 }
             ],
             "cpu": "256",
-            "createdAt": "2026-05-25T06:13:17.791000+00:00",
+            "createdAt": "2026-05-25T06:51:10.831000+00:00",
             "desiredStatus": "RUNNING",
             "enableExecuteCommand": false,
             "group": "service:healthbridge-notification",
@@ -757,12 +455,12 @@
             },
             "platformVersion": "1.4.0",
             "platformFamily": "Linux",
-            "pullStartedAt": "2026-05-25T06:13:30.432000+00:00",
-            "pullStoppedAt": "2026-05-25T06:13:36.678000+00:00",
-            "startedAt": "2026-05-25T06:13:47.122000+00:00",
-            "startedBy": "ecs-svc/5767554977353039979",
+            "pullStartedAt": "2026-05-25T06:51:25.149000+00:00",
+            "pullStoppedAt": "2026-05-25T06:51:31.150000+00:00",
+            "startedAt": "2026-05-25T06:51:40.263000+00:00",
+            "startedBy": "ecs-svc/3432944441758557771",
             "tags": [],
-            "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/b66722ba27c341a7b320454d5333bcc9",
+            "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/6e785c2fc58549ad8c0df9d2d155acab",
             "taskDefinitionArn": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-notification:1",
             "version": 5,
             "ephemeralStorage": {
@@ -775,7 +473,187 @@
         {
             "attachments": [
                 {
-                    "id": "838e35dc-73a4-456a-8b61-7b76a5632a13",
+                    "id": "b7babdd7-a993-42cb-a086-ad24bb7f9c76",
+                    "type": "ElasticNetworkInterface",
+                    "status": "ATTACHED",
+                    "details": [
+                        {
+                            "name": "subnetId",
+                            "value": "subnet-0d0de008f955e1c47"
+                        },
+                        {
+                            "name": "networkInterfaceId",
+                            "value": "eni-06ec389248886f5b6"
+                        },
+                        {
+                            "name": "macAddress",
+                            "value": "02:84:30:71:8f:65"
+                        },
+                        {
+                            "name": "privateDnsName",
+                            "value": "ip-10-0-4-236.ap-southeast-2.compute.internal"
+                        },
+                        {
+                            "name": "privateIPv4Address",
+                            "value": "10.0.4.236"
+                        }
+                    ]
+                }
+            ],
+            "attributes": [
+                {
+                    "name": "ecs.cpu-architecture",
+                    "value": "x86_64"
+                }
+            ],
+            "availabilityZone": "ap-southeast-2a",
+            "clusterArn": "arn:aws:ecs:ap-southeast-2:617998378442:cluster/healthbridge",
+            "containers": [
+                {
+                    "containerArn": "arn:aws:ecs:ap-southeast-2:617998378442:container/healthbridge/761a07a2830d45ffb96e886aa38f2ff4/06970290-fa04-484c-a0f8-fe9ccaaa1568",
+                    "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/761a07a2830d45ffb96e886aa38f2ff4",
+                    "name": "auth",
+                    "image": "617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-auth:latest",
+                    "lastStatus": "PENDING",
+                    "networkInterfaces": [
+                        {
+                            "attachmentId": "b7babdd7-a993-42cb-a086-ad24bb7f9c76",
+                            "privateIpv4Address": "10.0.4.236"
+                        }
+                    ],
+                    "healthStatus": "UNKNOWN",
+                    "cpu": "0"
+                }
+            ],
+            "cpu": "256",
+            "createdAt": "2026-05-26T16:44:22.134000+00:00",
+            "desiredStatus": "RUNNING",
+            "enableExecuteCommand": false,
+            "group": "service:healthbridge-auth",
+            "healthStatus": "UNKNOWN",
+            "lastStatus": "PROVISIONING",
+            "launchType": "FARGATE",
+            "memory": "512",
+            "overrides": {
+                "containerOverrides": [
+                    {
+                        "name": "auth"
+                    }
+                ],
+                "inferenceAcceleratorOverrides": []
+            },
+            "platformVersion": "1.4.0",
+            "platformFamily": "Linux",
+            "startedBy": "ecs-svc/2067487929114080282",
+            "tags": [],
+            "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/761a07a2830d45ffb96e886aa38f2ff4",
+            "taskDefinitionArn": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-auth:2",
+            "version": 1,
+            "ephemeralStorage": {
+                "sizeInGiB": 20
+            },
+            "fargateEphemeralStorage": {
+                "sizeInGiB": 20
+            }
+        },
+        {
+            "attachments": [
+                {
+                    "id": "a9af31ef-d595-4eb9-a888-c34c99bee087",
+                    "type": "ElasticNetworkInterface",
+                    "status": "ATTACHED",
+                    "details": [
+                        {
+                            "name": "subnetId",
+                            "value": "subnet-0d0de008f955e1c47"
+                        },
+                        {
+                            "name": "networkInterfaceId",
+                            "value": "eni-020a9ca732461e6f0"
+                        },
+                        {
+                            "name": "macAddress",
+                            "value": "02:23:54:5d:a8:c5"
+                        },
+                        {
+                            "name": "privateDnsName",
+                            "value": "ip-10-0-4-214.ap-southeast-2.compute.internal"
+                        },
+                        {
+                            "name": "privateIPv4Address",
+                            "value": "10.0.4.214"
+                        }
+                    ]
+                }
+            ],
+            "attributes": [
+                {
+                    "name": "ecs.cpu-architecture",
+                    "value": "x86_64"
+                }
+            ],
+            "availabilityZone": "ap-southeast-2a",
+            "clusterArn": "arn:aws:ecs:ap-southeast-2:617998378442:cluster/healthbridge",
+            "connectivity": "CONNECTED",
+            "connectivityAt": "2026-05-25T06:51:47.368000+00:00",
+            "containers": [
+                {
+                    "containerArn": "arn:aws:ecs:ap-southeast-2:617998378442:container/healthbridge/7cfacffb80e94421b2e68dbb5dd3b7ee/e6bc578f-3467-40aa-aeec-2cf26603a00d",
+                    "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/7cfacffb80e94421b2e68dbb5dd3b7ee",
+                    "name": "auth",
+                    "image": "617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-auth:latest",
+                    "imageDigest": "sha256:d7b926a116bf4ec68168135abf800e7411aceaca37f1c00ba799690fdcddf90f",
+                    "runtimeId": "7cfacffb80e94421b2e68dbb5dd3b7ee-2503977039",
+                    "lastStatus": "RUNNING",
+                    "networkBindings": [],
+                    "networkInterfaces": [
+                        {
+                            "attachmentId": "a9af31ef-d595-4eb9-a888-c34c99bee087",
+                            "privateIpv4Address": "10.0.4.214"
+                        }
+                    ],
+                    "healthStatus": "UNKNOWN",
+                    "cpu": "0"
+                }
+            ],
+            "cpu": "256",
+            "createdAt": "2026-05-25T06:51:42.485000+00:00",
+            "desiredStatus": "RUNNING",
+            "enableExecuteCommand": false,
+            "group": "service:healthbridge-auth",
+            "healthStatus": "UNKNOWN",
+            "lastStatus": "RUNNING",
+            "launchType": "FARGATE",
+            "memory": "512",
+            "overrides": {
+                "containerOverrides": [
+                    {
+                        "name": "auth"
+                    }
+                ],
+                "inferenceAcceleratorOverrides": []
+            },
+            "platformVersion": "1.4.0",
+            "platformFamily": "Linux",
+            "pullStartedAt": "2026-05-25T06:51:54.171000+00:00",
+            "pullStoppedAt": "2026-05-25T06:52:00.544000+00:00",
+            "startedAt": "2026-05-25T06:52:18.013000+00:00",
+            "startedBy": "ecs-svc/5182186297752197037",
+            "tags": [],
+            "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/7cfacffb80e94421b2e68dbb5dd3b7ee",
+            "taskDefinitionArn": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-auth:2",
+            "version": 5,
+            "ephemeralStorage": {
+                "sizeInGiB": 20
+            },
+            "fargateEphemeralStorage": {
+                "sizeInGiB": 20
+            }
+        },
+        {
+            "attachments": [
+                {
+                    "id": "e72850eb-67b9-4d19-a0c2-9d3750ddd686",
                     "type": "ElasticNetworkInterface",
                     "status": "ATTACHED",
                     "details": [
@@ -785,11 +663,105 @@
                         },
                         {
                             "name": "networkInterfaceId",
-                            "value": "eni-01554ec3a6ffbed9a"
+                            "value": "eni-0b134cbafee8fa8ee"
                         },
                         {
                             "name": "macAddress",
-                            "value": "02:2a:12:6b:7e:67"
+                            "value": "02:68:0b:e1:46:2b"
+                        },
+                        {
+                            "name": "privateDnsName",
+                            "value": "ip-10-0-3-22.ap-southeast-2.compute.internal"
+                        },
+                        {
+                            "name": "privateIPv4Address",
+                            "value": "10.0.3.22"
+                        }
+                    ]
+                }
+            ],
+            "attributes": [
+                {
+                    "name": "ecs.cpu-architecture",
+                    "value": "x86_64"
+                }
+            ],
+            "availabilityZone": "ap-southeast-2a",
+            "clusterArn": "arn:aws:ecs:ap-southeast-2:617998378442:cluster/healthbridge",
+            "connectivity": "CONNECTED",
+            "connectivityAt": "2026-05-25T06:50:44.847000+00:00",
+            "containers": [
+                {
+                    "containerArn": "arn:aws:ecs:ap-southeast-2:617998378442:container/healthbridge/9e2be7bada344f5eab2417bb9bcc7b64/35af3307-1f7d-455a-8eed-7b0aa03172c8",
+                    "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/9e2be7bada344f5eab2417bb9bcc7b64",
+                    "name": "analytics",
+                    "image": "617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-analytics:latest",
+                    "imageDigest": "sha256:297590f3c4584247b17a44bc799c339005349f4c7fa97ed2ab30a8cc85254c23",
+                    "runtimeId": "9e2be7bada344f5eab2417bb9bcc7b64-1544569995",
+                    "lastStatus": "RUNNING",
+                    "networkBindings": [],
+                    "networkInterfaces": [
+                        {
+                            "attachmentId": "e72850eb-67b9-4d19-a0c2-9d3750ddd686",
+                            "privateIpv4Address": "10.0.3.22"
+                        }
+                    ],
+                    "healthStatus": "HEALTHY",
+                    "cpu": "0"
+                }
+            ],
+            "cpu": "256",
+            "createdAt": "2026-05-25T06:50:40.700000+00:00",
+            "desiredStatus": "RUNNING",
+            "enableExecuteCommand": false,
+            "group": "service:healthbridge-analytics",
+            "healthStatus": "HEALTHY",
+            "lastStatus": "RUNNING",
+            "launchType": "FARGATE",
+            "memory": "512",
+            "overrides": {
+                "containerOverrides": [
+                    {
+                        "name": "analytics"
+                    }
+                ],
+                "inferenceAcceleratorOverrides": []
+            },
+            "platformVersion": "1.4.0",
+            "platformFamily": "Linux",
+            "pullStartedAt": "2026-05-25T06:50:52.397000+00:00",
+            "pullStoppedAt": "2026-05-25T06:51:04.331000+00:00",
+            "startedAt": "2026-05-25T06:51:16.630000+00:00",
+            "startedBy": "ecs-svc/3462520984926015953",
+            "tags": [],
+            "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/9e2be7bada344f5eab2417bb9bcc7b64",
+            "taskDefinitionArn": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-analytics:1",
+            "version": 5,
+            "ephemeralStorage": {
+                "sizeInGiB": 20
+            },
+            "fargateEphemeralStorage": {
+                "sizeInGiB": 20
+            }
+        },
+        {
+            "attachments": [
+                {
+                    "id": "4c8a7b6f-e5cb-41a8-ab79-d52d42240833",
+                    "type": "ElasticNetworkInterface",
+                    "status": "ATTACHING",
+                    "details": [
+                        {
+                            "name": "subnetId",
+                            "value": "subnet-0c16a12e0cd387b21"
+                        },
+                        {
+                            "name": "networkInterfaceId",
+                            "value": "eni-039382a2c5573eed7"
+                        },
+                        {
+                            "name": "macAddress",
+                            "value": "02:3f:9f:51:21:39"
                         },
                         {
                             "name": "privateDnsName",
@@ -810,116 +782,17 @@
             ],
             "availabilityZone": "ap-southeast-2a",
             "clusterArn": "arn:aws:ecs:ap-southeast-2:617998378442:cluster/healthbridge",
-            "connectivity": "CONNECTED",
-            "connectivityAt": "2026-05-25T06:13:50.788000+00:00",
             "containers": [
                 {
-                    "containerArn": "arn:aws:ecs:ap-southeast-2:617998378442:container/healthbridge/d3a997025882481ca6f0538d6ea4cd23/65b52852-fa75-4197-9077-3e70936d0dfd",
-                    "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/d3a997025882481ca6f0538d6ea4cd23",
-                    "name": "prescription",
-                    "image": "617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-prescription:latest",
-                    "imageDigest": "sha256:1210d84b18707ac7da3183c9fceef8a8c7ed7fd0ca8026181d2df75db1bce61e",
-                    "runtimeId": "d3a997025882481ca6f0538d6ea4cd23-2642827053",
-                    "lastStatus": "RUNNING",
-                    "networkBindings": [],
+                    "containerArn": "arn:aws:ecs:ap-southeast-2:617998378442:container/healthbridge/dcac5195884a4c0f8f8dea25a4ec7799/6b6494b0-f4a8-4952-b933-d668cdc943ec",
+                    "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/dcac5195884a4c0f8f8dea25a4ec7799",
+                    "name": "notification",
+                    "image": "617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-notification:latest",
+                    "lastStatus": "PENDING",
                     "networkInterfaces": [
                         {
-                            "attachmentId": "838e35dc-73a4-456a-8b61-7b76a5632a13",
+                            "attachmentId": "4c8a7b6f-e5cb-41a8-ab79-d52d42240833",
                             "privateIpv4Address": "10.0.3.199"
-                        }
-                    ],
-                    "healthStatus": "HEALTHY",
-                    "cpu": "0"
-                }
-            ],
-            "cpu": "256",
-            "createdAt": "2026-05-25T06:13:46.950000+00:00",
-            "desiredStatus": "RUNNING",
-            "enableExecuteCommand": false,
-            "group": "service:healthbridge-prescription",
-            "healthStatus": "HEALTHY",
-            "lastStatus": "RUNNING",
-            "launchType": "FARGATE",
-            "memory": "512",
-            "overrides": {
-                "containerOverrides": [
-                    {
-                        "name": "prescription"
-                    }
-                ],
-                "inferenceAcceleratorOverrides": []
-            },
-            "platformVersion": "1.4.0",
-            "platformFamily": "Linux",
-            "pullStartedAt": "2026-05-25T06:13:56.106000+00:00",
-            "pullStoppedAt": "2026-05-25T06:14:05.320000+00:00",
-            "startedAt": "2026-05-25T06:14:15.754000+00:00",
-            "startedBy": "ecs-svc/4885095106601815309",
-            "tags": [],
-            "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/d3a997025882481ca6f0538d6ea4cd23",
-            "taskDefinitionArn": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-prescription:2",
-            "version": 5,
-            "ephemeralStorage": {
-                "sizeInGiB": 20
-            },
-            "fargateEphemeralStorage": {
-                "sizeInGiB": 20
-            }
-        },
-        {
-            "attachments": [
-                {
-                    "id": "9bdf94c2-9f71-4ea2-b220-4e3535cd1c3c",
-                    "type": "ElasticNetworkInterface",
-                    "status": "ATTACHED",
-                    "details": [
-                        {
-                            "name": "subnetId",
-                            "value": "subnet-0c16a12e0cd387b21"
-                        },
-                        {
-                            "name": "networkInterfaceId",
-                            "value": "eni-0ce822efb4d71321f"
-                        },
-                        {
-                            "name": "macAddress",
-                            "value": "02:63:db:e0:39:33"
-                        },
-                        {
-                            "name": "privateDnsName",
-                            "value": "ip-10-0-3-71.ap-southeast-2.compute.internal"
-                        },
-                        {
-                            "name": "privateIPv4Address",
-                            "value": "10.0.3.71"
-                        }
-                    ]
-                }
-            ],
-            "attributes": [
-                {
-                    "name": "ecs.cpu-architecture",
-                    "value": "x86_64"
-                }
-            ],
-            "availabilityZone": "ap-southeast-2a",
-            "clusterArn": "arn:aws:ecs:ap-southeast-2:617998378442:cluster/healthbridge",
-            "connectivity": "CONNECTED",
-            "connectivityAt": "2026-05-25T06:13:02.009000+00:00",
-            "containers": [
-                {
-                    "containerArn": "arn:aws:ecs:ap-southeast-2:617998378442:container/healthbridge/dc32f70e08b942c0a2b1a3ced53c6442/d84115ed-0d24-41cf-8e6e-359fd1dbf327",
-                    "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/dc32f70e08b942c0a2b1a3ced53c6442",
-                    "name": "api-gateway",
-                    "image": "617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-api-gateway:latest",
-                    "imageDigest": "sha256:8cd608e28d7d951b541e7be8e373db28202e6d865691c87ca675020fb197055e",
-                    "runtimeId": "dc32f70e08b942c0a2b1a3ced53c6442-3510052496",
-                    "lastStatus": "RUNNING",
-                    "networkBindings": [],
-                    "networkInterfaces": [
-                        {
-                            "attachmentId": "9bdf94c2-9f71-4ea2-b220-4e3535cd1c3c",
-                            "privateIpv4Address": "10.0.3.71"
                         }
                     ],
                     "healthStatus": "UNKNOWN",
@@ -927,32 +800,29 @@
                 }
             ],
             "cpu": "256",
-            "createdAt": "2026-05-25T06:12:57.177000+00:00",
+            "createdAt": "2026-05-26T16:44:26.057000+00:00",
             "desiredStatus": "RUNNING",
             "enableExecuteCommand": false,
-            "group": "service:healthbridge-api-gateway",
+            "group": "service:healthbridge-notification",
             "healthStatus": "UNKNOWN",
-            "lastStatus": "RUNNING",
+            "lastStatus": "PROVISIONING",
             "launchType": "FARGATE",
             "memory": "512",
             "overrides": {
                 "containerOverrides": [
                     {
-                        "name": "api-gateway"
+                        "name": "notification"
                     }
                 ],
                 "inferenceAcceleratorOverrides": []
             },
             "platformVersion": "1.4.0",
             "platformFamily": "Linux",
-            "pullStartedAt": "2026-05-25T06:13:09.709000+00:00",
-            "pullStoppedAt": "2026-05-25T06:13:15.689000+00:00",
-            "startedAt": "2026-05-25T06:13:32.394000+00:00",
-            "startedBy": "ecs-svc/9328207627094391561",
+            "startedBy": "ecs-svc/6045288573621057385",
             "tags": [],
-            "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/dc32f70e08b942c0a2b1a3ced53c6442",
-            "taskDefinitionArn": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-api-gateway:18",
-            "version": 5,
+            "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/dcac5195884a4c0f8f8dea25a4ec7799",
+            "taskDefinitionArn": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-notification:1",
+            "version": 1,
             "ephemeralStorage": {
                 "sizeInGiB": 20
             },
@@ -963,29 +833,29 @@
         {
             "attachments": [
                 {
-                    "id": "8aa64892-b4d4-4a4d-9350-043bbad7a3b2",
+                    "id": "6b59ddfd-04fc-46f4-9a29-2bbccb781041",
                     "type": "ElasticNetworkInterface",
                     "status": "ATTACHED",
                     "details": [
                         {
                             "name": "subnetId",
-                            "value": "subnet-0c16a12e0cd387b21"
+                            "value": "subnet-0d0de008f955e1c47"
                         },
                         {
                             "name": "networkInterfaceId",
-                            "value": "eni-0986ae8d2d2ed380d"
+                            "value": "eni-0a5f36fb98f3cd893"
                         },
                         {
                             "name": "macAddress",
-                            "value": "02:6b:27:bd:83:91"
+                            "value": "02:5a:75:a2:6a:1b"
                         },
                         {
                             "name": "privateDnsName",
-                            "value": "ip-10-0-3-66.ap-southeast-2.compute.internal"
+                            "value": "ip-10-0-4-61.ap-southeast-2.compute.internal"
                         },
                         {
                             "name": "privateIPv4Address",
-                            "value": "10.0.3.66"
+                            "value": "10.0.4.61"
                         }
                     ]
                 }
@@ -999,34 +869,123 @@
             "availabilityZone": "ap-southeast-2a",
             "clusterArn": "arn:aws:ecs:ap-southeast-2:617998378442:cluster/healthbridge",
             "connectivity": "CONNECTED",
-            "connectivityAt": "2026-05-25T06:13:24.250000+00:00",
+            "connectivityAt": "2026-05-25T06:51:38.897000+00:00",
             "containers": [
                 {
-                    "containerArn": "arn:aws:ecs:ap-southeast-2:617998378442:container/healthbridge/ef8e3b4f6aa646a688cef4e69ccbd88c/4c8b610d-53ba-4ad6-989a-78e6337d57e5",
-                    "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/ef8e3b4f6aa646a688cef4e69ccbd88c",
-                    "name": "billing",
-                    "image": "617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-billing:latest",
-                    "imageDigest": "sha256:ebaba1095624bbf07e8d424e27f3176e506e12692fa504976b97096d1dc429ca",
-                    "runtimeId": "ef8e3b4f6aa646a688cef4e69ccbd88c-1097859292",
+                    "containerArn": "arn:aws:ecs:ap-southeast-2:617998378442:container/healthbridge/eef251b65e864422a9d90ad08ab822c7/6d9dfb62-3f2d-49ec-8cab-7905ff1c4959",
+                    "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/eef251b65e864422a9d90ad08ab822c7",
+                    "name": "patient",
+                    "image": "617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-patient:latest",
+                    "imageDigest": "sha256:7fc4e844b230ebd6e42637260c9bcfdc4c6dcedf0570804a0da604f147c5aa67",
+                    "runtimeId": "eef251b65e864422a9d90ad08ab822c7-2163104094",
                     "lastStatus": "RUNNING",
                     "networkBindings": [],
                     "networkInterfaces": [
                         {
-                            "attachmentId": "8aa64892-b4d4-4a4d-9350-043bbad7a3b2",
-                            "privateIpv4Address": "10.0.3.66"
+                            "attachmentId": "6b59ddfd-04fc-46f4-9a29-2bbccb781041",
+                            "privateIpv4Address": "10.0.4.61"
                         }
                     ],
-                    "healthStatus": "HEALTHY",
+                    "healthStatus": "UNKNOWN",
                     "cpu": "0"
                 }
             ],
             "cpu": "256",
-            "createdAt": "2026-05-25T06:13:20.565000+00:00",
+            "createdAt": "2026-05-25T06:51:33.796000+00:00",
+            "desiredStatus": "RUNNING",
+            "enableExecuteCommand": false,
+            "group": "service:healthbridge-patient",
+            "healthStatus": "UNKNOWN",
+            "lastStatus": "RUNNING",
+            "launchType": "FARGATE",
+            "memory": "512",
+            "overrides": {
+                "containerOverrides": [
+                    {
+                        "name": "patient"
+                    }
+                ],
+                "inferenceAcceleratorOverrides": []
+            },
+            "platformVersion": "1.4.0",
+            "platformFamily": "Linux",
+            "pullStartedAt": "2026-05-25T06:51:46.439000+00:00",
+            "pullStoppedAt": "2026-05-25T06:51:53.819000+00:00",
+            "startedAt": "2026-05-25T06:52:11.017000+00:00",
+            "startedBy": "ecs-svc/8459487691186688530",
+            "tags": [],
+            "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/eef251b65e864422a9d90ad08ab822c7",
+            "taskDefinitionArn": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-patient:11",
+            "version": 5,
+            "ephemeralStorage": {
+                "sizeInGiB": 20
+            },
+            "fargateEphemeralStorage": {
+                "sizeInGiB": 20
+            }
+        },
+        {
+            "attachments": [
+                {
+                    "id": "d798d17d-a01a-4aa0-8433-b50adf1dda71",
+                    "type": "ElasticNetworkInterface",
+                    "status": "CREATED",
+                    "details": [
+                        {
+                            "name": "subnetId",
+                            "value": "subnet-0d0de008f955e1c47"
+                        },
+                        {
+                            "name": "networkInterfaceId",
+                            "value": "eni-06394d220b578d8f7"
+                        },
+                        {
+                            "name": "macAddress",
+                            "value": "02:1c:04:b7:e0:b1"
+                        },
+                        {
+                            "name": "privateDnsName",
+                            "value": "ip-10-0-4-241.ap-southeast-2.compute.internal"
+                        },
+                        {
+                            "name": "privateIPv4Address",
+                            "value": "10.0.4.241"
+                        }
+                    ]
+                }
+            ],
+            "attributes": [
+                {
+                    "name": "ecs.cpu-architecture",
+                    "value": "x86_64"
+                }
+            ],
+            "availabilityZone": "ap-southeast-2a",
+            "clusterArn": "arn:aws:ecs:ap-southeast-2:617998378442:cluster/healthbridge",
+            "containers": [
+                {
+                    "containerArn": "arn:aws:ecs:ap-southeast-2:617998378442:container/healthbridge/f0dc93b974d44589b1fd0f9b9c7f1a96/29d699b7-86fa-421c-8847-5292dc5fe117",
+                    "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/f0dc93b974d44589b1fd0f9b9c7f1a96",
+                    "name": "billing",
+                    "image": "617998378442.dkr.ecr.ap-southeast-2.amazonaws.com/healthbridge-billing:latest",
+                    "lastStatus": "PENDING",
+                    "networkInterfaces": [
+                        {
+                            "attachmentId": "d798d17d-a01a-4aa0-8433-b50adf1dda71",
+                            "privateIpv4Address": "10.0.4.241"
+                        }
+                    ],
+                    "healthStatus": "UNKNOWN",
+                    "cpu": "0"
+                }
+            ],
+            "cpu": "256",
+            "createdAt": "2026-05-26T16:44:27.524000+00:00",
             "desiredStatus": "RUNNING",
             "enableExecuteCommand": false,
             "group": "service:healthbridge-billing",
-            "healthStatus": "HEALTHY",
-            "lastStatus": "RUNNING",
+            "healthStatus": "UNKNOWN",
+            "lastStatus": "PROVISIONING",
             "launchType": "FARGATE",
             "memory": "512",
             "overrides": {
@@ -1039,14 +998,11 @@
             },
             "platformVersion": "1.4.0",
             "platformFamily": "Linux",
-            "pullStartedAt": "2026-05-25T06:13:31.982000+00:00",
-            "pullStoppedAt": "2026-05-25T06:13:38.104000+00:00",
-            "startedAt": "2026-05-25T06:13:47.928000+00:00",
-            "startedBy": "ecs-svc/4342800235761406631",
+            "startedBy": "ecs-svc/3022755285725874607",
             "tags": [],
-            "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/ef8e3b4f6aa646a688cef4e69ccbd88c",
+            "taskArn": "arn:aws:ecs:ap-southeast-2:617998378442:task/healthbridge/f0dc93b974d44589b1fd0f9b9c7f1a96",
             "taskDefinitionArn": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-billing:1",
-            "version": 5,
+            "version": 1,
             "ephemeralStorage": {
                 "sizeInGiB": 20
             },
