@@ -1,5 +1,10 @@
-export const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3000";
+const rawApiUrl = process.env.NEXT_PUBLIC_API_URL?.trim();
+
+/**
+ * In production (Amplify), prefer explicit NEXT_PUBLIC_API_URL.
+ * If not set, keep requests relative so Next rewrites can still proxy `/api/*`.
+ */
+export const API_BASE_URL = rawApiUrl ? rawApiUrl.replace(/\/+$/, "") : "";
 
 export const ROLES = {
   PATIENT: "patient",
