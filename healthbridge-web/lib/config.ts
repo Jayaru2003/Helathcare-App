@@ -4,19 +4,21 @@ const normalizedApiUrl = rawApiUrl ? rawApiUrl.replace(/\/+$/, "") : "";
 /**
  * API base URL resolution:
  *
- * - In the browser: use the real backend URL directly (from NEXT_PUBLIC_API_URL).
- *   The same-origin proxy approach (empty string + Next.js rewrites) only works
- *   when NEXT_PUBLIC_API_URL is set in the build environment so that next.config.js
- *   can configure the rewrite destination. When the env var is missing the rewrite
- *   array is empty and every /api/* request 404s / times out.
- *   Using the URL directly avoids that dependency and works regardless of whether
- *   the rewrite is configured.
+ * - In the BROWSER: always use "" (empty string = same-origin relative URLs).
+ *   The browser sends requests to /api/* on the same HTTPS Amplify origin.
+ *   Next.js rewrites (next.config.js) then proxy those /api/* calls server-side
+ *   to the real HTTP ALB backend. Server→backend is HTTP (allowed); the browser
+ *   only ever talks HTTPS to Amplify, so Mixed Content is never triggered.
  *
- * - On the server (SSR / API routes): also use the real backend URL.
+ * - On the SERVER (SSR): use the real backend URL directly, since Node.js
+ *   has no Mixed Content restrictions.
  *
- * For local development set NEXT_PUBLIC_API_URL=http://localhost:3000 in .env.local.
+ * For local dev, set NEXT_PUBLIC_API_URL=http://localhost:3000 in .env.local.
  */
-export const API_BASE_URL = normalizedApiUrl || "http://localhost:3000";
+export const API_BASE_URL =
+  typeof window !== "undefined"
+    ? ""                                          // browser → same-origin proxy
+    : (normalizedApiUrl || "http://localhost:3000"); // server  → direct ALB
 
 export const ROLES = {
   PATIENT: "patient",
