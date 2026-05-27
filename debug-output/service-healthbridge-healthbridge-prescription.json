@@ -13,7 +13,7 @@
             "status": "ACTIVE",
             "desiredCount": 1,
             "runningCount": 1,
-            "pendingCount": 1,
+            "pendingCount": 0,
             "launchType": "FARGATE",
             "platformVersion": "LATEST",
             "platformFamily": "Linux",
@@ -30,15 +30,15 @@
             },
             "deployments": [
                 {
-                    "id": "ecs-svc/5477282761934460316",
+                    "id": "ecs-svc/3467953447630809952",
                     "status": "PRIMARY",
                     "taskDefinition": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-prescription:2",
-                    "desiredCount": 1,
-                    "pendingCount": 1,
+                    "desiredCount": 0,
+                    "pendingCount": 0,
                     "runningCount": 0,
                     "failedTasks": 0,
-                    "createdAt": "2026-05-27T15:50:30.544000+00:00",
-                    "updatedAt": "2026-05-27T15:50:43.784000+00:00",
+                    "createdAt": "2026-05-27T16:12:31.166000+00:00",
+                    "updatedAt": "2026-05-27T16:12:34.486000+00:00",
                     "launchType": "FARGATE",
                     "platformVersion": "1.4.0",
                     "platformFamily": "Linux",
@@ -55,18 +55,18 @@
                         }
                     },
                     "rolloutState": "IN_PROGRESS",
-                    "rolloutStateReason": "ECS deployment ecs-svc/5477282761934460316 in progress."
+                    "rolloutStateReason": "ECS deployment ecs-svc/3467953447630809952 in progress."
                 },
                 {
-                    "id": "ecs-svc/3165326950820770203",
+                    "id": "ecs-svc/7369216517466209299",
                     "status": "ACTIVE",
                     "taskDefinition": "arn:aws:ecs:ap-southeast-2:617998378442:task-definition/healthbridge-prescription:2",
                     "desiredCount": 1,
                     "pendingCount": 0,
                     "runningCount": 1,
                     "failedTasks": 0,
-                    "createdAt": "2026-05-27T15:47:21.956000+00:00",
-                    "updatedAt": "2026-05-27T15:50:43.793000+00:00",
+                    "createdAt": "2026-05-27T15:52:28.142000+00:00",
+                    "updatedAt": "2026-05-27T16:12:34.443000+00:00",
                     "launchType": "FARGATE",
                     "platformVersion": "1.4.0",
                     "platformFamily": "Linux",
@@ -82,12 +82,37 @@
                             "assignPublicIp": "ENABLED"
                         }
                     },
-                    "rolloutState": "IN_PROGRESS",
-                    "rolloutStateReason": "ECS deployment ecs-svc/3165326950820770203 in progress."
+                    "rolloutState": "COMPLETED",
+                    "rolloutStateReason": "ECS deployment ecs-svc/7369216517466209299 completed."
                 }
             ],
             "roleArn": "arn:aws:iam::617998378442:role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS",
             "events": [
+                {
+                    "id": "25264d63-0d81-4b0c-a7a3-1cd079a53b98",
+                    "createdAt": "2026-05-27T15:56:21.682000+00:00",
+                    "message": "(service healthbridge-prescription) has reached a steady state."
+                },
+                {
+                    "id": "ea369684-6150-4d1d-843a-16b62b478ba0",
+                    "createdAt": "2026-05-27T15:56:21.681000+00:00",
+                    "message": "(service healthbridge-prescription) (deployment ecs-svc/7369216517466209299) deployment completed."
+                },
+                {
+                    "id": "ab2edec6-55b6-45dc-bc5c-396373316aff",
+                    "createdAt": "2026-05-27T15:54:37.121000+00:00",
+                    "message": "(service healthbridge-prescription) has stopped 1 running tasks: (task 86c1032524eb4acd8d82e4e0b6c58538)."
+                },
+                {
+                    "id": "7332e305-34de-4f1a-8709-7d327ed5ad70",
+                    "createdAt": "2026-05-27T15:53:13.583000+00:00",
+                    "message": "(service healthbridge-prescription) has started 1 tasks: (task 96711ba697dd48a7920567e81cfb4bb9)."
+                },
+                {
+                    "id": "eb06e3eb-3eeb-4f7f-86d6-8776fac9ca6d",
+                    "createdAt": "2026-05-27T15:52:09.435000+00:00",
+                    "message": "(service healthbridge-prescription) has stopped 1 running tasks: (task 729c4bb2828948b1beeed17130580f99)."
+                },
                 {
                     "id": "83069485-4918-4339-96a7-754c56403e3d",
                     "createdAt": "2026-05-27T15:50:44.390000+00:00",
@@ -505,16 +530,16 @@
                 }
             ],
             "createdAt": "2026-05-24T03:24:19.187000+00:00",
-            "currentServiceDeployment": "arn:aws:ecs:ap-southeast-2:617998378442:service-deployment/healthbridge/healthbridge-prescription/U3jTvndh6uKgdB-lwn4aF",
+            "currentServiceDeployment": "arn:aws:ecs:ap-southeast-2:617998378442:service-deployment/healthbridge/healthbridge-prescription/8VNOyfMeB1UBs5jws__ld",
             "currentServiceRevisions": [
                 {
-                    "arn": "arn:aws:ecs:ap-southeast-2:617998378442:service-revision/healthbridge/healthbridge-prescription/5477282761934460316",
-                    "requestedTaskCount": 1,
+                    "arn": "arn:aws:ecs:ap-southeast-2:617998378442:service-revision/healthbridge/healthbridge-prescription/3467953447630809952",
+                    "requestedTaskCount": 0,
                     "runningTaskCount": 0,
-                    "pendingTaskCount": 1
+                    "pendingTaskCount": 0
                 },
                 {
-                    "arn": "arn:aws:ecs:ap-southeast-2:617998378442:service-revision/healthbridge/healthbridge-prescription/3165326950820770203",
+                    "arn": "arn:aws:ecs:ap-southeast-2:617998378442:service-revision/healthbridge/healthbridge-prescription/7369216517466209299",
                     "requestedTaskCount": 1,
                     "runningTaskCount": 1,
                     "pendingTaskCount": 0
