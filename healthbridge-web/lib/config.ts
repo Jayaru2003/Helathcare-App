@@ -2,15 +2,21 @@ const rawApiUrl = process.env.NEXT_PUBLIC_API_URL?.trim();
 const normalizedApiUrl = rawApiUrl ? rawApiUrl.replace(/\/+$/, "") : "";
 
 /**
- * Always use same-origin relative requests in the browser.
- * Otherwise Amplify will send the request cross-origin and CORS will block it.
+ * API base URL resolution:
  *
- * Next rewrites (next.config.js) will forward `/api/*` to the real backend.
+ * - In the browser: use the real backend URL directly (from NEXT_PUBLIC_API_URL).
+ *   The same-origin proxy approach (empty string + Next.js rewrites) only works
+ *   when NEXT_PUBLIC_API_URL is set in the build environment so that next.config.js
+ *   can configure the rewrite destination. When the env var is missing the rewrite
+ *   array is empty and every /api/* request 404s / times out.
+ *   Using the URL directly avoids that dependency and works regardless of whether
+ *   the rewrite is configured.
+ *
+ * - On the server (SSR / API routes): also use the real backend URL.
+ *
+ * For local development set NEXT_PUBLIC_API_URL=http://localhost:3000 in .env.local.
  */
-export const API_BASE_URL =
-  typeof window !== "undefined"
-    ? ""
-    : (normalizedApiUrl || "http://localhost:3000");
+export const API_BASE_URL = normalizedApiUrl || "http://localhost:3000";
 
 export const ROLES = {
   PATIENT: "patient",
