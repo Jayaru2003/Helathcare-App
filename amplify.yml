@@ -10,10 +10,11 @@ applications:
           commands:
             - npm run build
       artifacts:
-        baseDirectory: .next
+        baseDirectory: healthbridge-web/.next
         files:
           - '**/*'
       cache:
         paths:
-          - node_modules/**/*
-          - .next/cache/**/*
+          - healthbridge-web/node_modules/**/*
+          - healthbridge-web/.next/cache/**/*
+
